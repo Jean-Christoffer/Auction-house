@@ -71,7 +71,14 @@
     }
     .customWidth{
 		width: 457px;
+	
     }
+	@media(max-width:600px){
+		.customWidth{
+		width: 100vw;
+	
+    }
+	}
     .customLink{
         font-size: 12px;
         border-bottom: 1px dotted #202020;
