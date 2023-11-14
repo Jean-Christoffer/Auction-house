@@ -1,5 +1,18 @@
 <input
-class="custom-style inline-block box-border text-center uppercase text-white text-sm outline-none ml-[-10px] mt-7"
+class="
+custom-style 
+inline-block 
+box-border 
+text-center 
+uppercase 
+text-white 
+text-sm 
+outline-none 
+ml-[-10px] 
+mt-7 
+cursor-pointer
+
+"
 
 type={inputType}
 value={buttonText}
@@ -21,5 +34,10 @@ value={buttonText}
     height: 40px;
     background-color: #202020;
     border: 1px solid #202020;
+}
+.custom-style:hover{
+  background-color: rgb(255, 255, 255);
+  color: black;
+  
 }
 </style>

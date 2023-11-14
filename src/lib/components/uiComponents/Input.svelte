@@ -1,4 +1,7 @@
 <input
+  type={inputType}
+  value={inputValue}
+  on:input={handleInput}
  class=
  "
   custom-style
@@ -8,7 +11,21 @@
   outline-none
   text-sm
   px-4" />
+
 <script>
+  /**
+   * @type {string}
+  */
+export let inputValue = ""
+  /**
+   * @type {string}
+  */
+export let inputType = "text"
+  /**
+   * @type {oninput}
+  */
+export let handleInput
+
 
 </script>
 <style lang="postcss">
