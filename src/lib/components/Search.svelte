@@ -12,24 +12,24 @@
 				<button  on:click={handleVisible} class="customLink inline-block tracking-tight uppercase cursor-pointer transition-all">Close</button>
 
 				<div class="pt-6" >
-					<h3 class="mb-3">Search lot</h3>
-					<p class="customText">Search by lot number or keyword</p>
+					<h3 class="mb-3">Search our auction house</h3>
+					<p class="customText">search by keyword</p>
 
-					<form class="flex">
-						<Input />
-						<InputButton inputType={"button"} buttonText={"Search"} />  
+					<form class="flex" on:submit={handleSearch}>
+						<Input inputType="text" handleInput={handleInput} inputValue={inputValue}/>
+						<InputButton inputType={"submit"} buttonText={"Search"}  />  
 					</form>
-                    {#if results}
-					<SearchResults />
-					{:else}
-					<div />
-					<div >
-						<p >
-							Nothing found. Please try again <br /> with different keywords.
-						</p>
-					</div>
-
-					{/if}
+					{#if searchData && searchData.length > 0}
+					<SearchResults searchData={searchData} />
+					{:else if searchData.length < 1}
+						<div class="mt-2" >
+							<p >
+								Nothing found. Please try again <br /> with different keywords.
+							</p>
+						</div>
+					
+					{/if }
+			
 				</div>
 			</div>
 		</div>
@@ -43,6 +43,7 @@
 	import SearchResults from "./SearchResults.svelte";
 	import { fade } from 'svelte/transition';
 	import { slide } from 'svelte/transition';
+	
 
 	let results = false
 	/**
@@ -53,6 +54,25 @@
     * @type {onclick}
     */
 	export let handleVisible
+
+	/**
+	 * @type {onsubmit}
+	 */
+	export let handleSearch
+
+
+	/**
+	 * @type {oninput}
+	 */
+	export let handleInput
+	/**
+	 * @type {string}
+	 */
+	export let inputValue
+	/**
+	 * @type {Array<{}>}
+	 */
+	export let searchData
 
 	const fadeIn = {
 		delay: 100,
