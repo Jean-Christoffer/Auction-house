@@ -11,7 +11,7 @@ text-center
 
 {isFilled ? "hover:bg-gray-700" : "hover:bg-black"}
 {isFilled ? "hover:text-white" : "hover:text-white"}
-{isFilled ? "border-none" : "border-gray-700"}
+{isFilled ? "border-none" : "border-black"}
 {isMobile ? "p-2" : "p-3"}
 {isFilled ? "bg-black" : ""}
 

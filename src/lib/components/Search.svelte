@@ -1,6 +1,6 @@
 
 {#if isVisible}
-<aside   in:fade="{fadeIn}" out:fade="{fadeOut}">
+<aside   in:fade="{fadeIn}" out:fade="{fadeOut}" class="customZ">
 	<div class="w-screen h-screen overflow-hidden fixed top-0 left-0 flex items-center justify-center">
 		<div class="absolute top-0 h-full left-0 w-full customColor"  />
 		<div  
@@ -21,7 +21,7 @@
 					</form>
 					{#if searchData && searchData.length > 0}
 					<SearchResults searchData={searchData} />
-					{:else if searchData.length < 1}
+					{:else if searchData && searchData.length < 1}
 						<div class="mt-2" >
 							<p >
 								Nothing found. Please try again <br /> with different keywords.
@@ -85,7 +85,10 @@
 	}
 </script>
 <style lang="postcss">
-
+.customZ{
+	position: relative;
+	z-index: 1000;
+}
     .customColor{
         background-color:  rgba(0,0,0,.6);
     }
