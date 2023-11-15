@@ -92,7 +92,7 @@ onMount(async () => {
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../lib/images/hero00.jpg");
+  background-image: url("../lib/images/hero5.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
