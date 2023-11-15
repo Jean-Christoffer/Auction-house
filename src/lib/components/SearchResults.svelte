@@ -1,4 +1,3 @@
-
 {#if searchData && searchData.length > 0}
 <div>
     {#each searchData as item}
@@ -7,7 +6,7 @@
 
     
 </div>
-
+{/if}
 <script>
 
     import SearchItem from "./uiComponents/SearchItem.svelte";

@@ -1,7 +1,7 @@
 <div>
     <div>
       <nav
-        class="container px-6 py-8 mx-auto md:flex md:justify-between md:items-center"
+        class="container px-6 py-5 mx-auto md:flex md:justify-between md:items-center"
       >
         <div class="flex items-center justify-between">
             <button on:click={toggleNavbar} class="flex md:hidden">
@@ -117,10 +117,6 @@
             href:"buyingSelling"
         },
         {
-            name:"About",
-            href:"about"
-        },
-        {
             name:"Login",
             href:"/"
         },
@@ -128,6 +124,10 @@
          {
             name:"Profile",
             href:"profile"
-        }
+        },
+        {
+            name:"About",
+            href:"about"
+        },
     ]
 </script>
