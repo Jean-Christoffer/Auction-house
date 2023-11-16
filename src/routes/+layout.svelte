@@ -2,8 +2,18 @@
     import "../app.css";
     import Navigation from "$lib/components/Navigation.svelte";
     import Footer from "$lib/components/Footer.svelte";
+    import Lenis from '@studio-freight/lenis'
+    import { onMount } from "svelte";
 
+    onMount(()=>{
+    const lenis = new Lenis()
+    function raf(time) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
 
+    requestAnimationFrame(raf)
+  })
     let inputValue = ""
     /**
 	 * @type {Array<{}>}
@@ -54,4 +64,6 @@
     <Footer/>
   </footer>
 </div>
+<style lang="postcss">
 
+</style>

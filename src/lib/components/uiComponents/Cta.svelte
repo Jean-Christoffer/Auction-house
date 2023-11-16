@@ -11,12 +11,12 @@ text-center
 
 {isFilled ? "hover:bg-gray-700" : "hover:bg-black"}
 {isFilled ? "hover:text-white" : "hover:text-white"}
-{isFilled ? "border-none" : "border-black"}
+{isFilled ? "border-none" : "customBorder"}
 {isMobile ? "p-2" : "p-3"}
 {isFilled ? "bg-black" : ""}
 
 {isMobile ? "text-base" : "text-xl"}
-{isFilled ? "text-white" : ""}
+{isFilled ? "text-white" : "customColor"}
 ">{linkText}
 </a>
 
@@ -38,3 +38,14 @@ export let isMobile
 */
 export let isFilled
 </script>
+<style lang="postcss">
+
+    .customBorder{
+        border: 1px solid #F2F2F2;
+     
+    }
+    .customColor{
+        color: #F2F2F2;
+        text-shadow: 0px 4px 30px #000000;
+    }
+</style>
