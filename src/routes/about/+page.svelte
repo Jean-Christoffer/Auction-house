@@ -47,6 +47,8 @@
         <div class="outro-img"><div>
 
     </section>
+<div class="w-full h-full customBg">
+
 
     <article class="max-w-xl mx-auto my-0 article h-[100vh]  z-20 relative  ">
 
@@ -66,7 +68,7 @@
             </p>
         </div>
     </article>
-
+</div>
     </div>
 </div>
 <script>
@@ -242,9 +244,14 @@ onMount(async () => {
     text-shadow: 0px 4px 30px #ffffff;
 }
 .shadow{
-    box-shadow: -9px 19px 74px 3px rgba(0,0,0,0.66),
-25px 0px 20px -20px rgba(0,0,0,0.45),
-0px 25px 20px -20px rgba(0,0,0,0.45),
--25px 0px 20px -20px rgba(0,0,0,0.45);
+
+}
+.customBg{
+    background-color: #F2F2F2;
+    z-index: 20;
+    position: relative;
+    box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
+-webkit-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
+-moz-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 }
 </style>
