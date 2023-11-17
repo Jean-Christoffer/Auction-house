@@ -50,9 +50,21 @@
         >
             {#each links as link}
             <li>
-                <a class="text-gray-800 hover:text-gray-400" href="{link.href}">{link.name}</a>
+                {#if link.name !== "Logout"}
+                  <a class="text-gray-800 hover:text-gray-400" href="{link.href}">{link.name}</a>
+                {/if}
+                {#if link.name === "Logout"}
+                  <button on:click={handleLogout}>{link.name}</button>
+                {/if}
             </li>
             {/each}
+            <li>
+              {#if $authStore.token}
+                <button on:click={authStore.logout}>Logout</button>
+                {:else}
+                  <a href="/login">Login</a>
+              {/if}
+            </li>
         </ul>
         <div class="md:block hidden">
             <SearchButton handleSideBar= {handleActive}/>
@@ -76,7 +88,7 @@
 <script>
     import Search from "./Search.svelte";
     import SearchButton from "./searchComponents/SearchButton.svelte";
-   
+    import {authStore } from "$lib/data/authstore"
     //exports
     /**
      *  @type {onsubmit}
@@ -116,10 +128,7 @@
             name:"Buying & Selling",
             href:"buyingSelling"
         },
-        {
-            name:"Login",
-            href:"/"
-        },
+
 
          {
             name:"Profile",
@@ -129,5 +138,6 @@
             name:"About",
             href:"about"
         },
+
     ]
 </script>
