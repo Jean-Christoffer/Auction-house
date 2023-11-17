@@ -75,7 +75,7 @@
 
 <script>
     import Search from "./Search.svelte";
-    import SearchButton from "./uiComponents/SearchButton.svelte";
+    import SearchButton from "./searchComponents/SearchButton.svelte";
    
     //exports
     /**
