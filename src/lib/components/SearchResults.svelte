@@ -9,7 +9,7 @@
 {/if}
 <script>
 
-    import SearchItem from "./uiComponents/SearchItem.svelte";
+    import SearchItem from "./searchComponents/SearchItem.svelte";
     /**
 	 * @type {Array<{}>}
 	 */

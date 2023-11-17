@@ -31,7 +31,7 @@
     /**@type {Array<{}>}*/
     export let itemsData
    
-    import AuctionItem from "./uiComponents/AuctionItem.svelte";
+    import AuctionItem from "./auctionItems/AuctionItem.svelte";
     import {flip} from "svelte/animate"
 
 

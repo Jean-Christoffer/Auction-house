@@ -1,6 +1,7 @@
 <div>
   <section class="bg">
     <div class="bg-content">
+      <div class="bg-overlay"></div>
       <div class="bg-image"></div>
     </div>
   </section>
@@ -82,6 +83,12 @@ onMount(async () => {
   position: relative;
   z-index: 0;
 }
+.bg-overlay{
+  position: absolute;
+  inset: 0;
+  background-color: #f2f2f238;
+  z-index: 20;
+}
 .bg-image{
   position: absolute;
   top: 0;
@@ -90,7 +97,7 @@ onMount(async () => {
   height: 100%;
   background-image:
   linear-gradient(to bottom, #F2F2F2, #F2F2F2),
-  url("../lib/images/hero6.png");
+  url("../public/images/images/hero6.png");
   background-blend-mode: multiply;
   background-position: center top 25%;
   background-size: cover;
