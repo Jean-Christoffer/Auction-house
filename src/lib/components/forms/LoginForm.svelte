@@ -52,10 +52,11 @@
     </div>
 </div>
 <script>
-    import user from "$lib/data/user";
+
     import Button from "../uiComponents/Button.svelte";
     import { goto } from '$app/navigation';
     import Snackbar from "../uiComponents/Snackbar.svelte";
+    import {authStore } from "$lib/data/authstore"
     let email = ""
     let password = ""
  
@@ -101,8 +102,9 @@
             if(data){
                 localStorage.setItem('token', data.accessToken);
                 localStorage.setItem('userId', data.name);
+                authStore.login(data.accessToken,  data.name);
                 goto('/profile')
-                user.update(val => val = {...data})
+       
          
             }
         })

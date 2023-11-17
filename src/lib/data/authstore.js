@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 import { browser } from '$app/environment';
+import { goto } from '$app/navigation';
 function getInitialValue(key, defaultValue) {
     if (browser) {
         const value = localStorage.getItem(key);
@@ -29,8 +30,10 @@ function createAuthStore() {
             if (browser) {
                 localStorage.removeItem('token');
                 localStorage.removeItem('userId');
+                goto('/')
             }
             set({ token: null, userId: null });
+            console.log('Logged out and store updated');
         }
     };
 }

@@ -20,13 +20,10 @@
 <script>
     import LoginForm from "$lib/components/forms/LoginForm.svelte";
     import RegisterForm from "$lib/components/forms/RegisterForm.svelte";
-    import user from "$lib/data/user"
+    import {authStore } from "$lib/data/authstore"
 	import { fade } from 'svelte/transition';
-    $: isLoggedIn = $user === null ? false : true
-    function logOut(){
-        user.update(val => val = null)
-    }
-
+    $: isLoggedIn = !$authStore.token  ? false : true
+    
     let isLoginForm = true
     let isRegisterForm = false
 
