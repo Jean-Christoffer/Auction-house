@@ -23,6 +23,7 @@
 
                     ">
                         <div class="
+                        animate
                         w-full
                         block 
                         h-full
@@ -253,5 +254,27 @@ onMount(async () => {
     box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 -webkit-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 -moz-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
+}
+
+.animate{
+        -webkit-animation: scalingBack 45s ease-in infinite;
+        animation: scalingBack 45s ease-in infinite;
+        -webkit-animation-play-state: running;
+        animation-play-state: running;
+
+
+    }
+
+
+@keyframes scalingBack{
+    0% {
+    transform: scale(1.1);
+}
+    50% {
+    transform: scale(1);
+}
+    100% {
+    transform: scale(1.1);
+}
 }
 </style>

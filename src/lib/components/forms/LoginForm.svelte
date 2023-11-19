@@ -57,6 +57,7 @@
     import { goto } from '$app/navigation';
     import Snackbar from "../uiComponents/Snackbar.svelte";
     import {authStore } from "$lib/data/authstore"
+    
     let email = ""
     let password = ""
  

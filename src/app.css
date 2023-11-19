@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-p{
+p,select,option,input{
   font-family: 'Montserrat', sans-serif;
 }
 h1,
