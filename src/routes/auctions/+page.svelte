@@ -13,9 +13,9 @@
     <div class="flex flex-wrap items-stretch gap-1 h-full justify-start">
         {#if sortedListings}
             {#each sortedListings as listing}
-            
+                <a href="/auctionItem/{listing.id}" >
                     <AuctionItem listingData={listing} />
-             
+                </a>
             {/each}
         {/if}
     </div>

@@ -1,5 +1,5 @@
 
-  <div class=" w-[250px] custom  bg-white flex flex-col " id="{listingData.id}">
+  <div class=" w-[250px] custom  bg-white flex flex-col h-full " id="{listingData.id}">
     <div class="flex flex-col overflow-hidden h-full ">
       <div class="p-12">
         <div class="customWidth">
@@ -14,7 +14,7 @@
             {truncateDescription(listingData.description)}
           </p>
           <p class="py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Ends at {formatDate(listingData.endsAt)}</p>
-          {#if listingData.bids.length > 0 && listingData.bids}
+          {#if listingData?.bids?.length > 0 && listingData.bids}
             <p class="pb-1">
               <strong>Current bid</strong>
               <em>{listingData.bids[listingData.bids.length - 1].amount} $</em>
@@ -55,9 +55,7 @@ function truncateDescription(text) {
   .custom-bg{
     background-color: #ebe9e9;
   }
-.custom{
 
-}
 .customWidth{
   max-width: 150px;
   height: 100px;

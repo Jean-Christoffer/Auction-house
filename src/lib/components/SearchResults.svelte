@@ -1,7 +1,9 @@
 {#if searchData && searchData.length > 0}
 <div>
     {#each searchData as item}
+    <a href="/auctionItem/{item.id}">
          <SearchItem  searchData={item}/>
+    </a>
     {/each}
 
     
