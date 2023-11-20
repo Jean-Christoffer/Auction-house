@@ -122,18 +122,18 @@
     [
         {
             name:"Auctions",
-            href:"auctions"
+            href:"/auctions"
         },
 
 
 
          {
             name:"Profile",
-            href:"profile"
+            href:"/profile"
         },
         {
             name:"About",
-            href:"about"
+            href:"/about"
         },
 
     ]

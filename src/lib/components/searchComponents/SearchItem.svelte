@@ -1,4 +1,4 @@
-<figure class="border-b border-gray-300 mt-10" >
+<figure class="border-b border-gray-300 mt-10" id="{searchData.id}">
     <p class="text-xs leading-5 mb-5">Listed {formatDate(searchData.created)}</p>
     <article class="text-gray-800 flex items-center mb-10">
         <div class="w-20 h-20 mr-6">

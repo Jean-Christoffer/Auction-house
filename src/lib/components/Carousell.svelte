@@ -1,9 +1,9 @@
 <div  class="carousell hideScroll">
     <div  class="inner-carousell hideScroll">
         {#each itemsData as item (item.id)}
-            <div class="customWidth flex items-stretch" id= {item.id} animate:flip={{duration:500}}>
-                <AuctionItem listingData={item}/>
-            </div>
+                <a href="/auctionItem/{item.id}"  class="customWidth flex items-stretch" id= {item.id} animate:flip={{duration:500}}>
+                    <AuctionItem listingData={item}/>
+                </a>
         {/each}
     </div>
     <button class="left" on:click={rotateLeft}>
