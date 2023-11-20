@@ -97,7 +97,7 @@ onMount(async () => {
   height: 100%;
   background-image:
   linear-gradient(to bottom, #F2F2F2, #F2F2F2),
-  url("../public/images/images/hero6.png");
+  url("../public/hero6.png");
   background-blend-mode: multiply;
   background-position: center top 25%;
   background-size: cover;

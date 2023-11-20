@@ -65,5 +65,10 @@
   </footer>
 </div>
 <style lang="postcss">
-
+header{
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #F2F2F2;
+}
 </style>
