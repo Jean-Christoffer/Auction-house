@@ -16,7 +16,8 @@ text-center
 {isFilled ? "bg-black" : ""}
 
 {isMobile ? "text-base" : "text-xl"}
-{isFilled ? "text-white" : "customColor"}
+
+{textColor === "black" ? "text-black" : "text-white"}
 ">{linkText}
 </a>
 
@@ -37,6 +38,7 @@ export let isMobile
 * @type {boolean}
 */
 export let isFilled
+export let textColor = ""
 </script>
 <style lang="postcss">
 

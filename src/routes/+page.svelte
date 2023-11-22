@@ -1,3 +1,4 @@
+{#if auctionItems}
 <div>
   <section class="bg">
     <div class="bg-content">
@@ -11,32 +12,37 @@
     <div class="cta-container">
 
     
-    <Cta isFilled={false} isMobile={false} linkText={"Auctions"} href="auctions"/>
+    <Cta isFilled={false} isMobile={false} linkText={"Auctions"} href="auctions" textColor="black"/>
    </div>
-  </div>
 
+  </div>
+  <div class="trigger"></div>
     <div class="auctions-wrapper">
       
       <div class="auctions-container">
         <h3 class="py-4 text-4xl">Auctions ending soon</h3>
-        <Carousell itemsData={listings.slice(0,19)}>
+        <Carousell itemsData={auctionItems}>
         </Carousell>
       </div>
     </div>
 
 </div>
+{/if}
 <script>
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Cta from "$lib/components/uiComponents/Cta.svelte";
 import { onMount } from "svelte";
 import Carousell from "$lib/components/Carousell.svelte";
 
+
 export let data
-let listings 
+let auctionItems = []
+
+
 $: {
   if(data){
-    listings = data.props.data.filter(i => i.media.length > 0).sort((a,b) => b.endsAt - a.endsAt)
-
+    const {auctionItem} = data
+    auctionItems = auctionItem
   }
 }
 
@@ -49,14 +55,14 @@ onMount(async () => {
 
     // @ts-ignore
     ScrollTrigger.refresh()
-    gsap.to(".bg-content",
+    gsap.to(".bg-image",
     {
       scale:1.2,
       ease:"none",
       scrollTrigger:{
-        trigger:".hero",
-        start:"top bottom",
-        end: "bottom top",
+        trigger:".trigger",
+        start:"top 100%",
+        end: " top 20%",
         scrub:true,
         markers:false,
         fastScrollEnd:true,
@@ -73,7 +79,7 @@ onMount(async () => {
   width: 100%;
   overflow: hidden;
   transform: translate3d(0,0,0);
-  height: 100vh;
+  height: 100svh;
   pointer-events: none;
   z-index: 0;
 }
@@ -82,11 +88,12 @@ onMount(async () => {
   width: 100%;
   position: relative;
   z-index: 0;
+  overflow: hidden;
 }
 .bg-overlay{
   position: absolute;
   inset: 0;
-  background-color: #f2f2f238;
+  background-color: #f2f2f234;
   z-index: 20;
 }
 .bg-image{
@@ -97,25 +104,27 @@ onMount(async () => {
   height: 100%;
   background-image:
   linear-gradient(to bottom, #F2F2F2, #F2F2F2),
-  url("../public/hero6.png");
+  url("../public/hero4.jpg");
   background-blend-mode: multiply;
-  background-position: center top 25%;
+  background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 0;
 }
 
 .auctions-wrapper{
-  height: 100vh;
+ 
   background: #F2F2F2;
   z-index: 100;
   position: relative;
   transform: translate3d(0,0,0);
 
+
 }
 .auctions-container{
   max-width:1200px;
   margin: 0 auto;
+  padding: 48px 0;
 }
 .hero{
   position: relative;

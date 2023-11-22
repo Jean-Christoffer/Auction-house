@@ -7,17 +7,23 @@
         </div>
       </div>
       <div class="h-full pt-6 px-3 custom-bg w-full flex flex-col">
-        <div class="mt-auto">
-          <h3 class="font-bold text-xl mb-2">{listingData.title}</h3>
+        <div class="m-auto">
+          <h3 class="font-bold text-xl mb-2">{truncateDescription(listingData.title)}</h3>
           <p>Listed {formatDate(listingData.created)}</p>
           <p class="text-gray-700  text-sm" id="description" bind:this={description}>
             {truncateDescription(listingData.description)}
           </p>
-          <p class="py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">Ends at {formatDate(listingData.endsAt)}</p>
+        </div>
+        <div class="mt-auto pb-2 pt-2">
+          <p class="text-sm font-semibold text-gray-700 mr-2">Ends at {formatDate(listingData.endsAt)}</p>
           {#if listingData?.bids?.length > 0 && listingData.bids}
-            <p class="pb-1">
+            <p>
               <strong>Current bid</strong>
               <em>{listingData.bids[listingData.bids.length - 1].amount} $</em>
+            </p>
+            {:else}
+            <p>
+              <strong>No bids yet</strong>
             </p>
           {/if}
         </div>
@@ -41,8 +47,8 @@ function formatDate(dateString) {
 function truncateDescription(text) {
         const sentence = text
         const sentences = sentence?.split('. ');
-        if (sentences?.length > 2) {
-          let splittedText = sentences.slice(0, 2).join('. ') + '.';
+        if (sentences?.length > 1) {
+          let splittedText = sentences.slice(0, 1).join('. ') + '.';
           
           return splittedText
         }

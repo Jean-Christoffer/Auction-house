@@ -60,7 +60,7 @@
             });
         
   }
-
+ 
 //handles the weird pricing
 function getLatestBidAmount(listing) {
     const bids = listing.bids;

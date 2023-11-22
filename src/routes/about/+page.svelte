@@ -48,24 +48,22 @@
         <div class="outro-img"><div>
 
     </section>
-<div class="w-full h-full customBg">
+<div class="w-full h-full customBg article">
 
 
-    <article class="max-w-xl mx-auto my-0 article h-[100vh]  z-20 relative  ">
+    <article class="max-w-xl mx-auto  my-0 h-[100vh]  z-20 relative flex justify-center text-center items-center">
 
-        <div class="shadow p-2">
+        <div class="">
 
-            <p>
-                At Fine Auctions, we specialize in 
-                List Specialties - e.g., fine art, antiques, rare collectibles.
-                Each item is handpicked and rigorously authenticated, ensuring that our clients acquire only authentic and valuable pieces.
-                Our auctions are not just events; they are grand celebrations of history, art, and culture.
-
-            </p>
-            <p class="mt-4">
-                <strong>Our Mission:</strong> Our mission is to connect discerning collectors with extraordinary items. 
-                We believe every piece has a story, and it is our privilege to weave these narratives into the lives of our clients. 
-                Whether you're a seasoned collector or new to the world of auctions, we provide a platform that is both accessible and sophisticated.
+            <h2 class="text-7xl mission text-bold "  >
+    
+                    OUR MISSION
+   
+            </h2> 
+            <p class="mt-4 text-2xl" id="caption">
+                
+                 Connecting discerning collectors with extraordinary items. 
+              
             </p>
         </div>
     </article>
@@ -76,7 +74,7 @@
     let gsap
     import { onMount } from "svelte";
     import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
-    
+    import SplitType from 'split-type'
     let stories =
      [
         {
@@ -104,6 +102,8 @@ onMount(async () => {
         start: "top 90%",
         end:"top 20%",
         scrub:true,
+        fastScrollEnd:true,
+        preventOverlaps:true
 
     }
     })
@@ -121,6 +121,8 @@ onMount(async () => {
         start: "top 90%",
         end:"top 20%",
         scrub:true,
+        fastScrollEnd:true,
+        preventOverlaps:true
 
     }
     })
@@ -138,6 +140,8 @@ onMount(async () => {
         start: "top 90%",
         end:"top 10%",
         scrub:true,
+        fastScrollEnd:true,
+        preventOverlaps:true
 
     }
     })
@@ -148,17 +152,36 @@ onMount(async () => {
         scale:1.12
     },0)
 
+ setTimeout(() => {
+    const tl4 = gsap.timeline({
+        scrollTrigger:{
+            trigger:".mission",
+            start:"top 80%",
+            end:"top 20%",
+            scrub:true
+            
+        }
+         })
+         const splittedWord = document.querySelectorAll(".mission")
+
+         splittedWord.forEach((char, i) => {
+
+            const text = new SplitType(char,{ types:"chars"})
+
+            tl4.from(text.chars,{
+                opacity:0.1,
+                stagger:0.1,
+                duration:2
+
+            })
+         })
+
+ },100)
 
 
 
     })
-    function splitText(txt){
-        let splittedText =
-        txt.split(" ")
-        .map((word, index) => `<span class=span${index} style="--index:${index}">${word}</span>`)
-        .join(" ");
-        return splittedText
-    }
+
 </script>
 <style lang="postcss">
 .gridAreas{
@@ -176,10 +199,10 @@ onMount(async () => {
  
 }
 .img0{
-    background-image: url("./heroImg.png");
+    background-image: url("./heroImg.jpg");
 }
 .img1{
-    background-image: url("./hero3.png");
+    background-image: url("./hero3.jpg");
     
 }
 @media (min-width: 768px) {
@@ -236,10 +259,11 @@ onMount(async () => {
         background-blend-mode: multiply;
     }
     .bg-overlay{
-  position: absolute;
-  inset: 0;
-  background-color: #f2f2f238;
-  z-index: 20;
+        position: absolute;
+        inset: 0;
+        background-color: #f2f2f238;
+        z-index: 20;
+        overflow: hidden;
 }
 .shadow p{
     text-shadow: 0px 4px 30px #ffffff;
