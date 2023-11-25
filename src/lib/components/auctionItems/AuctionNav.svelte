@@ -1,6 +1,6 @@
 <div class="sticky top-[69px] w-full block">
 <nav class="block w-full customBg text-white relative z-2 px-2 py-2">
-    <div class="w-full custom-width flex items-center justify-between">
+    <div class="w-full custom-width flex items-center justify-between container mx-auto flex-wrap gap-2">
         <div class="flex items-center gap-2">
             <p><strong>Showing</strong></p>
             <p><small><em>({listings.length})</em></small> items</p>
@@ -13,7 +13,6 @@
 
         </div>
     </div>
-    <div></div>
 </nav>
 </div>
 <script>
@@ -29,8 +28,5 @@
 .customBg{
         background-color: #202020;
     }
-.custom-width {
-    width: calc(100% - 180px);
-    margin: 0 auto;
-}
+
 </style>

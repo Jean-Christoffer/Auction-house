@@ -20,33 +20,16 @@ gap-2">
      focus:bg-black 
      focus:border-gray-500">
         <option value="">SORT BY</option>
-        <option value="lowHigh">Price lowest-high</option>
+        <option value="lowHigh">Price low-high</option>
         <option value="highLow">Price high-low</option>
-        <option value="new">Listed newest</option>
-        <option value="old">Listed oldest</option>
-        <option value="soon">Ends soon</option>
-        <option value="later">Ends latest</option>
+        <option value="new">Newest</option>
+        <option value="old">Oldest</option>
+        <option value="soon">Ending soon</option>
+        <option value="later">Ending due time</option>
         <!-- Add more user options here -->
     </select>
 </div>
-<div class="w-50">
-    <select class="block 
-    w-full 
-    border 
-    border-gray-300 
-    custom-bg 
-    py-2 px-3 
-    pr-8 rounded 
-    leading-tight 
-    focus:outline-none 
-    focus:bg-black 
-    focus:border-gray-500">
-        <option value="">FILTER</option>
-        <option value="hasBids">no bids</option>
-        <option value="noBids">has bids</option>
-        <!-- Add more user options here -->
-    </select>
-</div>
+
 </div>
 <script>
   export let selectedValue = '';
