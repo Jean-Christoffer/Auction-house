@@ -1,60 +1,38 @@
 {#if profileData !== null}
-<div  class="w-full overflow-hidden relative customHeight" >
-  <div class="absolute
-   top-0 
-   left-0 
-   w-full 
-   h-full 
-   bg-cover
-   bg-center 
-   animate
-   {memberStatus}"
-  ></div>
-  <div class="bg-overlay"></div>
-  <div class="mt-auto md:container md:mx-auto relative z-2 ">
-    <h1 class="text-4xl shadow">
-      Welcome back {profileData.name}
-    </h1>
-    <strong><p class="shadow">{memberStatus
-    .substring(0,1)
-    .toLocaleUpperCase()
-     + memberStatus.substring(1)} member</p></strong>
+<div  class="w-full overflow-hidden relative customHeight flex flex-col justify-center " >
+          <div class="absolute
+          top-0 
+          left-0 
+          w-full 
+          h-full 
+          bg-cover
+          bg-center 
+          animate
+          {memberStatus}"
+          ></div>
+          <div class="bg-overlay"></div>
+          <ProfileCard profileData = {profileData} memberStatus = {memberStatus} />
+          
+</div> 
+        <ProfileNav profileData ={profileData} />  
+
+          <div  class="container mx-auto h-full">
+          <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
+              {#each profileData.listings as myListing}
+              <a href="/auctionItem/{myListing.id}">
+                <AuctionItem  listingData =  {myListing}/> 
+              </a>
+              {/each }
+        </div>
   </div>
 
-  <div class="relative z-2 mt-auto pb-2">
-  <ProfileCard 
-    profileData = {profileData} />
-  </div>
-</div>   
-<div >
 
-<ProfileNav
-profileData={profileData}
- showListings={handleShowListings}
-createAuction={handleShowForm}
-isDisabledForm={isFormDisabled}
-isDisabledListings={isListingDisabled} />
-{#if showForm}
-<CreateAuction />
-{:else}
-<div  class="md:container md:mx-auto h-full">
-<div  class="flex flex-wrap items-stretch gap-1 h-full justify-start py-3"> 
-    {#each profileData.listings as myListing}
-    <a href="/auctionItem/{myListing.id}">
-      <AuctionItem  listingData =  {myListing}/> 
-    </a>
-    {/each }
-</div>
-</div>
-{/if}
-</div>
     {:else}
     <h1>Please log in to see your profile</h1>
 {/if}
 <script>
 import ProfileCard from '$lib/components/profileComponents/ProfileCard.svelte';
 import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
-import CreateAuction from '$lib/components/forms/CreateAuction.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
 export let data
 
@@ -71,27 +49,6 @@ export let data
     }
    }
   $: console.log(profileData)
-  let showForm = false
-  let showListings = true
-  
-   let isFormDisabled = false
-
-   let isListingDisabled = true
-
-  function handleShowListings(){
-    showListings = !showListings
-    showForm = !showForm
-
-    isListingDisabled= !isListingDisabled
-    isFormDisabled= !isFormDisabled
-  }
-  function handleShowForm(){
-    showForm = !showForm
-    showListings = !showListings
-
-    isFormDisabled= !isFormDisabled
-    isListingDisabled= !isListingDisabled
-  }
 
 
   switch (wins) {
@@ -152,4 +109,8 @@ export let data
 .shadow{
   text-shadow: 0px 4px 30px #000000;
 }
+.custom-width{
+        max-width: 1010px;
+        margin: 0 auto;
+    }
 </style>

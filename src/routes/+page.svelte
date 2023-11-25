@@ -7,8 +7,8 @@
     </div>
   </section>
   <div class="hero h-screen">
-    <h2 >Welcome to Fine Auctions</h2>
-    <p>View all listings here</p>
+    <h2  class="text-4xl md:text-5xl">Welcome to Fine Auctions</h2>
+    <p  class="text-2xl md:text-1xl pt-1">View all listings here</p>
     <div class="cta-container">
 
     
@@ -79,7 +79,7 @@ onMount(async () => {
   width: 100%;
   overflow: hidden;
   transform: translate3d(0,0,0);
-  height: 100svh;
+  height: 100vh;
   pointer-events: none;
   z-index: 0;
 }
@@ -141,13 +141,13 @@ onMount(async () => {
   text-shadow: 0px 4px 30px #ffffff;
   font-weight: bold;
   color: black;
-  font-size: 50px;
+
 }
 .hero p{
   text-shadow: 0px 4px 30px #ffffff;
   font-weight: bold;
   color: black;
-  font-size: 24px;
+
 }
 .cta-container{
   box-shadow: -9px 19px 74px 3px rgba(0,0,0,0.66),
@@ -156,6 +156,7 @@ onMount(async () => {
 -25px 0px 20px -20px rgba(0,0,0,0.45);
   max-width: 370px;
   margin: 16px auto 0 auto;
+  padding: 0 16px;
 }
 
 

@@ -55,12 +55,12 @@
 
         <div class="">
 
-            <h2 class="text-7xl mission text-bold "  >
-    
+            <h2 class="text-5xl md:text-7xl mission text-bold "  >
+             
                     OUR MISSION
    
             </h2> 
-            <p class="mt-4 text-2xl" id="caption">
+            <p class="mt-4 text-1xl md:text-2xl" id="caption">
                 
                  Connecting discerning collectors with extraordinary items. 
               

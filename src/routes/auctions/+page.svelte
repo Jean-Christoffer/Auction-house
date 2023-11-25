@@ -2,7 +2,7 @@
     <div  class="w-full overflow-hidden relative customHeight" >
         <div class="absolute top-0 left-0 w-full h-full bg-cover animate"></div>
         <div class="bg-overlay"></div>
-        <div class="z-10 text-black relative  custom-width flex flex-col justify-center h-full ">
+        <div class="z-10 text-black relative  container mx-auto flex flex-col justify-center h-full pl-2 ">
             <p class="shadow"> {formatDate(date)}</p>
             <h1 class="text-4xl shadow"> Our collection of fine items</h1>
         </div>
@@ -10,7 +10,7 @@
     </div>
         <AuctionNav listings = {sortedListings}   selectedValue= {sortVal} setSelectedValue={handleChange} />
     <div  class="md:container md:mx-auto">
-    <div class="flex flex-wrap items-stretch gap-1 h-full justify-start">
+    <div class="flex flex-wrap items-stretch gap-1 h-full justify-center md:justify-start">
         {#if sortedListings}
             {#each sortedListings as listing}
                 <a href="/auctionItem/{listing.id}" >
@@ -29,10 +29,12 @@
 
     let date = ""
     let sortVal = ""
-    let filterVal = ""
+
     $: {
     if(data){
-        listings = data.props.data.filter(i => i.media.length > 0  && i.title.length <= 20)
+        const {auctionItem} = data
+
+        listings = auctionItem.filter(i => i.media.length > 0  && i.title.length <= 20)
         
     }
     }
@@ -74,11 +76,6 @@ function getLatestBidAmount(listing) {
 
 //sortValue
   function handleChange(event) {
-    sortVal = event.target.value
-    
-   
-  }
-  function handleFilter(event) {
     sortVal = event.target.value
     
    

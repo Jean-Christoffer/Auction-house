@@ -10,7 +10,7 @@ export async function load({ fetch }) {
         };
     }
 
-    const apiUrl = `https://api.noroff.dev/api/v1/auction/profiles/${userId}?_listings=true`;
+    const apiUrl = `https://api.noroff.dev/api/v1/auction/profiles/${userId}?_listings=true&_active=true&_bids=true`;
     const response = await fetch(apiUrl,{
         method:"GET",
         credentials: "same-origin",

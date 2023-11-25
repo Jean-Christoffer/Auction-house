@@ -1,20 +1,20 @@
 <section  class="md:container md:mx-auto my-10 h-full p-2 m-auto flex justify-center">
     {#if data && $authStore.token}
     <figure class="custom-grid ">
-        <div >
+        <div class="grid-item1">
             <div class="custom-width">
-                <img class="w-full block h-full object-cover object-center" src="{data.media[0]}" /> 
+                <img class="w-full block h-full object-cover object-center aspect-square" src="{data.media[0]}" alt="{data.title}" /> 
             </div>
-            {#if data.bids.length > 0}
-            <p class="mt-2">Current bid <strong>${data?.bids[data?.bids?.length - 1].amount}</strong></p>
-            {:else}
-            <p>Be the first to bid on this item</p>
-            {/if}
-            <p>Auction ends in {timeRemaining} </p>
+            <p><strong>Auction ends in {timeRemaining} </strong></p>
         </div>
-        <article class="max-w-sm">
+        <article class="max-w-sm grid-item2">
             <h2 class="text-4xl">{data.title}</h2>
             <p>{data.description}</p>
+            {#if data.bids.length > 0}
+            <p class="mt-2">Current bid <strong >${data?.bids[data?.bids?.length - 1].amount}</strong></p>
+            {:else}
+            <p><small>Be the first to bid on this item</small></p>
+            {/if}
             <BidForm id={data.id} amountToBid = {data?.bids?.length > 0 ? data?.bids[data?.bids?.length - 1].amount : 0}/>
         </article>
     </figure>
@@ -32,7 +32,6 @@
     import { onMount } from 'svelte';
     import BidForm from '../forms/BidForm.svelte';
 	import { authStore } from '$lib/data/authstore';
-
 
         let timeRemaining = '';
         $: {
@@ -74,9 +73,10 @@
         });
 </script>
 <style lang="postcss">
+
     .custom-width{
-        max-width: 600px;
-        height: 500px;
+        max-width: 550px;
+       
     }
     .custom-grid{
         display: grid;
@@ -84,5 +84,26 @@
         justify-content: center;
         align-items: center;
         gap: 50px;
+    }
+    .grid-item1{
+        grid-column: 1;
+    }
+    .grid-item2{
+        grid-column: 2;
+    }
+    @media(max-width:820px){
+        .custom-grid{
+            grid-template-columns:  1fr;
+            justify-items: center;
+            gap: 0;
+        }   
+        .grid-item1{
+        grid-column: 1;
+        padding: 16px;
+    }
+    .grid-item2{
+        grid-column: 1;
+        padding: 16px;
+    }
     }
 </style>

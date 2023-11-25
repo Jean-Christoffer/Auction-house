@@ -1,6 +1,6 @@
 <div class="w-full max-w-xs m-auto ">
  
-    <form on:submit|preventDefault={Create} class=" rounded px-8 pt-6 pb-8 mb-4 customBg shadow-md">
+    <form on:submit|preventDefault={Create} class="  px-8 pt-6 pb-8 mb-4 customBg">
 
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
