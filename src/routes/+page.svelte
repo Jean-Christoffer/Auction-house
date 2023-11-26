@@ -1,5 +1,5 @@
 {#if auctionItems}
-<div>
+
   <section class="bg">
     <div class="bg-content">
       <div class="bg-overlay"></div>
@@ -16,22 +16,22 @@
    </div>
 
   </div>
-  <div class="trigger"></div>
+
     <div class="auctions-wrapper">
       
       <div class="auctions-container">
-        <h3 class="py-4 text-4xl">Auctions ending soon</h3>
+        <h3 class="py-4 pl-2 text-4xl">Auctions ending soon</h3>
         <Carousell itemsData={auctionItems}>
         </Carousell>
       </div>
     </div>
 
-</div>
+
 {/if}
 <script>
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Cta from "$lib/components/uiComponents/Cta.svelte";
-import { onMount } from "svelte";
+import { onMount,onDestroy } from "svelte";
 import Carousell from "$lib/components/Carousell.svelte";
 
 
@@ -57,10 +57,10 @@ onMount(async () => {
     ScrollTrigger.refresh()
     gsap.to(".bg-image",
     {
-      scale:1.2,
+      scale:1.1,
       ease:"none",
       scrollTrigger:{
-        trigger:".trigger",
+        trigger:".auctions-wrapper",
         start:"top 100%",
         end: " top 20%",
         scrub:true,
@@ -68,7 +68,10 @@ onMount(async () => {
         fastScrollEnd:true,
       }
     })
-
+    onDestroy(() => {
+        
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
+    }); 
     })
     
     </script>
@@ -128,7 +131,7 @@ onMount(async () => {
 }
 .hero{
   position: relative;
-
+  padding: 0 16px;
   z-index: 200;
   transform: translate3d(0,0,0);
   text-align: center;
@@ -156,7 +159,7 @@ onMount(async () => {
 -25px 0px 20px -20px rgba(0,0,0,0.45);
   max-width: 370px;
   margin: 16px auto 0 auto;
-  padding: 0 16px;
+
 }
 
 

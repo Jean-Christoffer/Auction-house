@@ -34,7 +34,7 @@
     if(data){
         const {auctionItem} = data
 
-        listings = auctionItem.filter(i => i.media.length > 0  && i.title.length <= 20)
+        listings = auctionItem
         
     }
     }

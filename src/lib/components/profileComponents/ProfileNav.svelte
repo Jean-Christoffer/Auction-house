@@ -24,7 +24,7 @@
     </nav>
     </div>
     
-    <dialog id="auctionModal" class="modal rounded px-8 pt-6 pb-8 mb-8 customBg shadow-md ">
+    <dialog id="auctionModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md ">
         <button class="btn ml-auto text-white"  on:click={() => auctionModal.close()}>Close</button>
       <div class="modal-box">
         <div class="modal-action ">
