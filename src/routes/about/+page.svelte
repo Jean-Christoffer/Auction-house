@@ -1,6 +1,6 @@
-<div>
+
     <section  class="max-w-7xl mx-auto my-0 px-1">
-        <article>
+        <article class="overflow-hidden">
             {#each stories as story,idx}
                 <div
                 class="
@@ -42,37 +42,35 @@
         </article>
     </section>
 
-    <div>
-    <section class="outro">
-        <div class="bg-overlay"></div>
-        <div class="outro-img"><div>
-
-    </section>
-<div class="w-full h-full customBg article">
-
-
-    <article class="max-w-xl mx-auto  my-0 h-[100vh]  z-20 relative flex justify-center text-center items-center">
-
-        <div class="">
-
-            <h2 class="text-5xl md:text-7xl mission text-bold "  >
-             
-                    OUR MISSION
-   
-            </h2> 
-            <p class="mt-4 text-1xl md:text-2xl" id="caption">
-                
-                 Connecting discerning collectors with extraordinary items. 
-              
-            </p>
-        </div>
-    </article>
-</div>
+    <div class="sticky top-0 h-[100vh] outro overflow-hiddenq">
+        <section class="h-full overflow-hidden">
+            <div class="bg-content">
+                <div class="bg-overlay"></div>
+                <div class="outro-img"><div>
+            </div>
+        </section>
     </div>
-</div>
+    <div class="w-full  h-[100vh] customBg article overflow-hidden">
+        <article class="max-w-xl mx-auto h-full my-0  z-20 relative flex justify-center text-center items-center">
+
+            <div class="">
+
+                <h2 class="text-5xl md:text-7xl mission text-bold "  >
+                
+                        OUR MISSION
+    
+                </h2> 
+                <p class="mt-4 text-1xl md:text-2xl" id="caption">
+                    
+                    Connecting discerning collectors with extraordinary items. 
+                
+                </p>
+            </div>
+        </article>
+    </div>
 <script>
     let gsap
-    import { onMount } from "svelte";
+    import { onMount,onDestroy } from "svelte";
     import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
     import SplitType from 'split-type'
     let stories =
@@ -148,11 +146,7 @@ onMount(async () => {
     
     tl3.to(".outro-img",{
         "clip-path":"polygon(0% 0%,100% 0%,100% 100%,0% 100%)"
-    },0).to(".outro-img",{
-        scale:1.12
     },0)
-
- setTimeout(() => {
     const tl4 = gsap.timeline({
         scrollTrigger:{
             trigger:".mission",
@@ -176,14 +170,17 @@ onMount(async () => {
             })
          })
 
- },100)
-
+    onDestroy(() => {
+        
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
+        });
 
 
     })
 
 </script>
 <style lang="postcss">
+    
 .gridAreas{
     grid-template-areas:
     "txt"
@@ -237,21 +234,20 @@ onMount(async () => {
        max-width: 380px;
        margin-left: 16px;
     
-    }
-    .outro{
-        height: 100vh;
-        overflow: hidden;
-        position: sticky;
-        top: 0;
-    
-    }
+}
+
+    .bg-content{
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+}
     .outro-img{
         background-image: url("./out.jpg");
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
-        height: 100%;
-        width: 100%;
         position: absolute;
         inset: 0;
         clip-path: polygon(5% 10%,95% 10%,95% 90%,5% 90%);
@@ -280,25 +276,4 @@ onMount(async () => {
 -moz-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 }
 
-.animate{
-        -webkit-animation: scalingBack 45s ease-in infinite;
-        animation: scalingBack 45s ease-in infinite;
-        -webkit-animation-play-state: running;
-        animation-play-state: running;
-
-
-    }
-
-
-@keyframes scalingBack{
-    0% {
-    transform: scale(1.1);
-}
-    50% {
-    transform: scale(1);
-}
-    100% {
-    transform: scale(1.1);
-}
-}
 </style>

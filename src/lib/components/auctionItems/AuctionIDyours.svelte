@@ -3,10 +3,10 @@
     <figure class="custom-grid ">
         <div class="grid-item1">
             <div class="custom-width">
-                <img class="w-full block h-full object-cover object-center aspect-square" src="{data.media[0]}" alt="{data.title}" /> '
+                <img class="w-full block h-full object-cover object-center aspect-square" src="{data.media[0]}" alt="{data.title}" /> 
                 <p><strong>Auction ends in {timeRemaining} </strong></p>
             </div>
-       
+
         </div>
         <article class="max-w-sm grid-item2">
             <h2 class="text-4xl">{data.title}</h2>
@@ -28,7 +28,7 @@
             {:else}
             <p><small>Be the first to bid on this item</small></p>
             {/if}
-            <BidForm id={data.id} amountToBid = {data?.bids?.length > 0 ? data?.bids[data?.bids?.length - 1].amount : 0}/>
+            <EditListing auctionId ={data.id}/>
         </article>
     </figure>
     {:else}
@@ -43,7 +43,7 @@
 <script>
     export let data
     import { onMount } from 'svelte';
-    import BidForm from '../forms/BidForm.svelte';
+    import EditListing from '../forms/EditListing.svelte';
 	import { authStore } from '$lib/data/authstore';
 
         let timeRemaining = '';

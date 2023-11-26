@@ -3,7 +3,8 @@
     <div class="flex flex-col overflow-hidden h-full ">
       <div class="p-12">
         <div class="customWidth">
-          <img class="w-full h-auto object-contain object-center " src="{listingData.media[0]}" alt="">
+          <img class="w-full h-auto object-cover object-center block" src="{listingData.media[0]}" alt="">
+          
         </div>
       </div>
       <div class="h-full pt-6 px-3 custom-bg w-full flex flex-col text-left">
@@ -59,8 +60,9 @@ function truncateDescription(text) {
   }
 
 .customWidth{
-  max-width: 150px;
-  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   aspect-ratio: 16/10;
   overflow: hidden;
 }
