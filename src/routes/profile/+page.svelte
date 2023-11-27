@@ -1,4 +1,4 @@
-{#if profileData !== null}
+{#if userData !== null}
 <div  class="w-full overflow-hidden relative customHeight flex flex-col justify-center " >
           <div class="absolute
           top-0 
@@ -11,14 +11,14 @@
           {memberStatus}"
           ></div>
           <div class="bg-overlay"></div>
-          <ProfileCard profileData = {profileData} memberStatus = {memberStatus} />
+          <ProfileCard profileData = {userData} memberStatus = {memberStatus} />
           
 </div> 
-        <ProfileNav profileData ={profileData} />  
+        <ProfileNav profileData ={userData} />  
 
           <div  class="container mx-auto h-full">
           <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
-              {#each profileData.listings as myListing}
+              {#each userData.listings as myListing}
               <a href="/auctionItem/{myListing.id}">
                 <AuctionItem  listingData =  {myListing}/> 
               </a>
@@ -36,34 +36,35 @@ import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
 export let data
 
-   let profileData
-   let wins
-   let memberStatus = "bronze"
-   $: {
-    if(data){
-        profileData = data.props.data
-        wins = profileData?.wins.length
-      
-    }else{
-        profileData = null
-    }
-   }
-  $: console.log(profileData)
+   let userData = {}
+   let wins = 2
+   let memberStatus = "silver"
 
 
+
+
+$: {
+  if(data){
+    const {profileData} = data
+    userData = profileData
+    wins = userData?.wins?.length
+  }
   switch (wins) {
-                case wins > 4:
-                   memberStatus = "bronze";
-                   break;
-                    case wins> 5:
-                     memberStatus = "silver";
-                     break;
-                    case wins > 9:
-                     memberStatus = "gold"
-                     break;
-                default:
-                     memberStatus = "bronze";
-                }
+    
+    case wins > 1:
+     memberStatus = "silver";
+     break;
+    case wins > 2:
+     memberStatus = "gold"
+     break;
+    default:
+        memberStatus = "silver";
+    }
+}
+
+
+
+
 </script>
 <style lang="postcss">
       .animate{
