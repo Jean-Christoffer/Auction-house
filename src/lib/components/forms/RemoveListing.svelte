@@ -2,7 +2,7 @@
  
     <form on:submit|preventDefault={Remove} class="  px-8 pt-6 pb-8 mb-4 customBg">
 
-        <Button buttonText="Remove listing" isDisabled={urlPattern.test(mediaurl)} />
+        <Button buttonText="Remove listing"/>
      
     </form>
 
@@ -19,11 +19,10 @@
     import Button from "../uiComponents/Button.svelte";
     import Snackbar from "../uiComponents/Snackbar.svelte";
     import {authStore } from "$lib/data/authstore"
+    import { goto } from '$app/navigation';
 
     export let auctionId = ""
-    let mediaurl = ""
 
-    const urlPattern = /^(http|https):\/\/[^ "]+$/;
 
 
 
@@ -71,9 +70,11 @@
         })
         .catch((err) => {
             currentErr = err
-  
             console.log("Something horrible went wrong :O",err)
-        })
+        }).finally(() => {
+            goto('/profile')
+        });
+
     }
 </script>
 <style lang="postcss">
