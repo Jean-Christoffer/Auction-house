@@ -26,9 +26,10 @@
             </ul>
             <p class="mt-2">Current bid <strong >${data?.bids[data?.bids?.length - 1].amount}</strong></p>
             {:else}
-            <p><small>Be the first to bid on this item</small></p>
+            <p><small>No bids yet</small></p>
             {/if}
             <EditListing auctionId ={data.id}/>
+            <RemoveListing auctionId={data.id} />
         </article>
     </figure>
     {:else}
@@ -45,6 +46,7 @@
     import { onMount } from 'svelte';
     import EditListing from '../forms/EditListing.svelte';
 	import { authStore } from '$lib/data/authstore';
+    import RemoveListing from '../forms/RemoveListing.svelte';
 
         let timeRemaining = '';
         $: {
