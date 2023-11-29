@@ -1,14 +1,18 @@
 <div class="w-full max-w-xs m-auto ">
  
-    <form on:submit|preventDefault={Create} class="  px-8 pt-6 pb-8 mb-4 customBg">
-
+    <form
+    use:enhance
+    method="post"
+    action="?/create" 
+    class="  px-8 pt-6 pb-8 mb-4 customBg">
+    
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
                 Title*
                 <input
                 type="text"
                 id="title"
-  
+                name="title"
                 bind:value={title}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
@@ -21,7 +25,7 @@
                 <input
                 type="text"
                 id="description"
-  
+                name="description"
                 bind:value={description}
                 class="shadow appearance-none border rounded w-full py-2 px-3  mb-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
@@ -36,7 +40,7 @@
                  class="shadow appearance-none border  rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="text" 
                  id="tags" 
-
+                 name="tags"
                  bind:value={tags} />
             </label>
         </div>
@@ -49,7 +53,7 @@
                  class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="text" 
                  id="media" 
-
+                 name="media"
                  bind:value={media} />
                  {#if !urlPattern.test(media)}
                     <p class="text-grey-500 text-xs italic">Must be a valid url</p>
@@ -65,6 +69,7 @@
                  class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="date" 
                  id="endsAt" 
+                 name="endsAt"
                  required
 
                  bind:value={endsAt} />
@@ -73,28 +78,20 @@
         <div  class="flex items-center justify-between">
             <div class="customWidth">
                 <Button buttonText="List item" isDisabled={urlPattern.test(media)
-                 && title.length > 3
-                 && description.length > 5
-                 && tags.length > 5
+                 && title.length > 1
+                 && description.length > 1
+                 && tags.length > 1
                ? false : true } />
             </div>       
         </div>
      
     </form>
-
-    <div class="mt-2">
-        <Snackbar
-            message={currentErr}
-            show={showSnackBar}
-            isSuccess={isSuccess} 
-            status={isStatus} />
-    </div>
 </div>
 <script>
     
     import Button from "../uiComponents/Button.svelte";
-    import Snackbar from "../uiComponents/Snackbar.svelte";
-    import { page } from '$app/stores'
+    import {enhance} from "$app/forms"
+
 
     let title = ""
     let description = ""
@@ -104,74 +101,12 @@
 
 
 
-
-    let isSuccess = true
-    let currentErr = null
-    let showSnackBar = false
-    let isStatus = "Success"
-
+ 
 
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
 
-    const Create = () => {
-        fetch("https://api.noroff.dev/api/v1/auction/listings",{
-            method:"POST",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${$page.data.token}`
-            },
-            body:JSON.stringify({
-                title:title,
-                description: description,
-                tags:[tags],
-                media: [media],
-                endsAt:endsAt
-            })
-        })
-        .then((res) => {
-            if(res.status < 299){
-                return res.json()
-
-            }
-            if(res.status > 299){
-                currentErr = "something went wrong"
-            }
-            if(res.status === 400){
-                currentErr ="Could not list item"
-                isSuccess=false
-                showSnackBar = true
-                isStatus="Error"
-
-                title = ""
-                description = ""
-                tags = ""
-                media=""
-                endsAt = new Date()
-
-            
-            }
-        })
-        .then((data) => {
-            if(data){
-                currentErr ="Auction created!"
-                isSuccess=true
-                showSnackBar = true
-                isStatus="Success"
-                
-                title = ""
-                description = ""
-                tags = ""
-                media=""
-                endsAt = new Date()
-            }
-        })
-        .catch((err) => {
-            currentErr = err
-            console.log("Something horrible went wrong :O",err)
-        })
-    }
+   
 </script>
 <style lang="postcss">
     .customBg{

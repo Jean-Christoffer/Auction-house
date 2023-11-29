@@ -1,13 +1,18 @@
 <div class="w-full max-w-xs  ">
  
-    <form on:submit|preventDefault={Update} class="  px-8 pt-6 pb-8 mb-4 customBg">
+    <form  
+    class="px-8 pt-6 pb-8 mb-4 customBg"
+    method="post"
+    action="?/edit"
+    use:enhance
+    >
         <div class="mb-4">
             <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
                 Title
                 <input
                 type="text"
                 id="title"
-  
+                name="title"
                 bind:value={title}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
@@ -19,6 +24,7 @@
                 <input
                 type="text"
                 id="description"
+                name="description"
   
                 bind:value={description}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
@@ -31,6 +37,7 @@
                 <input
                 type="text"
                 id="tags"
+                name="tags"
   
                 bind:value={tags}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
@@ -43,6 +50,7 @@
                 <input
                 type="text"
                 id="url"
+                name="url"
   
                 bind:value={mediaurl}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
@@ -59,92 +67,16 @@
         </div>
      
     </form>
-
-    <div class="mt-2">
-        <Snackbar
-            message={currentErr}
-            show={showSnackBar}
-            isSuccess={isSuccess} 
-            status={isStatus} />
-    </div>
 </div>
 <script>
-    
+     import {enhance} from "$app/forms"
     import Button from "../uiComponents/Button.svelte";
-    import Snackbar from "../uiComponents/Snackbar.svelte";
-    import { page } from '$app/stores'
     export let auctionId = ""
     let mediaurl = ""
     let title = ""
     let description = ""
     let tags = ""
-
-    const urlPattern = /^(http|https):\/\/[^ "]+$/;
-
-
-
-    let isSuccess = true
-    let currentErr = null
-    let showSnackBar = false
-    let isStatus = "Success"
-
-
-
-
-
-
-    const Update = () => {
-        fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionId}`,{
-            method:"PUT",
-            credentials: "same-origin",
-            headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${$page.data.token}`
-            },
-            body:JSON.stringify({
-                title:title,
-                description:description,
-                tags:[tags],
-                media:mediaurl
-            })
-        })
-        .then((res) => {
-            if(res.status < 299){
-      
-                return res.json()
-               
-
-            }
-            if(res.status > 299){
-         
-                currentErr = "something went wrong"
-            }
-            if(res.status === 400){
-                currentErr ="Invalid url"
-                isSuccess=false
-                showSnackBar = true
-                isStatus="Error"
-
-                mediaurl = ""
-
-            
-            }
-        })
-        .then((data) => {
-            if(data){
-                currentErr ="Listing updated!"
-                isSuccess=true
-                showSnackBar = true
-                isStatus="Success"      
-                mediaurl = ""
-                
-            }
-        })
-        .catch((err) => {
-            currentErr = err
-            console.log("Something horrible went wrong :O",err)
-        })
-    }
+    const urlPattern = /^(http|https):\/\/[^ "]+$/;   
 </script>
 <style lang="postcss">
     .customBg{
