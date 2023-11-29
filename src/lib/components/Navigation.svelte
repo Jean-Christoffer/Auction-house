@@ -62,14 +62,14 @@
             {/each}
             {#if !$page.data.user}
             <li>
-              <a href="/login">Login</a>
+              <a href="/login" class="text-white md:text-gray-400" on:click={toggleNavbar}>Login</a>
             </li>
             {/if}
         
           {#if $page.data.user}
             <li>
               <form action="/logout" method="POST">
-                <button type="submit">Log out</button>
+                <button type="submit" on:click={toggleNavbar}>Log out</button>
               </form>
             </li>  
           {/if}
