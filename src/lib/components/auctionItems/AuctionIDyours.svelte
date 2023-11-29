@@ -1,5 +1,5 @@
 <section  class="md:container md:mx-auto my-10 h-full p-2 m-auto flex justify-center">
-    {#if data && $authStore.token}
+    {#if data }
     <figure class="custom-grid ">
         <div class="grid-item1">
             <div class="custom-width">
@@ -45,7 +45,7 @@
     export let data
     import { onMount } from 'svelte';
     import EditListing from '../forms/EditListing.svelte';
-	import { authStore } from '$lib/data/authstore';
+
     import RemoveListing from '../forms/RemoveListing.svelte';
 
         let timeRemaining = '';

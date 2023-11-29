@@ -60,17 +60,19 @@
                 {/if}
             </li>
             {/each}
+            {#if !$page.data.user}
             <li>
-              {#if $authStore.token}
-                <button on:click={() => {
-                  authStore.logout()
-                  toggleNavbar()
-                }} class="text-white md:text-black">Logout</button>
-                {:else}
-                  <a href="/login" class="text-white md:text-black" on:click={toggleNavbar}>Login</a>
-              {/if}
+              <a href="/login">Login</a>
             </li>
-
+            {/if}
+        
+          {#if $page.data.user}
+            <li>
+              <form action="/logout" method="POST">
+                <button type="submit">Log out</button>
+              </form>
+            </li>  
+          {/if}
         </ul>
 
         <div class="md:block hidden">
@@ -96,8 +98,7 @@
 <script>
     import Search from "./Search.svelte";
     import SearchButton from "./searchComponents/SearchButton.svelte";
-    import {authStore } from "$lib/data/authstore"
-   
+    import { page } from '$app/stores'
 
     //exports
     /**
@@ -135,8 +136,6 @@
             href:"/auctions"
         },
 
-
-
          {
             name:"Profile",
             href:"/profile"
@@ -145,6 +144,7 @@
             name:"About",
             href:"/about"
         },
+
 
     ]
     

@@ -94,7 +94,8 @@
     
     import Button from "../uiComponents/Button.svelte";
     import Snackbar from "../uiComponents/Snackbar.svelte";
-    import {authStore } from "$lib/data/authstore"
+    import { page } from '$app/stores'
+
     let title = ""
     let description = ""
     let tags = ""
@@ -113,14 +114,13 @@
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
 
-
     const Create = () => {
         fetch("https://api.noroff.dev/api/v1/auction/listings",{
             method:"POST",
             credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${$authStore.token}`
+                Authorization: `Bearer ${$page.data.token}`
             },
             body:JSON.stringify({
                 title:title,

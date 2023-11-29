@@ -4,8 +4,11 @@
     import Footer from "$lib/components/Footer.svelte";
     import Lenis from '@studio-freight/lenis'
     import { onMount } from "svelte";
+    import { page } from '$app/stores'
+    $:console.log($page.data)
 
     onMount(()=>{
+    
     const lenis = new Lenis()
     function raf(time) {
       lenis.raf(time)
@@ -57,6 +60,7 @@
        handleInput={handleInput} 
        inputValue={inputValue}/>
   </header>
+
   <main>
     <slot />
   </main>

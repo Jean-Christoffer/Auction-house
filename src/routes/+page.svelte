@@ -68,10 +68,6 @@ onMount(async () => {
         fastScrollEnd:true,
       }
     })
-    onDestroy(() => {
-        
-        ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
-    }); 
     })
     
     </script>
@@ -113,6 +109,7 @@ onMount(async () => {
   background-size: cover;
   background-repeat: no-repeat;
   z-index: 0;
+  will-change:transform;
 }
 
 .auctions-wrapper{
