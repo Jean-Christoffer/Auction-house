@@ -1,12 +1,13 @@
 <div class="w-full max-w-xs m-auto">
     
-    <form on:submit|preventDefault={login} class=" rounded px-8 pt-6 pb-8 mb-4  customBg shadow-md">
+    <form method="POST" class=" rounded px-8 pt-6 pb-8 mb-4  customBg shadow-md"  use:enhance >
         <div class="mb-4">
-            <label for="mail" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
                 Email
                 <input
-                type="text"
-                id="mail"
+                type="email"
+                id="email"
+                name="email"
   
                 bind:value={email}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
@@ -24,7 +25,8 @@
                 <input
                  class="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="password" 
-                 id="password" 
+                 id="password"
+                 name="password" 
 
                  bind:value={password} />
                  {#if password.length < 7}
@@ -41,79 +43,20 @@
     </form>
     <div class="customWidth flex flex-col align-center m-auto">
         <p>Don't have an account yet? </p>
-        <button on:click={switchForm}><strong>register</strong></button>
-    </div>
-    <div class="mt-2">
-        <Snackbar
-            message={currentErr}
-            show={showSnackBar}
-            isSuccess={isSuccess} 
-            status={isStatus} />
+        <a href="/register" class="text-center"><strong>register</strong></a>
     </div>
 </div>
 <script>
 
     import Button from "../uiComponents/Button.svelte";
-    import { goto } from '$app/navigation';
-    import Snackbar from "../uiComponents/Snackbar.svelte";
-    import {authStore } from "$lib/data/authstore"
+    import {enhance} from "$app/forms"
+
     
     let email = ""
     let password = ""
- 
-
-    let isSuccess = true
-    let currentErr = null
-    let showSnackBar = false
-    let isStatus = "Success"
-
-    export let switchForm
     const mailRegex = /^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/;
 
-    const login = () => {
-        fetch("https://api.noroff.dev/api/v1/auction/auth/login",{
-            method:"POST",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body:JSON.stringify({
-                email:email.toLocaleLowerCase(),
-                password: password
-            })
-        })
-        .then((res) => {
-            if(res.status < 299){
-                return res.json()
 
-            }
-            if(res.status > 299){
-                currentErr = "something went wrong"
-            }
-            if(res.status === 401){
-                currentErr ="Invalid email or password"
-                isSuccess=false
-                showSnackBar = true
-                isStatus="Error"
-                 email = ""
-                 password = ""
-            }
-        })
-        .then((data) => {
-            if(data){
-                localStorage.setItem('token', data.accessToken);
-                localStorage.setItem('userId', data.name);
-                authStore.login(data.accessToken,  data.name);
-                goto('/profile')
-       
-         
-            }
-        })
-        .catch((err) => {
-            currentErr = err
-            console.log("Something horrible went wrong :O",err)
-        })
-    }
 </script>
 <style lang="postcss">
     .customBg{

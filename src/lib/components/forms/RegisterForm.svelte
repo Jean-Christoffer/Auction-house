@@ -1,6 +1,12 @@
 <div class="w-full max-w-xs m-auto ">
  
-    <form on:submit|preventDefault={Register} class=" rounded px-8 pt-6 pb-8 mb-4 customBg shadow-md">
+    <form 
+     method="post"
+    
+     use:enhance
+    
+     
+     class=" rounded px-8 pt-6 pb-8 mb-4 customBg shadow-md">
 
         <div class="mb-4">
             <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
@@ -8,7 +14,7 @@
                 <input
                 type="text"
                 id="name"
-  
+                name="name"
                 bind:value={name}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
@@ -16,11 +22,12 @@
         </div>
 
         <div class="mb-4">
-            <label for="mail" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
                 Email*
                 <input
-                type="text"
-                id="mail"
+                type="email"
+                id="email"
+                name="email"
   
                 bind:value={email}
                 class="shadow appearance-none border rounded w-full py-2 px-3  mb-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
@@ -38,7 +45,8 @@
                 <input
                  class="shadow appearance-none border {password.length < 7 ? " border-red-500" : ""} rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="password" 
-                 id="password" 
+                 id="password"
+                 name="password"
 
                  bind:value={password} />
                  {#if password.length < 7}
@@ -55,7 +63,7 @@
                  class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                  type="text" 
                  id="avatar" 
-
+                 name="avatar"
                  bind:value={avatar} />
                  {#if !urlPattern.test(avatar)}
                     <p class="text-grey-500 text-xs italic">Must be a valid url</p>
@@ -71,94 +79,28 @@
     </form>
     <div class="customWidth flex flex-col align-center m-auto">
         <p>Already have an account? </p>
-        <button on:click={switchFormLogin}><strong>Login</strong></button>
+        <a href="/login" class="text-center"><strong>Login</strong></a>
     </div>
-    <div class="mt-2">
-        <Snackbar
-            message={currentErr}
-            show={showSnackBar}
-            isSuccess={isSuccess} 
-            status={isStatus} />
-    </div>
+
 </div>
 <script>
-    
+    import {enhance} from "$app/forms"
     import Button from "../uiComponents/Button.svelte";
-    import Snackbar from "../uiComponents/Snackbar.svelte";
-  
+
+ 
+
     let name = ""
     let email = ""
     let password = ""
     let avatar = ""
 
-    let isSuccess = true
-    let currentErr = null
-    let showSnackBar = false
-    let isStatus = "Success"
 
-    export let switchFormLogin
 
     const mailRegex = /^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/;
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
 
 
-    const Register = () => {
-        fetch("https://api.noroff.dev/api/v1/auction/auth/register",{
-            method:"POST",
-            credentials: "same-origin",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body:JSON.stringify({
-                name:name.trim().replaceAll(" ",""),
-                password: password,
-                email:email.toLocaleLowerCase(),
-                avatar: avatar
-            })
-        })
-        .then((res) => {
-            if(res.status < 299){
-                console.log( res.json())
-                return res.json()
-
-            }
-            if(res.status > 299){
-                currentErr = "something went wrong"
-            }
-            if(res.status === 400){
-             
-            
-                currentErr ="Profile already exists"
-                isSuccess=false
-                showSnackBar = true
-                isStatus="Error"
-
-                 name = ""
-                 email = ""
-                 password = ""
-                 avatar = ""
-
-            
-            }
-        })
-        .then((data) => {
-            if(data){
-                currentErr ="Account created, you can now log in"
-                isSuccess=true
-                showSnackBar = true
-                isStatus="Success"
-                
-                 name = ""
-                 email = ""
-                 password = ""
-                 avatar = ""
-            }
-        })
-        .catch((err) => {
-            currentErr = err
-            console.log("Something horrible went wrong :O",err)
-        })
-    }
+    
 </script>
 <style lang="postcss">
     .customBg{

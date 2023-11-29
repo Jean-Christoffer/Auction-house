@@ -18,9 +18,9 @@
     
     import Button from "../uiComponents/Button.svelte";
     import Snackbar from "../uiComponents/Snackbar.svelte";
-    import {authStore } from "$lib/data/authstore"
+ 
     import { goto } from '$app/navigation';
-
+    import { page } from '$app/stores'
     export let auctionId = ""
 
 
@@ -42,7 +42,7 @@
             credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${$authStore.token}`
+                Authorization: `Bearer ${$page.data.token}`
             }
 
         })

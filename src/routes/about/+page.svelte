@@ -169,13 +169,6 @@ onMount(async () => {
 
             })
          })
-
-    onDestroy(() => {
-        
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill()); 
-        });
-
-
     })
 
 </script>
@@ -245,6 +238,7 @@ onMount(async () => {
 }
     .outro-img{
         background-image: url("./out.jpg");
+        will-change: transform;
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;

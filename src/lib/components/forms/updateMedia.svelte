@@ -36,7 +36,7 @@
     
     import Button from "../uiComponents/Button.svelte";
     import Snackbar from "../uiComponents/Snackbar.svelte";
-    import {authStore } from "$lib/data/authstore"
+    import { page } from '$app/stores'
     let mediaurl = ""
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
@@ -54,12 +54,12 @@
 
 
     const Update = () => {
-        fetch(`https://api.noroff.dev/api/v1/auction/profiles/${$authStore.userId}/media`,{
+        fetch(`https://api.noroff.dev/api/v1/auction/profiles/${$page.data.user}/media`,{
             method:"PUT",
             credentials: "same-origin",
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${$authStore.token}`
+                Authorization: `Bearer ${$page.data.token}`
             },
             body:JSON.stringify({
                 avatar:mediaurl

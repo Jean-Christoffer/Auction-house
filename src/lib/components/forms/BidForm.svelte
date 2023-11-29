@@ -37,8 +37,9 @@
 
     import Button from "../uiComponents/Button.svelte";
     import Snackbar from "../uiComponents/Snackbar.svelte";
-    import {authStore } from "$lib/data/authstore"
-    export let id
+    import { page } from '$app/stores'
+
+    export let id = ""
     export let amountToBid = 0
     let amount = 0
 
@@ -56,7 +57,7 @@
             credentials: "same-origin",
             headers: {
                 "Content-Type": "application/json",
-                Authorization: `Bearer ${$authStore.token}`
+                Authorization: `Bearer ${$page.data.token}`
             },
             body:JSON.stringify({
                 amount:amount
