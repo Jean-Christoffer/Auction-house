@@ -1,6 +1,9 @@
+import { redirect } from '@sveltejs/kit';
 
 export async function load({ fetch,locals }) {
-
+    if (!locals.user) {
+        throw redirect(307, '/warning');
+    }
         const fetchAuctionItem = async () => {
             const apiUrl = `https://api.noroff.dev/api/v1/auction/profiles/${locals.user.name}?_listings=true&_active=true&_bids=true`;
             const response = await fetch(apiUrl,{

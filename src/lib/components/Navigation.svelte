@@ -62,7 +62,7 @@
             {/each}
             {#if !$page.data.user}
             <li>
-              <a href="/login" class="text-white md:text-gray-400" on:click={toggleNavbar}>Login</a>
+              <a href="/login" class="text-white md:text-gray-800 hover:text-gray-400" on:click={toggleNavbar}>Login</a>
             </li>
             {/if}
         
