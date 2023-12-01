@@ -1,5 +1,13 @@
 import { redirect } from '@sveltejs/kit';
-
+interface AuctionDetails {
+    title: string;
+    description: string;
+    tags:  string[]; 
+    media: string[]; 
+    endsAt: string; 
+    token: string;
+  }
+  
 export async function load({ fetch,locals }) {
     if (!locals.user) {
         throw redirect(307, '/warning');
@@ -26,18 +34,27 @@ export const actions = {
     async create({ request, locals }) {
         const formData = await request.formData();
 
-        const title = formData.get("title")
-        const description = formData.get("description")
-        const tags = formData.get("tags")
-        const media = formData.get("media")
-        const endsAt = formData.get("endsAt")
 
-   
+        const title = formData.get("title") as string;
+        const description = formData.get("description") as string;
+        const tagsValue = formData.get("tags");
+        const mediaValue = formData.get("media");
+        const tags = typeof tagsValue === 'string' ? tagsValue.split(',') : [];
+        const media = typeof mediaValue === 'string' ? mediaValue.split(',') : [];
     
-    
-      
-        const result = await createAuction(title,description,tags,media,endsAt, locals?.user?.token);
-        console.log(result)
+        const endsAt = formData.get("endsAt") as string;
+        const token = locals?.user?.token as string;
+
+        const auctionDetails: AuctionDetails = { title, description, tags, media, endsAt, token };
+        const result = await createAuction(
+            auctionDetails.title, 
+            auctionDetails.description, 
+            auctionDetails.tags, 
+            auctionDetails.media, 
+            auctionDetails.endsAt, 
+            auctionDetails.token
+            );
+
       
         return {
             status: 303,
@@ -48,8 +65,13 @@ export const actions = {
     },
     async update({ request, locals }) {
         const formData = await request.formData();
-        const media = formData.get("url")
-        const result = await updateMedia(media, locals?.user?.name, locals?.user?.token);
+        const mediaValue = formData.get("url")
+        
+        const token = locals?.user?.token as string;
+        const userName = locals?.user?.name as string
+
+        const media = typeof mediaValue === 'string' ? mediaValue.split(',') : [];
+        const result = await updateMedia(media, userName, token);
         console.log(result)
       
         return {
@@ -64,7 +86,7 @@ export const actions = {
 };
 
 
-async function createAuction( title,description,tags,media,endsAt, token) {
+async function createAuction( title: string,description: string,tags: Array<string>,media: Array<string>,endsAt: string, token: string) {
   
     try {
         const response = await fetch("https://api.noroff.dev/api/v1/auction/listings",{
@@ -112,7 +134,7 @@ async function createAuction( title,description,tags,media,endsAt, token) {
 }
 
 
-async function updateMedia( media,user,token) {
+async function updateMedia( media: Array<string>,user:string,token:string) {
   
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/profiles/${user}/media`,{

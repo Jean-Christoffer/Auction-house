@@ -7,7 +7,7 @@ export function load({ fetch }) {
         const response = await fetch(apiUrl);
         const data = await response.json();
   
-        return data.filter(i => i.media.length > 0)
+        return data.filter((i: { media: string | any[]; }) => i.media.length > 0)
     }
     return {
         auctionItem: fetchAuctionItem()

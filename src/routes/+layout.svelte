@@ -4,8 +4,8 @@
     import Footer from "$lib/components/Footer.svelte";
     import Lenis from '@studio-freight/lenis'
     import { onMount } from "svelte";
-    import { page } from '$app/stores'
-    $:console.log($page.data)
+
+
 
     onMount(()=>{
     
@@ -52,6 +52,8 @@
   }
 
 </script>
+
+
 <div class="min-h-screen flex-col flex">
   <header>
       <Navigation

@@ -6,6 +6,7 @@
 <script>
     export let data
     export let form
+    console.log(data)
     import { page } from '$app/stores'
     import AuctionId from '$lib/components/auctionItems/AuctionID.svelte';
     import AuctionIDyours from  '$lib/components/auctionItems/AuctionIDyours.svelte';

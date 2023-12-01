@@ -3,7 +3,10 @@
     <figure class="custom-grid ">
         <div class="grid-item1">
             <div class="custom-width">
+  
+          
                 <img class="w-full block h-full object-cover object-center aspect-square" src="{data.media[0]}" alt="{data.title}" /> '
+       
                 <p><strong>Auction ends in {timeRemaining} </strong></p>
             </div>
        
@@ -44,6 +47,7 @@
     export let data
     import { onMount } from 'svelte';
     import BidForm from '../forms/BidForm.svelte';
+   
     export let form
    
 

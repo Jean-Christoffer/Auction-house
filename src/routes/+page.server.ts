@@ -6,9 +6,11 @@
             const response = await fetch(apiUrl);
             const data = await response.json();
       
-            return data.filter(i => i.media.length > 0)
-            .sort((a, b) => {
-              return new Date(a.endsAt) - new Date(b.endsAt);
+            return data.filter((i: { media: string | any[]; }) => i.media.length > 0)
+            .sort((a: { endsAt: string | number | Date; }, b: { endsAt: string | number | Date; }) => {
+                const date1 = new Date(a.endsAt);
+                const date2 = new Date(b.endsAt);
+              return date1.getTime() - date2.getTime();
               }).slice(0,9)
         }
         return {

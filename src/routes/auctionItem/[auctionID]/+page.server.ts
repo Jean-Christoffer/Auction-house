@@ -5,7 +5,7 @@ export function load({ fetch, params,locals }) {
         throw redirect(307, '/warning');
     }
 
-    const fetchAuctionItem = async (id) => {
+    const fetchAuctionItem = async (id: string) => {
         const apiUrl = `https://api.noroff.dev/api/v1/auction/listings/${id}?_seller=true&_bids=true`;
         const response = await fetch(apiUrl,{
             method:"GET",
@@ -14,7 +14,7 @@ export function load({ fetch, params,locals }) {
                 Authorization: `Bearer ${locals?.user?.token}`
         }});
         const data = await response.json();
-     
+
         return data
     }
     return {
@@ -57,7 +57,7 @@ export const actions = {
             title,
             description,
             tags,
-             locals.user.token)
+             locals?.user?.token )
     
         console.log(resultsEdit)
         return {
@@ -71,14 +71,16 @@ export const actions = {
     async deleteAuction({ request, locals, params }) {
         const formData = await request.formData();
         const auctionID = params.auctionID;
-        const resultsDelete = await deleteItem(auctionID,locals?.user?.token)
+        const token = locals?.user?.token as string;
+        
+        const resultsDelete = await deleteItem(auctionID,token)
         console.log(resultsDelete,formData)
         throw redirect(303, '/profile');
   
     }
 };
 
-async function placeBid(auctionID, bidAmount, token) {
+async function placeBid(auctionID : string, bidAmount : number, token : string) {
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}/bids`, {
@@ -122,7 +124,7 @@ async function placeBid(auctionID, bidAmount, token) {
 
 
 
-async function editAuction(auctionID,mediaurl,title,description,tags,token) {
+async function editAuction(auctionID: string,mediaurl: string[],title: string,description: string,tags: string[],token:string) {
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}`,{
@@ -171,7 +173,7 @@ async function editAuction(auctionID,mediaurl,title,description,tags,token) {
     }
 }
 
-async function deleteItem(auctionID,token) {
+async function deleteItem(auctionID:string,token:string) {
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}`,{

@@ -1,6 +1,8 @@
+{#if !isMediaGallery}
 <div  class="carousell hideScroll">
     <div  class="inner-carousell hideScroll">
         {#each itemsData as item (item.id)}
+   
                 <a href="/auctionItem/{item.id}"  class="customWidth flex items-stretch" id= {item.id} animate:flip={{duration:500}}>
                     <AuctionItem listingData={item}/>
                 </a>
@@ -27,10 +29,12 @@
 
     </button>
 </div>
+
+{/if}
 <script>
     /**@type {Array<{}>}*/
     export let itemsData
-   
+    export let isMediaGallery = false
     import AuctionItem from "./auctionItems/AuctionItem.svelte";
     import {flip} from "svelte/animate"
 
