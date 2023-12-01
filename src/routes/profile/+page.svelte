@@ -11,22 +11,24 @@
           {memberStatus}"
           ></div>
           <div class="bg-overlay"></div>
-          <ProfileCard profileData = {userData} memberStatus = {memberStatus} />
+          <ProfileCard profileData = {userData} memberStatus = {memberStatus} form={form} />
           
 </div> 
-        <ProfileNav profileData ={userData} />  
+        <ProfileNav profileData ={userData} form={form} />  
 
           <div  class="container mx-auto h-full">
           <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
-              {#each userData.listings as myListing}
+              {#each userData.listings.filter(listing => {
+                const endsAtDate = new Date(listing.endsAt);
+                return endsAtDate >= today;
+              }) 
+                as myListing}
               <a href="/auctionItem/{myListing.id}">
                 <AuctionItem  listingData =  {myListing}/> 
               </a>
               {/each }
         </div>
   </div>
-
-
     {:else}
     <h1>Please log in to see your profile</h1>
 {/if}
@@ -35,7 +37,7 @@ import ProfileCard from '$lib/components/profileComponents/ProfileCard.svelte';
 import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
 export let data
-
+export let form
    let userData = {}
    let wins = 2
    let memberStatus = "silver"
@@ -63,6 +65,8 @@ $: {
 }
 
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 
 </script>
@@ -77,13 +81,13 @@ $: {
 
     }
     .animate.bronze{
-      background-image: url("./bronze.jpg");
+      background-image: url("$lib/images/bronze.jpg");
     }
     .animate.silver{
-      background-image: url("./silver.jpg");
+      background-image: url("$lib/images/silver.jpg");
     }
     .animate.gold{
-      background-image: url("./gold.jpg");
+      background-image: url("$lib/images/gold.jpg");
     }
     .bg-overlay{
   position: absolute;

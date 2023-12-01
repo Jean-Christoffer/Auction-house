@@ -65,13 +65,21 @@
                ? false : true } />
             </div>       
         </div>
-     
+        {#if form?.status === 303}
+        <div class="max-w-sm p-2 ">
+            <Snackbar status="Success" message="Listing changed" show={true} isSuccess={true} />
+        </div>
+        {/if}
+
     </form>
+    
 </div>
 <script>
      import {enhance} from "$app/forms"
-    import Button from "../uiComponents/Button.svelte";
-    export let auctionId = ""
+     import Button from "../uiComponents/Button.svelte";
+     import Snackbar from "../uiComponents/Snackbar.svelte";
+     export let form
+     console.log(form)
     let mediaurl = ""
     let title = ""
     let description = ""

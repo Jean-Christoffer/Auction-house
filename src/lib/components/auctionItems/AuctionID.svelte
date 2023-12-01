@@ -28,7 +28,7 @@
             {:else}
             <p><small>Be the first to bid on this item</small></p>
             {/if}
-            <BidForm  amountToBid = {data?.bids?.length > 0 ? data?.bids[data?.bids?.length - 1].amount : 0} />
+            <BidForm  amountToBid = {data?.bids?.length > 0 ? data?.bids[data?.bids?.length - 1].amount : 0} form={form}/>
         </article>
     </figure>
     {:else}
@@ -44,7 +44,7 @@
     export let data
     import { onMount } from 'svelte';
     import BidForm from '../forms/BidForm.svelte';
-
+    export let form
    
 
         let timeRemaining = '';

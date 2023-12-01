@@ -6,7 +6,7 @@
     use:enhance
      class="  px-8 pt-6 pb-8 mb-4 customBg">
 
-        <Button buttonText="Remove listing"/>
+        <Button buttonText="Remove listing" warning={true}/>
      
     </form>
 

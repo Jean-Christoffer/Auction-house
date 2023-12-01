@@ -28,7 +28,7 @@
         <button class="btn ml-auto text-white"  on:click={() => auctionModal.close()}>Close</button>
       <div class="modal-box">
         <div class="modal-action ">
-          <CreateAuction />
+          <CreateAuction form={form} />
         </div>
       </div>
     </dialog>
@@ -36,6 +36,7 @@
 
     <script>
         export let profileData
+        export let form
         import CreateAuction from "../forms/CreateAuction.svelte";
     </script>
     <style lang="postcss">

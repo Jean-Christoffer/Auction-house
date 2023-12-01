@@ -99,7 +99,7 @@ function getLatestBidAmount(listing) {
         animation: scalingBack 45s ease-in infinite;
         -webkit-animation-play-state: running;
         animation-play-state: running;
-        background-image: url("./6.jpg");
+        background-image: url("$lib/images/6.jpg");
 
     }
 

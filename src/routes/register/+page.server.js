@@ -1,6 +1,6 @@
 
 
-import { redirect } from '@sveltejs/kit';
+import { fail } from '@sveltejs/kit';
 
 export const actions = {
     default: async ({ request }) => {
@@ -29,14 +29,24 @@ export const actions = {
             const errorData = await response.json(); 
             console.log('Login Error:', errorData); 
             console.log(form)
+            if(response.status === 400){
+                return fail(400, { 
+                    error: errorData.message || 'Login failed',
+                    email, incorrect: true
+                });
+            }
+          
             return { error: errorData.message || 'Login failed' };
         }
-
+ 
         const data = await response.json(); 
-       
         console.log(data)
+        if (response.ok) {
+            return { success: true };
+        }
+    
 
-        throw redirect(303, '/login');
+      
     }
 };
 

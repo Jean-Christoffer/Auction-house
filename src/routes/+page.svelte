@@ -1,4 +1,4 @@
-{#if auctionItems}
+{#if auctionItems.length > 0}
 
   <section class="bg">
     <div class="bg-content">
@@ -36,6 +36,9 @@ import Carousell from "$lib/components/Carousell.svelte";
 
 
 export let data
+	/**
+	 * @type {[]}
+	 */
 let auctionItems = []
 
 
@@ -103,7 +106,7 @@ onMount(async () => {
   height: 100%;
   background-image:
   linear-gradient(to bottom, #F2F2F2, #F2F2F2),
-  url("../public/hero4.jpg");
+  url("$lib/images/hero4.jpg");
   background-blend-mode: multiply;
   background-position: center;
   background-size: cover;

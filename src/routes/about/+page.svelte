@@ -189,10 +189,10 @@ onMount(async () => {
  
 }
 .img0{
-    background-image: url("./heroImg.jpg");
+    background-image: url("$lib/images/heroImg.jpg");
 }
 .img1{
-    background-image: url("./hero3.jpg");
+    background-image: url("$lib/images/hero3.jpg");
     
 }
 @media (min-width: 768px) {
@@ -237,7 +237,7 @@ onMount(async () => {
   overflow: hidden;
 }
     .outro-img{
-        background-image: url("./out.jpg");
+        background-image: url("$lib/images/out.jpg");
         will-change: transform;
         background-position: center;
         background-size: cover;

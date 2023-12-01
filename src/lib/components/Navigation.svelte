@@ -69,7 +69,7 @@
           {#if $page.data.user}
             <li>
               <form action="/logout" method="POST">
-                <button type="submit" on:click={toggleNavbar}>Log out</button>
+                <button type="submit" on:click={toggleNavbar}  class="text-white md:text-gray-800 hover:text-gray-400">Logout</button>
               </form>
             </li>  
           {/if}

@@ -7,7 +7,7 @@
      
     
     <div  in:fade={{ delay: 250, duration: 300 }}>
-        <LoginForm  />
+        <LoginForm form={form}  />
     </div>
 
 </div>
@@ -16,7 +16,8 @@
 
 	import { fade } from 'svelte/transition';
     export let form
-
+  
+    console.log("form",form)
 
 
 </script>

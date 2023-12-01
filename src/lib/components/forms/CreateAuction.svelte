@@ -86,13 +86,16 @@
         </div>
      
     </form>
+    {#if form?.status === 303}
+    <Snackbar status="Success" show={true}  isSuccess={true} message="Auction created"/>
+    {/if}
 </div>
 <script>
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
-
-
+    export let form
+    import Snackbar from "../uiComponents/Snackbar.svelte";
     let title = ""
     let description = ""
     let tags = ""

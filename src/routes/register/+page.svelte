@@ -8,16 +8,25 @@
   
 
     <div in:fade={{ delay: 250, duration: 300 }}>
-        <RegisterForm/>
+        <RegisterForm form={form}/>
     </div>
    
-
+    {#if form?.incorrect}
+    <div class="max-w-sm md:pl-2">
+        <Snackbar status="Error" message="User already exist!" show={true} isSuccess={false} />
+    </div>
+    {/if}
+    {#if form?.success}
+    <div class="max-w-sm md:pl-2">
+        <Snackbar status="Success" message="You can now log in" show={true} isSuccess={true} />
+    </div>
+    {/if}
 </div>
 <script>
     export let form
     import RegisterForm from "$lib/components/forms/RegisterForm.svelte";
 	import { fade } from 'svelte/transition';
-
+  import Snackbar from "$lib/components/uiComponents/Snackbar.svelte";
 </script>
 <style lang="postcss">
 

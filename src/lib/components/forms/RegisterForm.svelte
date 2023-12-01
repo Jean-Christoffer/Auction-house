@@ -81,14 +81,14 @@
         <p>Already have an account? </p>
         <a href="/login" class="text-center"><strong>Login</strong></a>
     </div>
-
 </div>
+
 <script>
     import {enhance} from "$app/forms"
     import Button from "../uiComponents/Button.svelte";
 
  
-
+    export let form
     let name = ""
     let email = ""
     let password = ""

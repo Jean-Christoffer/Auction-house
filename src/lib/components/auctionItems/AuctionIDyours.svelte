@@ -28,8 +28,11 @@
             {:else}
             <p><small>No bids yet</small></p>
             {/if}
-            <EditListing auctionId ={data.id}/>
-            <RemoveListing auctionId={data.id} />
+            <EditListing form={form}/>
+            <RemoveListing />
+            {#if form?.success}
+            <h1>asdSADsdasdas</h1>
+            {/if}
         </article>
     </figure>
     {:else}
@@ -43,6 +46,7 @@
 
 <script>
     export let data
+    export let form
     import { onMount } from 'svelte';
     import EditListing from '../forms/EditListing.svelte';
 

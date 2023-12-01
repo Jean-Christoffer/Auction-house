@@ -48,7 +48,7 @@
             <button class="btn ml-auto text-black"  on:click={() => mediaModal.close()}>Close</button>
           <div class="modal-box">
             <div class="modal-action ">
-                <UpdateMedia />
+                <UpdateMedia form={form} />
             </div>
           </div>
         </dialog>
@@ -57,6 +57,7 @@
 <script>
 export let profileData = {}
 export let memberStatus
+export let form
 import UpdateMedia from "../forms/updateMedia.svelte";
 
 </script>
@@ -80,7 +81,7 @@ import UpdateMedia from "../forms/updateMedia.svelte";
     .hover{
         display: none;
         filter: grayscale(100%);
-        background-image: url("/src/public/27002.jpg");
+        background-image: url("$lib/images/27002.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;

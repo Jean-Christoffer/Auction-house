@@ -5,15 +5,17 @@ export async function load({ fetch,locals }) {
         throw redirect(307, '/warning');
     }
         const fetchAuctionItem = async () => {
-            const apiUrl = `https://api.noroff.dev/api/v1/auction/profiles/${locals.user.name}?_listings=true&_active=true&_bids=true`;
+            const apiUrl = `https://api.noroff.dev/api/v1/auction/profiles/${locals?.user?.name}?_listings=true&_active=true&_bids=true`;
             const response = await fetch(apiUrl,{
                 method:"GET",
                 credentials: "same-origin",
                 headers: {
-                    Authorization: `Bearer ${locals.user.token}`
+                    Authorization: `Bearer ${locals?.user?.token}`
             }});
             const data = await response.json();
-      
+            //no unactive listings :S
+  
+
             return data
         }
         return {
@@ -34,26 +36,26 @@ export const actions = {
     
     
       
-        const result = await createAuction(title,description,tags,media,endsAt, locals.user.token);
+        const result = await createAuction(title,description,tags,media,endsAt, locals?.user?.token);
         console.log(result)
       
         return {
-            status: 303, // 'See Other' status code for redirection
+            status: 303,
             headers: {
-                location: `/profile` // Redirect to the same auction item page
+                location: `/profile`
             }
         };
     },
     async update({ request, locals }) {
         const formData = await request.formData();
         const media = formData.get("url")
-        const result = await updateMedia(media, locals.user.name,locals.user.token);
+        const result = await updateMedia(media, locals?.user?.name, locals?.user?.token);
         console.log(result)
       
         return {
-            status: 303, // 'See Other' status code for redirection
+            status: 303, 
             headers: {
-                location: `/profile` // Redirect to the same auction item page
+                location: `/profile`
             }
         };
     },
@@ -86,19 +88,19 @@ async function createAuction( title,description,tags,media,endsAt, token) {
             console.log(data);
             return data;
         } else {
-            // If the response is not 'ok', attempt to read and log the error message
+          
             const errorData = await response.json();
             console.error('Error Response:', errorData);
 
             if (response.status === 400) {
-                // Handle Bad Request
+        
                 console.error('Bad Request:', errorData.message);
                 return null;
             } else if (response.status === 403) {
                 console.error('Forbidden:', errorData.message);
                 return null;
             } else {
-                // Handle other HTTP errors
+       
                 console.error(`HTTP Error: ${response.status}`);
                 return null;
             }
@@ -127,22 +129,22 @@ async function updateMedia( media,user,token) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            return data
   
         } else {
-            // If the response is not 'ok', attempt to read and log the error message
+      
             const errorData = await response.json();
             console.error('Error Response:', errorData);
 
             if (response.status === 400) {
-                // Handle Bad Request
+    
                 console.error('Bad Request:', errorData.message);
                 return null;
             } else if (response.status === 403) {
                 console.error('Forbidden:', errorData.message);
                 return null;
             } else {
-                // Handle other HTTP errors
+ 
                 console.error(`HTTP Error: ${response.status}`);
                 return null;
             }
