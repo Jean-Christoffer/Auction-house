@@ -7,7 +7,7 @@
     class="  px-8 pt-6 pb-8 mb-4 customBg">
     
         <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
                 Title*
                 <input
                 type="text"
@@ -32,7 +32,7 @@
             </label>
         </div>
         <div class="mb-6">
-            <label for="password"
+            <label for="tags"
             class="block text-gray-700 text-sm font-bold mb-2"
             >
                 Tags*

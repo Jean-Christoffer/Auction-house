@@ -10,20 +10,10 @@
 </button>
 
 <script>
-    /**
- * Controls the visibility of the sidebar popup.
- *
- * This variable is exported from the button component and is used to toggle
- * the display state of the sidebar for search. When the button is clicked,
- * this variable is updated to show or hide the sidebar accordingly.
+ /**
  *
  * @type {onclick}
  * @example
- * // To open the sidebar
- * sidebarVisible = true;
- *
- * // To close the sidebar
- * sidebarVisible = false;
  */
     export let handleSideBar
 </script>

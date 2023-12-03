@@ -15,22 +15,17 @@
 
 </figure>
 <script>
-// @ts-nocheck
 
-import Cta from "../uiComponents/Cta.svelte"
 /***
  * @type {Array<{}>}
 */
 export let searchData
 
 
-/***
- * 
- * 
- *             <div >
-                <Cta linkText = "More details" href="#" isMobile={true} isFilled={false}/>
-            </div>
-*/
+
+	/**
+	 * @param {string | number | Date} dateString
+	 */
 function formatDate(dateString) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const date = new Date(dateString);

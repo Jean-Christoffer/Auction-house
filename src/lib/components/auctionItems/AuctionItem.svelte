@@ -17,10 +17,10 @@
         </div>
         <div class="mt-auto pb-2 pt-2">
           <p class="text-sm font-semibold text-gray-700 mr-2">Ends at {formatDate(listingData.endsAt)}</p>
-          {#if listingData?.bids?.length > 0 && listingData.bids}
+          {#if sortedBids.length > 0 && sortedBids}
             <p>
               <strong><small>Current bid</small></strong>
-              ${listingData.bids[listingData.bids.length - 1].amount}
+              ${sortedBids[listingData.bids.length - 1].amount}
             </p>
           {/if}
         </div>
@@ -31,6 +31,7 @@
 <script>
 export let listingData
 let description
+let sortedBids = ""
 function formatDate(dateString) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const date = new Date(dateString);
@@ -51,7 +52,18 @@ function truncateDescription(text) {
         }
         return sentence
     }
+$:{
+        if(listingData.bids){
+          let bidHistory = listingData.bids
+                sortedBids = [...bidHistory].sort((a, b) => {
+                const date1 = new Date(a.created);
+                const date2 = new Date(b.created);
+                    return date1.getTime() - date2.getTime()
+                
+            });
+        }
 
+}
 </script>
 <style lang="postcss">
 

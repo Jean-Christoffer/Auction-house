@@ -20,7 +20,11 @@
     import Select from "../uiComponents/Select.svelte";
 
     export let selectedValue = '';
-    export let setSelectedValue
+     /**
+	 * @param {Event} event
+	 * @type {any}
+	 */
+      export let setSelectedValue 
 
 
 </script>

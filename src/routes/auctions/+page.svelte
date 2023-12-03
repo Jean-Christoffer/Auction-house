@@ -3,7 +3,7 @@
         <div class="absolute top-0 left-0 w-full h-full bg-cover animate"></div>
         <div class="bg-overlay"></div>
         <div class="z-10 text-black relative  container mx-auto flex flex-col justify-center h-full pl-2 ">
-            <p class="shadow"> {formatDate(date)}</p>
+            <p class="shadow"> {formatDate()}</p>
             <h1 class="text-4xl shadow"> Our collection of fine items</h1>
         </div>
 
@@ -25,6 +25,9 @@
     export let data
     import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
     import AuctionNav from '$lib/components/auctionItems/AuctionNav.svelte';
+    /**
+	 * @type {string | any[]}
+	 */
     let listings 
 
     let date = ""
@@ -33,25 +36,33 @@
     $: {
     if(data){
         const {auctionItem} = data
-
+        console.log(data)
         listings = auctionItem
         
     }
     }
 
+        /**
+	 * @type {any[]}
+	 */
         let sortedListings = [];
         $: if (listings && listings.length > 0) {
-          
+
             sortedListings = [...listings].sort((a, b) => {
+                const date1 = new Date(a.endsAt);
+                const date2 = new Date(b.endsAt);
+
+                const date1Creat = new Date(a.endsAt);
+                const date2Create = new Date(b.endsAt);
                 switch (sortVal) {
                 case 'new':
-                    return new Date(b.created) - new Date(a.created);
+                return date1Creat.getTime() - date2Create.getTime();
                 case 'old':
-                    return new Date(a.created) - new Date(b.created);
+                    return date2Create.getTime() - date1Creat.getTime();
                 case "soon":
-                    return new Date(a.endsAt) - new Date(b.endsAt)
+                    return date1.getTime() - date2.getTime() 
                 case "later":
-                    return new Date(b.endsAt) - new Date(a.endsAt)
+                     return date2.getTime() - date1.getTime();
                 case "lowHigh":
                     return getLatestBidAmount(a) - getLatestBidAmount(b)
                 case "highLow":
@@ -64,6 +75,9 @@
   }
  
 //handles the weird pricing
+	/**
+	 * @param {{ bids: any; }} listing
+	 */
 function getLatestBidAmount(listing) {
     const bids = listing.bids;
    
@@ -75,13 +89,16 @@ function getLatestBidAmount(listing) {
 
 
 //sortValue
+  /**
+	 * @param {{ target: { value: string; }; }} event
+	 */
   function handleChange(event) {
     sortVal = event.target.value
     
    
   }
-  //some fun dates
-    function formatDate(dateString) {
+
+    function formatDate() {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const date = new Date();
 

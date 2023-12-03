@@ -1,5 +1,5 @@
 {#if show}
-<div  in:fade={{ delay: 250, duration: 300 }}
+<div  in:fade={{ delay: 250, duration: 300 }} out:fade={{ delay: 250, duration: 300 }}
  class="border {isSuccess ? "bg-green-100" : "bg-red-100  " }  {isSuccess ? "border-green-400" : "border-red-400"}  {isSuccess ? "text-green-700" : "text-red-700"} px-4 py-3 rounded relative" role="alert">
     <strong class="font-bold">{status}!</strong>
     <span class="block sm:inline">{message}.</span>
@@ -17,4 +17,9 @@
     export let status = ""
     export let message = ""
     export let show = false
+    $:{
+      if(show){
+        setTimeout(()=>{return show = !show},3500)
+      }
+    }
   </script>

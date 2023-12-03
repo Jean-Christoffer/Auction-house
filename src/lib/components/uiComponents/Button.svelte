@@ -24,7 +24,7 @@ disabled = {isDisabled}
     */
    export let buttonText
  /**
-     * @type {boleean}
+     * @type {boolean}
     */
    export let isDisabled = false
 

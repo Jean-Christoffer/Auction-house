@@ -25,9 +25,7 @@ declare global {
         }
 
  
-        interface Platform {
-  
-        }
+ 
 
 
         interface Session {

@@ -1,13 +1,5 @@
 import { redirect } from '@sveltejs/kit';
-interface AuctionDetails {
-    title: string;
-    description: string;
-    tags:  string[]; 
-    media: string[]; 
-    endsAt: string; 
-    token: string;
-  }
-  
+
 export async function load({ fetch,locals }) {
     if (!locals.user) {
         throw redirect(307, '/warning');
@@ -21,7 +13,7 @@ export async function load({ fetch,locals }) {
                     Authorization: `Bearer ${locals?.user?.token}`
             }});
             const data = await response.json();
-            //no unactive listings :S
+          
   
 
             return data
@@ -39,20 +31,12 @@ export const actions = {
         const description = formData.get("description") as string;
         const tagsValue = formData.get("tags");
         const mediaValue = formData.get("media");
-        const tags = typeof tagsValue === 'string' ? tagsValue.split(',') : [];
-        const media = typeof mediaValue === 'string' ? mediaValue.split(',') : [];
+
     
         const endsAt = formData.get("endsAt") as string;
         const token = locals?.user?.token as string;
 
-        const auctionDetails: AuctionDetails = { title, description, tags, media, endsAt, token };
-        const result = await createAuction(
-            auctionDetails.title, 
-            auctionDetails.description, 
-            auctionDetails.tags, 
-            auctionDetails.media, 
-            auctionDetails.endsAt, 
-            auctionDetails.token
+        const result = await createAuction(title, description, tagsValue, mediaValue, endsAt, token
             );
 
       
@@ -70,8 +54,8 @@ export const actions = {
         const token = locals?.user?.token as string;
         const userName = locals?.user?.name as string
 
-        const media = typeof mediaValue === 'string' ? mediaValue.split(',') : [];
-        const result = await updateMedia(media, userName, token);
+
+        const result = await updateMedia(mediaValue, userName, token);
         console.log(result)
       
         return {
@@ -134,7 +118,7 @@ async function createAuction( title: string,description: string,tags: Array<stri
 }
 
 
-async function updateMedia( media: Array<string>,user:string,token:string) {
+async function updateMedia( media: string,user:string,token:string) {
   
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/profiles/${user}/media`,{

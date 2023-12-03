@@ -5,18 +5,23 @@
     import Lenis from '@studio-freight/lenis'
     import { onMount } from "svelte";
 
+      /**
+       * @param {any} time
+       */
+/*
+      onMount(()=>{
+      
+      const lenis = new Lenis()
 
+      function raf(time) {
+        lenis.raf(time)
+        requestAnimationFrame(raf)
+      }
 
-    onMount(()=>{
-    
-    const lenis = new Lenis()
-    function raf(time) {
-      lenis.raf(time)
       requestAnimationFrame(raf)
-    }
-
-    requestAnimationFrame(raf)
-  })
+    })
+  */
+  
     let inputValue = ""
     /**
 	 * @type {Array<{}>}
@@ -40,6 +45,9 @@
 
     }
 
+    /**
+	 * @param {{ preventDefault: () => void; }} e
+	 */
     function handleSearch(e) {
         e.preventDefault()
         if(inputValue){

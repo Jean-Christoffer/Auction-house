@@ -45,7 +45,7 @@
 	import { slide } from 'svelte/transition';
 	
 
-	let results = false
+
 	/**
     * @type {boolean}
     */

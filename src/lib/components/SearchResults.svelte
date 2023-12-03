@@ -13,7 +13,7 @@
 
     import SearchItem from "./searchComponents/SearchItem.svelte";
     /**
-	 * @type {Array<{}>}
+	 * @type {{}[] | null}
 	 */
     export let searchData
     $: console.log(searchData)

@@ -1,5 +1,5 @@
 
-    <section  class="max-w-7xl mx-auto my-0 px-1">
+    <section  class="max-w-7xl mx-auto my-0 px-1" >
         <article class="overflow-hidden">
             {#each stories as story,idx}
                 <div
@@ -42,7 +42,7 @@
         </article>
     </section>
 
-    <div class="sticky top-0 h-[100vh] outro overflow-hiddenq">
+    <div class="sticky top-0 h-[100vh] outro overflow-hidden mt-2">
         <section class="h-full overflow-hidden">
             <div class="bg-content">
                 <div class="bg-overlay"></div>
@@ -68,11 +68,14 @@
             </div>
         </article>
     </div>
+
+
 <script>
-    let gsap
     import { onMount,onDestroy } from "svelte";
+    import Lenis from '@studio-freight/lenis'
     import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
     import SplitType from 'split-type'
+    let gsap
     let stories =
      [
         {
@@ -89,10 +92,14 @@
 onMount(async () => {
   const module = await import ("gsap")
   gsap = module.default
+
+
+
+
+
+
   gsap.registerPlugin(ScrollTrigger) 
 
-    // @ts-ignore
-    ScrollTrigger.refresh()
 
     const tl = gsap.timeline({
         scrollTrigger: {

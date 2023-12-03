@@ -1,5 +1,20 @@
 
 import { redirect } from '@sveltejs/kit';
+type User = {
+    token: string;
+    // Add other user properties as needed
+};
+
+type Locals = {
+    user?: User;
+};
+
+type Params = {
+    auctionID: string;
+    // Add other params as needed
+};
+
+  
 export function load({ fetch, params,locals }) {
     if (!locals.user) {
         throw redirect(307, '/warning');
@@ -28,12 +43,12 @@ export const actions = {
     async bid({ request, locals, params }) {
         const formData = await request.formData();
 
-        const bidAmount = formData.get('amount');
+        const bidAmount = formData.get('amount') as string;
   
     
         const auctionID = params.auctionID;
         const result = await placeBid(auctionID, bidAmount, locals?.user?.token);
-        console.log(result)
+       
       
         return {
             status: 303, 
@@ -59,7 +74,7 @@ export const actions = {
             tags,
              locals?.user?.token )
     
-        console.log(resultsEdit)
+
         return {
             status: 303, 
             headers: {

@@ -33,7 +33,11 @@ gap-2">
 </div>
 <script>
   export let selectedValue = '';
-  export let setSelectedValue
+    /**
+	 * @param {Event} event
+	 * @type {any}
+	 */
+     export let setSelectedValue 
 </script>
 <style lang="postcss">
     .custom-bg{

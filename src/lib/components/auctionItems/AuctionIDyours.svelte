@@ -11,20 +11,23 @@
         <article class="max-w-sm grid-item2">
             <h2 class="text-4xl">{data.title}</h2>
             <p>{data.description}</p>
-            {#if data.bids.length > 0}
-            <ul class="text-black mt-1">
-
-                {#each data.bids.sort((a,b) => new Date(a.created) - new Date(b.created)) as bid}
-                  <li> 
-                    <small> 
-                  
-                       <p> {formatDate(bid.created)} ${bid.amount}</p>
-                  
-                    </small>
-                </li>
-                {/each}
+            {#if sortedBids.length > 0  && sortedBids}
+            <ul class="text-black mt-1 custom-ul">
+                <div class="custom-container-scroll flex flex-col gap-1" >
+                    <h2 class="underline decoration-solid mb-1">Bid history</h2>
+                    {#each sortedBids as bid}
+        
+                    <li class="border border-solid p-1.5 border-1 border-gray-600" > 
+                        <small class="flex justify-between"> 
+                         <p>{dayjs(bid.created).fromNow()} </p>  
+                         <p><strong>${bid.amount}</strong></p>
+                    
+                        </small>
+                    </li>
+                    {/each}
+                </div>
             </ul>
-            <p class="mt-2">Current bid <strong >${data?.bids[data?.bids?.length - 1].amount}</strong></p>
+            <p class="mt-2">Current bid <strong >${sortedBids[sortedBids?.length - 1].amount}</strong></p>
             {:else}
             <p><small>No bids yet</small></p>
             {/if}
@@ -49,14 +52,25 @@
     export let form
     import { onMount } from 'svelte';
     import EditListing from '../forms/EditListing.svelte';
-
+    import dayjs from 'dayjs';
+    import relativeTime from 'dayjs/plugin/relativeTime';
     import RemoveListing from '../forms/RemoveListing.svelte';
-
+    let sortedBids = ""
+    dayjs.extend(relativeTime);
         let timeRemaining = '';
         $: {
             
-            if (data ) {
+            if (data.bids ) {
                 updateTimeRemaining();
+
+                let bidHistory = data.bids
+                sortedBids = [...bidHistory].sort((a, b) => {
+                const date1 = new Date(a.created);
+                const date2 = new Date(b.created);
+                    return date1.getTime() - date2.getTime()
+                
+            });
+        
             }
          }
         //lets make a countdown ;s
@@ -140,4 +154,35 @@
         padding: 16px;
     }
     }
+    .custom-ul{
+        max-width: 100%;
+        
+
+
+    }
+    .custom-container-scroll{
+      
+            border: 1px solid #202020;
+            border-radius: 4px;
+            max-height: 200px;
+            width: 100%;
+            overflow: auto;
+            padding: 10px 10px;
+            scroll-behavior: smooth;
+    }
+    .custom-container-scroll::-webkit-scrollbar {
+            width: 12px;
+        }
+        
+        .custom-container-scroll::-webkit-scrollbar-track {
+            border-radius: 8px;
+            background-color: #e7e7e7;
+            border: 1px solid #cacaca;
+            box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+        }
+        
+        .custom-container-scroll::-webkit-scrollbar-thumb {
+            border-radius: 8px;
+            background-color: #363636;
+        }
 </style>

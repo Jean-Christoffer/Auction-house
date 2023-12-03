@@ -59,7 +59,7 @@ export let profileData = {}
 export let memberStatus
 export let form
 import UpdateMedia from "../forms/updateMedia.svelte";
-
+console.log(profileData)
 </script>
 <style lang="postcss">
     .shadow{
