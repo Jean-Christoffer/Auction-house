@@ -24,6 +24,8 @@
           <a
             class="text-xl font-bold text-gray-800"
             href="/"
+            aria-label="logo"
+           
             >
             <div class="block ml-5">
               <svg width="35" height="35" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -136,8 +138,6 @@
     {/if}
   </div>
 
-
-
 <script lang="ts">
     import Search from "./Search.svelte";
     import SearchButton from "./searchComponents/SearchButton.svelte";
@@ -163,7 +163,6 @@
         isVisible = !isVisible
         
     }
-
     const links = 
     [
         {
@@ -179,10 +178,7 @@
             name:"About",
             href:"/about"
         },
-
-
     ]
-    
 </script>
 <style lang="postcss">
 
