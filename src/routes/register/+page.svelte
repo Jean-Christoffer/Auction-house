@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Register</title>
-
+  <meta name="description" content="Here you can register for a user on Fine Auctions">
 </svelte:head>
 <div class="h-screen m-auto">
     <h1 class="text-center text-5xl mb-4 mt-4">Fine auctions</h1>

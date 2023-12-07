@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Auctib item</title>
+  <meta name="description" content="Bid or edit your listing!">
+</svelte:head>
 {#if auctionData?.seller?.name !== $page?.data?.user?.name}
 <AuctionId  data = {auctionData} form={form}/>
 {:else}

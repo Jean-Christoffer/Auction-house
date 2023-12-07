@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Profile</title>
-
+  <meta name="description" content="View your listings, or create a new auction!">
 </svelte:head>
 {#if userData !== null}
 <div  class="w-full overflow-hidden relative customHeight flex flex-col justify-center " >

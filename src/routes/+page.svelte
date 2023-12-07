@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Welcome to Fine Auctuons</title>
-
+  <meta name="description" content="Finest auctions on the web">
 </svelte:head>
 {#if auctionItems.length > 0}
 
