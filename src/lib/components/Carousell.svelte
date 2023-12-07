@@ -3,7 +3,7 @@
     <div  class="inner-carousell hideScroll">
         {#each itemsData as item (item.id)}
    
-                <a href="/auctionItem/{item.id}"  class="customWidth flex items-stretch" id= {item.id} animate:flip={{duration:500}}>
+                <a href="/auctionItem/{item.id}"  class="customWidth flex items-stretch" animate:flip={{duration:500}}>
                     <AuctionItem listingData={item}/>
                 </a>
         {/each}
