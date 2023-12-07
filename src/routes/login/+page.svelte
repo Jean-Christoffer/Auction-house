@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Login</title>
+
+</svelte:head>
 <div class="h-screen m-auto">
     <h1 class="text-center text-5xl mb-4 mt-4">Fine auctions</h1>
     
@@ -11,13 +15,13 @@
     </div>
 
 </div>
-<script>
+<script lang="ts">
     import LoginForm from "$lib/components/forms/LoginForm.svelte";
 
 	import { fade } from 'svelte/transition';
-    export let form
+    export let form:ExtendedFormData
   
-    console.log("form",form)
+
 
 
 </script>

@@ -18,16 +18,9 @@ disabled = {isDisabled}
 >
     {buttonText}
 </button>
-<script>
-    /**
-     * @type {string}
-    */
-   export let buttonText
- /**
-     * @type {boolean}
-    */
-   export let isDisabled = false
-
-export let warning = false
+<script lang="ts">
+   export let buttonText:string
+   export let isDisabled:boolean = false
+   export let warning:boolean = false
    
 </script>

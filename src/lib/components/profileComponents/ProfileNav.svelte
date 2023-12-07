@@ -24,7 +24,7 @@
     </nav>
     </div>
     
-    <dialog id="auctionModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md ">
+    <dialog id="auctionModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md " bind:this={auctionModal}>
         <button class="btn ml-auto text-white"  on:click={() => auctionModal.close()}>Close</button>
       <div class="modal-box">
         <div class="modal-action ">
@@ -34,10 +34,11 @@
     </dialog>
 
 
-    <script>
-        export let profileData
-        export let form
+    <script lang="ts">
+        export let profileData:ProfileData
+        export let form:FormData
         import CreateAuction from "../forms/CreateAuction.svelte";
+        let auctionModal: HTMLDialogElement  
     </script>
     <style lang="postcss">
     .customBg{

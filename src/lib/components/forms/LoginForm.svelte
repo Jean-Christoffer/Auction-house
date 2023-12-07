@@ -52,14 +52,14 @@
     <Snackbar status="Error" message="wrong email or password" show={true} isSuccess={false} />
 </div>
 {/if}
-<script>
+<script lang="ts">
 
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
     import Snackbar from "../uiComponents/Snackbar.svelte";
-    export let form
+    export let form:ExtendedFormData
  
-    console.log(form)
+
     let email = ""
     let password = ""
     const mailRegex = /^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/;

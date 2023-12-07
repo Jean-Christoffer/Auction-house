@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Register</title>
+
+</svelte:head>
 <div class="h-screen m-auto">
     <h1 class="text-center text-5xl mb-4 mt-4">Fine auctions</h1>
 
@@ -22,11 +26,11 @@
     </div>
     {/if}
 </div>
-<script>
-    export let form
+<script lang="ts">
+    export let form:ExtendedFormData
     import RegisterForm from "$lib/components/forms/RegisterForm.svelte";
 	import { fade } from 'svelte/transition';
-  import Snackbar from "$lib/components/uiComponents/Snackbar.svelte";
+    import Snackbar from "$lib/components/uiComponents/Snackbar.svelte";
 </script>
 <style lang="postcss">
 

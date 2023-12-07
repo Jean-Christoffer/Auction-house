@@ -90,11 +90,11 @@
     <Snackbar status="Success" show={true}  isSuccess={true} message="Auction created"/>
     {/if}
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
-    export let form
+    export let form:ExtendedFormData
     import Snackbar from "../uiComponents/Snackbar.svelte";
     let title = ""
     let description = ""

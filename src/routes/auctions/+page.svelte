@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Auctions</title>
+
+</svelte:head>
 <div>
     <div  class="w-full overflow-hidden relative customHeight" >
         <div class="absolute top-0 left-0 w-full h-full bg-cover animate"></div>
@@ -21,31 +25,23 @@
     </div>
 </div>
 </div>
-<script>
+<script lang="ts">
     export let data
     import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
     import AuctionNav from '$lib/components/auctionItems/AuctionNav.svelte';
-    /**
-	 * @type {string | any[]}
-	 */
-    let listings 
-
-    let date = ""
+    let listings : AuctionItemTypes[]
+ 
     let sortVal = ""
 
     $: {
     if(data){
         const {auctionItem} = data
-        console.log(data)
         listings = auctionItem
         
     }
     }
 
-        /**
-	 * @type {any[]}
-	 */
-        let sortedListings = [];
+        let sortedListings:AuctionItemTypes[]
         $: if (listings && listings.length > 0) {
 
             sortedListings = [...listings].sort((a, b) => {
@@ -74,11 +70,8 @@
         
   }
  
-//handles the weird pricing
-	/**
-	 * @param {{ bids: any; }} listing
-	 */
-function getLatestBidAmount(listing) {
+
+function getLatestBidAmount(listing: { bids: any; }) {
     const bids = listing.bids;
    
     if (bids && bids.length > 0) {
@@ -87,12 +80,7 @@ function getLatestBidAmount(listing) {
     return 0;
   }
 
-
-//sortValue
-  /**
-	 * @param {{ target: { value: string; }; }} event
-	 */
-  function handleChange(event) {
+  function handleChange(event: { target: { value: string; }; }) {
     sortVal = event.target.value
     
    
@@ -132,13 +120,7 @@ function getLatestBidAmount(listing) {
     transform: scale(1.1);
 }
 }
-.customBg{
-        background-color: #202020;
-    }
-.custom-width {
-    width: calc(100% - 180px);
-    margin: 0 auto;
-}
+
 .customHeight{
     height: 60vh;
 }

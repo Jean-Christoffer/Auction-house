@@ -9,11 +9,7 @@
     Search
 </button>
 
-<script>
- /**
- *
- * @type {onclick}
- * @example
- */
-    export let handleSideBar
+<script lang="ts">
+
+    export let handleSideBar: () => void;
 </script>

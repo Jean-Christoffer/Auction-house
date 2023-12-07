@@ -34,13 +34,13 @@
     {/if}
 
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
     import Snackbar from "../uiComponents/Snackbar.svelte";
     let mediaurl = ""
-    export let form
+    export let form:ExtendedFormData
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
 

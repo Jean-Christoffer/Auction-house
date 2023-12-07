@@ -44,7 +44,7 @@
                 {/if}
             </div>
         </div>
-        <dialog id="mediaModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md ">
+        <dialog id="mediaModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md " bind:this={mediaModal}>
             <button class="btn ml-auto text-black"  on:click={() => mediaModal.close()}>Close</button>
           <div class="modal-box">
             <div class="modal-action ">
@@ -54,12 +54,12 @@
         </dialog>
     </div>
 </section>
-<script>
-export let profileData = {}
-export let memberStatus
-export let form
+<script lang="ts">
+export let profileData:ProfileData
+export let memberStatus = "bronze"
+export let form:FormData
 import UpdateMedia from "../forms/updateMedia.svelte";
-console.log(profileData)
+let mediaModal: HTMLDialogElement  
 </script>
 <style lang="postcss">
     .shadow{

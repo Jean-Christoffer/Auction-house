@@ -20,7 +20,7 @@
           {#if sortedBids.length > 0 && sortedBids}
             <p>
               <strong><small>Current bid</small></strong>
-              ${sortedBids[listingData.bids.length - 1].amount}
+              ${sortedBids[sortedBids.length - 1].amount}
             </p>
           {/if}
         </div>
@@ -28,11 +28,13 @@
     </div>
 
   </div>
-<script>
-export let listingData
+<script lang="ts">
+export let listingData:AuctionItemTypes
+$:console.log(listingData)
 let description
-let sortedBids = ""
-function formatDate(dateString) {
+let sortedBids:Bids[] = []
+
+function formatDate(dateString: string | number | Date) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const date = new Date(dateString);
 
@@ -42,7 +44,7 @@ function formatDate(dateString) {
 
     return `${months[monthIndex]} ${day}, ${year}`;
 }
-function truncateDescription(text) {
+function truncateDescription(text:string) {
         const sentence = text
         const sentences = sentence?.split('. ');
         if (sentences?.length > 1) {

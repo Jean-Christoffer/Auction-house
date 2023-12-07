@@ -21,24 +21,12 @@ text-center
 ">{linkText}
 </a>
 
-<script>
-/**
-* @type {string}
-*/
-export let linkText
-/**
-* @type {string}
-*/
-export let href
-/**
-* @type {boolean}
-*/
-export let isMobile
-/**
-* @type {boolean}
-*/
-export let isFilled
-export let textColor = ""
+<script lang="ts">
+export let linkText:string
+export let href:string
+export let isMobile:boolean
+export let isFilled:boolean
+export let textColor:string = ""
 </script>
 <style lang="postcss">
 
@@ -46,8 +34,5 @@ export let textColor = ""
         border: 1px solid #F2F2F2;
      
     }
-    .customColor{
-        color: #F2F2F2;
-        text-shadow: 0px 4px 30px #000000;
-    }
+
 </style>

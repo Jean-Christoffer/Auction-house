@@ -12,7 +12,7 @@
 
 
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
@@ -26,9 +26,5 @@
 <style lang="postcss">
     .customBg{
         background-color: #F2F2F2;
-    }
-    .customWidth{
-        max-width: 250px;
-        width: 100%;
     }
 </style>

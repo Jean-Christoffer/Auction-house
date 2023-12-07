@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Welcome to Fine Auctuons</title>
+
+</svelte:head>
 {#if auctionItems.length > 0}
 
   <section class="bg">
@@ -28,18 +32,16 @@
 
 
 {/if}
-<script>
+<script lang="ts">
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import Cta from "$lib/components/uiComponents/Cta.svelte";
-import { onMount,onDestroy } from "svelte";
+import { onMount } from "svelte";
 import Carousell from "$lib/components/Carousell.svelte";
 
 
 export let data
-	/**
-	 * @type {[]}
-	 */
-let auctionItems = []
+
+let auctionItems:AuctionItemTypes[]
 
 
 $: {
@@ -56,7 +58,7 @@ onMount(async () => {
   gsap = module.default
   gsap.registerPlugin(ScrollTrigger) 
 
-    // @ts-ignore
+
     ScrollTrigger.refresh()
     gsap.to(".bg-image",
     {

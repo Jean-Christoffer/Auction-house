@@ -1,4 +1,8 @@
 
+<svelte:head>
+    <title>About us</title>
+  
+  </svelte:head>
     <section  class="max-w-7xl mx-auto my-0 px-1" >
         <article class="overflow-hidden">
             {#each stories as story,idx}
@@ -42,7 +46,7 @@
         </article>
     </section>
 
-    <div class="sticky top-0 h-[100vh] outro overflow-hidden mt-2">
+    <div class="sticky top-0 h-[100vh] outro overflow-hidden mt-8">
         <section class="h-full overflow-hidden">
             <div class="bg-content">
                 <div class="bg-overlay"></div>
@@ -70,9 +74,9 @@
     </div>
 
 
-<script>
-    import { onMount,onDestroy } from "svelte";
-    import Lenis from '@studio-freight/lenis'
+<script lang="ts">
+    import { onMount } from "svelte";
+
     import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
     import SplitType from 'split-type'
     let gsap
@@ -101,14 +105,13 @@ onMount(async () => {
   gsap.registerPlugin(ScrollTrigger) 
 
 
-    const tl = gsap.timeline({
+  const tl = gsap.timeline({
         scrollTrigger: {
         trigger: ".story1",
         start: "top 90%",
         end:"top 20%",
         scrub:true,
-        fastScrollEnd:true,
-        preventOverlaps:true
+
 
     }
     })
@@ -126,8 +129,6 @@ onMount(async () => {
         start: "top 90%",
         end:"top 20%",
         scrub:true,
-        fastScrollEnd:true,
-        preventOverlaps:true
 
     }
     })
@@ -142,18 +143,18 @@ onMount(async () => {
     const tl3 = gsap.timeline({
         scrollTrigger: {
         trigger: ".article",
-        start: "top 90%",
-        end:"top 10%",
+        start: "top 100%",
+        end:"top 20%",
         scrub:true,
-        fastScrollEnd:true,
-        preventOverlaps:true
+       
+ 
 
     }
     })
-    
     tl3.to(".outro-img",{
-        "clip-path":"polygon(0% 0%,100% 0%,100% 100%,0% 100%)"
-    },0)
+       scale:1
+    })
+
     const tl4 = gsap.timeline({
         scrollTrigger:{
             trigger:".mission",
@@ -163,19 +164,18 @@ onMount(async () => {
             
         }
          })
-         const splittedWord = document.querySelectorAll(".mission")
+         const splittedWord = document.querySelectorAll(".mission");
 
-         splittedWord.forEach((char, i) => {
+        splittedWord.forEach((char: Element, i) => {
+            const htmlChar = char as HTMLElement;
+            const text = new SplitType(htmlChar, { types: "chars" });
 
-            const text = new SplitType(char,{ types:"chars"})
-
-            tl4.from(text.chars,{
-                opacity:0.1,
-                stagger:0.1,
-                duration:2
-
-            })
-         })
+            tl4.from(text.chars, {
+                opacity: 0.1,
+                stagger: 0.1,
+                duration: 2
+            });
+        })
     })
 
 </script>
@@ -251,9 +251,10 @@ onMount(async () => {
         background-repeat: no-repeat;
         position: absolute;
         inset: 0;
-        clip-path: polygon(5% 10%,95% 10%,95% 90%,5% 90%);
+        overflow: hidden;
         filter: grayscale(50%);
         background-blend-mode: multiply;
+        transform: scale(0.9);
     }
     .bg-overlay{
         position: absolute;
@@ -261,12 +262,6 @@ onMount(async () => {
         background-color: #f2f2f238;
         z-index: 20;
         overflow: hidden;
-}
-.shadow p{
-    text-shadow: 0px 4px 30px #ffffff;
-}
-.shadow{
-
 }
 .customBg{
     background-color: #F2F2F2;

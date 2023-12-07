@@ -12,19 +12,12 @@
   text-sm
   px-4" />
 
-<script>
-  /**
-   * @type {string}
-  */
-export let inputValue = ""
-  /**
-   * @type {string}
-  */
-export let inputType = "text"
-  /**
-   * @type {oninput}
-  */
-export let handleInput
+<script lang="ts">
+
+export let inputValue:string = ""
+export let inputType: 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | 'datetime-local' | 'month' | 'week' | 'url' | 'search' | 'tel' | 'color' | 'file'
+ = "text"
+export let handleInput: (event: Event) => void;
 
 
 </script>

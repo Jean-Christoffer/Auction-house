@@ -1,13 +1,13 @@
 
-
+import type { Actions } from './$types';
 import { fail } from '@sveltejs/kit';
 
-export const actions = {
+export const actions:Actions = {
     default: async ({ request }) => {
         const form = await request.formData();
 
-        const name = form.get("name")
-        const email = form.get('email');
+        const name = form.get("name") ;
+        const email = form.get('email')  ;
         const password = form.get('password');
         const avatar = form.get("avatar")
         
@@ -28,7 +28,7 @@ export const actions = {
         if (!response.ok) {
             const errorData = await response.json(); 
             console.log('Login Error:', errorData); 
-            console.log(form)
+        
             if(response.status === 400){
                 return fail(400, { 
                     error: errorData.message || 'Login failed',

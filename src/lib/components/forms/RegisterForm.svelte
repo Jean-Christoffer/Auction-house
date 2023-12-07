@@ -83,16 +83,14 @@
     </div>
 </div>
 
-<script>
+<script lang="ts">
     import {enhance} from "$app/forms"
     import Button from "../uiComponents/Button.svelte";
-
- 
-    export let form
-    let name = ""
-    let email = ""
-    let password = ""
-    let avatar = ""
+    export let form:ExtendedFormData
+    let name:string = ""
+    let email:string = ""
+    let password:string = ""
+    let avatar:string = ""
 
 
 

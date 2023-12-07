@@ -1,9 +1,10 @@
 <section  class="md:container md:mx-auto my-10 h-full p-2 m-auto flex justify-center">
     {#if data }
+    {@const mediaGallery = data.media}
     <figure class="custom-grid ">
         <div class="grid-item1">
             <div class="custom-width">
-                <img class="w-full block h-full object-cover object-center aspect-square" src="{data.media[0]}" alt="{data.title}" /> 
+                      <MediaGallery data={mediaGallery} />
                 <p><strong>Auction ends in {timeRemaining} </strong></p>
             </div>
 
@@ -13,11 +14,11 @@
             <p>{data.description}</p>
             {#if sortedBids.length > 0  && sortedBids}
             <ul class="text-black mt-1 custom-ul">
-                <div class="custom-container-scroll flex flex-col gap-1" >
-                    <h2 class="underline decoration-solid mb-1">Bid history</h2>
+                <div class="custom-container-scroll border border-gray-400 flex flex-col gap-1" >
+                    <h2 class=" mb-1">Bid history</h2>
                     {#each sortedBids as bid}
         
-                    <li class="border border-solid p-1.5 border-1 border-gray-600" > 
+                    <li class="border-t border-gray-400 border-solid p-1.5 border-1 border-gray-600" > 
                         <small class="flex justify-between"> 
                          <p>{dayjs(bid.created).fromNow()} </p>  
                          <p><strong>${bid.amount}</strong></p>
@@ -47,15 +48,18 @@
     {/if}
 </section>
 
-<script>
-    export let data
-    export let form
+<script lang="ts">
+    export let data:AuctionItemTypes
+    export let form:ExtendedFormData
     import { onMount } from 'svelte';
     import EditListing from '../forms/EditListing.svelte';
     import dayjs from 'dayjs';
     import relativeTime from 'dayjs/plugin/relativeTime';
     import RemoveListing from '../forms/RemoveListing.svelte';
-    let sortedBids = ""
+    import MediaGallery from './MediaGallery.svelte';
+    let sortedBids:Bids[]
+
+    console.log(data)
     dayjs.extend(relativeTime);
         let timeRemaining = '';
         $: {
@@ -73,13 +77,11 @@
         
             }
          }
-        //lets make a countdown ;s
-
         function updateTimeRemaining() {
         
             const endDate = new Date(data.endsAt);
             const now = new Date();
-            const timeDiff = endDate - now;
+            const timeDiff = endDate.getTime() - now.getTime();
 
             if (timeDiff <= 0) {
             timeRemaining = 'Auction ended';
@@ -104,21 +106,7 @@
             clearInterval(interval); 
             };
         });
-        function formatDate(dateString) {
-    const now = new Date();
-    const date = new Date(dateString);
 
-    const diffTime = Math.abs(now - date);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) {
-        return 'Today';
-    } else if (diffDays === 1) {
-        return '1 day ago';
-    } else {
-        return `${diffDays} days ago`;
-    }
-}
 </script>
 <style lang="postcss">
 
@@ -139,7 +127,7 @@
     .grid-item2{
         grid-column: 2;
     }
-    @media(max-width:820px){
+    @media(max-width:1020px){
         .custom-grid{
             grid-template-columns:  1fr;
             justify-items: center;
@@ -162,8 +150,7 @@
     }
     .custom-container-scroll{
       
-            border: 1px solid #202020;
-            border-radius: 4px;
+
             max-height: 200px;
             width: 100%;
             overflow: auto;

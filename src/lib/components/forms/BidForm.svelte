@@ -34,14 +34,14 @@
         </div>
     {/if}
 </div>
-<script>
+<script lang="ts">
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
     export let amountToBid = 0
-    export let form
+    export let form:ExtendedFormData
     import Snackbar from "../uiComponents/Snackbar.svelte";
     let amount = 0
-
+  
 
 </script>
 <style lang="postcss">

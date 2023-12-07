@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Profile</title>
+
+</svelte:head>
 {#if userData !== null}
 <div  class="w-full overflow-hidden relative customHeight flex flex-col justify-center " >
           <div class="absolute
@@ -18,29 +22,27 @@
 
           <div  class="container mx-auto h-full">
           <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
-              {#each userData.listings.filter(listing => {
-                const endsAtDate = new Date(listing.endsAt);
-                return endsAtDate >= today;
-              }) 
-                as myListing}
-              <a href="/auctionItem/{myListing.id}">
-                <AuctionItem  listingData =  {myListing}/> 
-              </a>
+              {#each userData?.listings as myListing} 
+                <a href="/auctionItem/{myListing.id}">
+                  <AuctionItem  listingData =  {myListing}/> 
+                </a>
               {/each }
         </div>
   </div>
     {:else}
     <h1>Please log in to see your profile</h1>
 {/if}
-<script>
+<script lang="ts">
 import ProfileCard from '$lib/components/profileComponents/ProfileCard.svelte';
 import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
+
 export let data
-export let form
-   let userData = {}
-   let wins = 2
-   let memberStatus = "silver"
+export let form:ExtendedFormData
+$:console.log(data)
+let userData:ProfileData
+let wins
+let memberStatus = ""
 
 
 
@@ -50,18 +52,17 @@ $: {
     const {profileData} = data
     userData = profileData
     wins = userData?.wins?.length
-  }
-  switch (wins) {
-    
-    case wins > 1:
-     memberStatus = "silver";
-     break;
-    case wins > 2:
-     memberStatus = "gold"
-     break;
-    default:
-        memberStatus = "silver";
+    if(wins){
+      if(wins < 3){
+        memberStatus = "bronze"
+      }else if(wins >= 3){
+        memberStatus = "silver"
+      }else if(wins >= 5){
+        memberStatus = "gold"
+      }
     }
+  }
+
 }
 
 

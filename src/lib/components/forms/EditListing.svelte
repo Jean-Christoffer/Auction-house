@@ -56,8 +56,10 @@
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
             </label>
-        </div>
 
+        </div>
+        
+        <input type="file" name="images" multiple>
         <div  class="flex items-center justify-between">
             <div class="customWidth">
                 <Button buttonText="Update listing" isDisabled={title.length > 0 || description.length > 0 || tags.length > 0 || urlPattern.test(mediaurl)
@@ -74,17 +76,20 @@
     </form>
     
 </div>
-<script>
+<script lang="ts">
      import {enhance} from "$app/forms"
      import Button from "../uiComponents/Button.svelte";
      import Snackbar from "../uiComponents/Snackbar.svelte";
-     export let form
-     console.log(form)
+     export let form:ExtendedFormData
+
     let mediaurl = ""
     let title = ""
     let description = ""
     let tags = ""
-    const urlPattern = /^(http|https):\/\/[^ "]+$/;   
+    const urlPattern = /^(http|https):\/\/[^ "]+$/;
+    
+    
+
 </script>
 <style lang="postcss">
     .customBg{

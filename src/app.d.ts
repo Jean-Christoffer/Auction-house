@@ -6,8 +6,8 @@ declare global {
     
         interface Locals {
             user?: {
-                name: string  | undefined;
-				token:string  | undefined;
+                name: string  ;
+				token:string ;
             };
             isAuthenticated: boolean;
         }
@@ -18,21 +18,58 @@ declare global {
             message: string;
         }
 
-   
-        interface PageData {
-            title: string;
-            content: string;
-        }
-
  
- 
-
-
-        interface Session {
-            userId: string;
-            roles: string[];
-        }
+  
     }
+    interface ExtendedFormData extends FormData {
+        status?: number;
+        incorrect?:boolean;
+        success?:boolean
+    }
+    interface AuctionItemTypes {
+        bids?:Bids[]
+        created:string;
+        description:string
+        endsAt:string
+        id:string
+        media:string[]
+        seller:Seller
+        tags:string[]
+        title:string
+        updated:string
+        _count?:Count
+    }
+    interface Bids{
+        amount:number;
+        bidderName:string;
+        created:string;
+        id:string
+    }
+    interface Seller{
+        avatar:string
+        email:string
+        name:string
+        wins?:string[]
+    }
+    interface Count{
+        bids:number
+    }
+
+    interface Listings{
+        listings:number | null
+
+    }
+       interface ProfileData{
+        avatar:string;
+        credits:number;
+        email: string;
+        listings:AuctionItemTypes[];
+        name:string;
+        wins?:string[];
+        _count?:Listings;
+
+       }
 }
 
 export {};
+

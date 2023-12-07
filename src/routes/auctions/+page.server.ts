@@ -1,7 +1,7 @@
 
+import type {PageServerLoad } from  './$types';
 
-
-export function load({ fetch }) {
+export const load: PageServerLoad = async  ({ fetch })  => {
     const fetchAuctionItem = async () => {
         const apiUrl = `https://api.noroff.dev/api/v1/auction/listings?_active=true&_bids=true&_seller=true`;
         const response = await fetch(apiUrl);

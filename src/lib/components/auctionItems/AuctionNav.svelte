@@ -1,4 +1,4 @@
-<div class="sticky top-[69px] w-full block">
+<div class="sticky md:top-[68px] top-[75px]  w-full block">
 <nav class="block w-full customBg text-white relative z-2 px-2 py-2">
     <div class="w-full custom-width flex items-center justify-between container mx-auto flex-wrap gap-2">
         <div class="flex items-center gap-2">
@@ -15,18 +15,11 @@
     </div>
 </nav>
 </div>
-<script>
+<script lang="ts">
     export let listings
     import Select from "../uiComponents/Select.svelte";
-
-    export let selectedValue = '';
-     /**
-	 * @param {Event} event
-	 * @type {any}
-	 */
-      export let setSelectedValue 
-
-
+    export let selectedValue:string = '';
+    export let setSelectedValue : (event: Event) => void;
 </script>
 <style lang="postcss">
 .customBg{
