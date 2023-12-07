@@ -20,13 +20,15 @@
         </div>
       
         <div class="left-container">
-            <button class="btn-left btn" on:click={handleLeft}  disabled={disableLeftButton}>
+            <button class="btn-left btn" on:click={handleLeft}  disabled={disableLeftButton} aria-label="Left-navigation" >
                 <svg width="24" height="24" fill="none" class="blockify lightbox-arrow-icon inline" xmlns="http://www.w3.org/2000/svg"><path d="M15 19.5 7.5 12 15 4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="aria">Navigate left</span>
             </button>
         </div>
         <div class="right-container">
-            <button class="btn-right btn"  on:click={handleRight}  disabled={disableRightButton}>
+            <button class="btn-right btn"  on:click={handleRight}  disabled={disableRightButton} aria-label="Right-navigation" >
                 <svg width="24" height="24" fill="none" class="blockify lightbox-arrow-icon inline" xmlns="http://www.w3.org/2000/svg"><path d="m9 4.5 7.5 7.5L9 19.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                <span class="aria">Navigate right</span>
             </button>
         </div>
         {/if}
@@ -139,7 +141,11 @@ onMount(()=>{checkScrollPosition()})
     display: none;
 }
 
-
+.aria{
+    position:absolute;
+    left:-100;
+    visibility: hidden
+}
 .hideScroll {
     -ms-overflow-style: none;  
     scrollbar-width: none;  

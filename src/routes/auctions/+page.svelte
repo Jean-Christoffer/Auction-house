@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Auctions</title>
-
+  <meta name="description" content="View our selected fine items">
 </svelte:head>
 <div>
     <div  class="w-full overflow-hidden relative customHeight" >

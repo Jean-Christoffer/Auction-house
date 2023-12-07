@@ -8,7 +8,7 @@
                 </a>
         {/each}
     </div>
-    <button class="left btn" on:click={rotateLeft} disabled = {isDisabled}>
+    <button class="left btn" on:click={rotateLeft} disabled = {isDisabled} aria-label="Left-navigation" >
  
             <svg width="32" height="63" viewBox="0 0 32 63" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-inside-1" fill="white">
@@ -16,9 +16,9 @@
                 </mask>
                 <path d="M0.339545 31.1946L-1.07467 32.6088L-2.48888 31.1946L-1.07467 29.7804L0.339545 31.1946ZM31.9826 2.38003L1.75376 32.6088L-1.07467 29.7804L29.1541 -0.448393L31.9826 2.38003ZM1.75376 29.7804L32.5945 60.6212L29.7661 63.4496L-1.07467 32.6088L1.75376 29.7804Z" fill="black" mask="url(#path-1-inside-1)"></path>
             </svg>
-    
+        <span class="aria">Navigate left</span>
     </button>
-    <button class="right btn"  on:click={rotateRight} disabled = {isDisabled}>
+    <button class="right btn"  on:click={rotateRight} disabled = {isDisabled} aria-label="Right-navigation" >
 
             <svg width="32" height="63" viewBox="0 0 32 63" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-inside-1" fill="white">
@@ -26,7 +26,7 @@
                 </mask>
                 <path d="M0.339545 31.1946L-1.07467 32.6088L-2.48888 31.1946L-1.07467 29.7804L0.339545 31.1946ZM31.9826 2.38003L1.75376 32.6088L-1.07467 29.7804L29.1541 -0.448393L31.9826 2.38003ZM1.75376 29.7804L32.5945 60.6212L29.7661 63.4496L-1.07467 32.6088L1.75376 29.7804Z" fill="black" mask="url(#path-1-inside-1)"></path>
             </svg>
-
+            <span class="aria">Navigate right</span>
     </button>
 </div>
 
@@ -128,5 +128,10 @@
 }
 .btn:disabled{
     opacity: .5;
+}
+.aria{
+    position:absolute;
+    left:-100;
+    visibility: hidden
 }
 </style>

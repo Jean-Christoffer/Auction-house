@@ -1,7 +1,7 @@
 
 <svelte:head>
     <title>About us</title>
-  
+    <meta name="description" content="Who are we?">
   </svelte:head>
     <section  class="max-w-7xl mx-auto my-0 px-1" >
         <article class="overflow-hidden">

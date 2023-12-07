@@ -1,6 +1,6 @@
 <svelte:head>
   <title>Login</title>
-
+  <meta name="description" content="Log in to start bidding!">
 </svelte:head>
 <div class="h-screen m-auto">
     <h1 class="text-center text-5xl mb-4 mt-4">Fine auctions</h1>
