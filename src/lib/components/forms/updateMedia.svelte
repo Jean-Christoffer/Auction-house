@@ -1,6 +1,7 @@
 <div class="w-full max-w-xs  ">
  
     <form 
+
     use:enhance
      method="post"
      action="?/update"
@@ -26,17 +27,20 @@
                ? false : true } />
             </div>       
         </div>
-     
-    </form>
 
+    </form>
+    {#if form?.status === 303}
+    <Snackbar status="Success" show={true}  isSuccess={true} message="Profile updated"/>
+    {/if}
 
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
-
     import {enhance} from "$app/forms"
+    import Snackbar from "../uiComponents/Snackbar.svelte";
     let mediaurl = ""
+    export let form:ExtendedFormData
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
 

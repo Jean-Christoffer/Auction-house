@@ -1,24 +1,30 @@
 
 {#if isVisible}
 <aside   in:fade="{fadeIn}" out:fade="{fadeOut}" class="customZ">
+	
 	<div class="w-screen h-screen overflow-hidden fixed top-0 left-0 flex items-center justify-center">
+		
 		<div class="absolute top-0 h-full left-0 w-full customColor"  />
 		<div  
 		   out:slide={{ delay: 60, duration: 2000,  axis: 'x', }}
 		   class:expanded={isVisible}
 		   class=" absolute top-0 h-full right-0 opacity-100 bg-white overflow-hidden customWidth">
-			<div class="box-border py-8 px-10 overflow-auto h-full relative" >
-	
-				<button  on:click={handleVisible} class="customLink inline-block tracking-tight uppercase cursor-pointer transition-all">Close</button>
-
-				<div class="pt-6" >
-					<h3 class="mb-3">Search our auction house</h3>
+				<div class="sticky top-0 zindex bg-white  py-8 px-10 ">
+					<button  on:click={handleVisible} class="customLink inline-block tracking-tight uppercase cursor-pointer transition-all">Close</button>
+					<h3 class="mb-3 pt-6">Search our auction house</h3>
 					<p class="customText">search by keyword</p>
 
 					<form class="flex" on:submit={handleSearch}>
 						<Input inputType="text" handleInput={handleInput} inputValue={inputValue}/>
 						<InputButton inputType={"submit"} buttonText={"Search"}  />  
 					</form>
+					</div>
+			<div class="box-border py-8 px-10 overflow-auto h-full relative" >
+				
+
+
+				<div class="pt-6" >
+		
 					{#if searchData && searchData.length > 0}
 					<SearchResults searchData={searchData} />
 					{:else if searchData && searchData.length < 1}
@@ -37,42 +43,22 @@
 	</div>
 </aside>
 {/if}
-<script>
+<script lang="ts">
 	import InputButton from "./uiComponents/InputButton.svelte";
 	import Input from "./uiComponents/Input.svelte"
 	import SearchResults from "./SearchResults.svelte";
 	import { fade } from 'svelte/transition';
 	import { slide } from 'svelte/transition';
-	
 
-	let results = false
-	/**
-    * @type {boolean}
-    */
-	export let isVisible 
-	/**
-    * @type {onclick}
-    */
-	export let handleVisible
+	export let isVisible:boolean
 
-	/**
-	 * @type {onsubmit}
-	 */
-	export let handleSearch
+	export let handleVisible : () => void;
+	export let handleSearch: (event: SubmitEvent) => void;
+	export let handleInput: (event: Event) => void;
 
+	export let inputValue:string
+	export let searchData:AuctionItemTypes[] 
 
-	/**
-	 * @type {oninput}
-	 */
-	export let handleInput
-	/**
-	 * @type {string}
-	 */
-	export let inputValue
-	/**
-	 * @type {Array<{}>}
-	 */
-	export let searchData
 
 	const fadeIn = {
 		delay: 100,
@@ -85,6 +71,9 @@
 	}
 </script>
 <style lang="postcss">
+	.zindex{
+		z-index: 2000;
+	}
 .customZ{
 	position: relative;
 	z-index: 1000;

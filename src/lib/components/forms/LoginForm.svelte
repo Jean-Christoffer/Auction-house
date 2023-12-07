@@ -1,6 +1,6 @@
 <div class="w-full max-w-xs m-auto">
     
-    <form method="POST" class=" rounded px-8 pt-6 pb-8 mb-4  customBg shadow-md"  use:enhance >
+    <form method="POST" class=" rounded px-8 pt-6 pb-8 mb-4  customBg shadow-md"  use:enhance  >
         <div class="mb-4">
             <label for="email" class="block text-gray-700 text-sm font-bold mb-2">
                 Email
@@ -46,16 +46,24 @@
         <a href="/register" class="text-center"><strong>register</strong></a>
     </div>
 </div>
-<script>
+
+{#if form?.incorrect}
+<div class="max-w-sm md:pl-2">
+    <Snackbar status="Error" message="wrong email or password" show={true} isSuccess={false} />
+</div>
+{/if}
+<script lang="ts">
 
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
+    import Snackbar from "../uiComponents/Snackbar.svelte";
+    export let form:ExtendedFormData
+ 
 
-    
     let email = ""
     let password = ""
     const mailRegex = /^[a-zA-Z0-9._%+-]+@(stud\.)?noroff\.no$/;
-
+  
 
 </script>
 <style lang="postcss">

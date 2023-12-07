@@ -7,7 +7,7 @@
     class="  px-8 pt-6 pb-8 mb-4 customBg">
     
         <div class="mb-4">
-            <label for="name" class="block text-gray-700 text-sm font-bold mb-2">
+            <label for="title" class="block text-gray-700 text-sm font-bold mb-2">
                 Title*
                 <input
                 type="text"
@@ -32,7 +32,7 @@
             </label>
         </div>
         <div class="mb-6">
-            <label for="password"
+            <label for="tags"
             class="block text-gray-700 text-sm font-bold mb-2"
             >
                 Tags*
@@ -86,13 +86,16 @@
         </div>
      
     </form>
+    {#if form?.status === 303}
+    <Snackbar status="Success" show={true}  isSuccess={true} message="Auction created"/>
+    {/if}
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
-
-
+    export let form:ExtendedFormData
+    import Snackbar from "../uiComponents/Snackbar.svelte";
     let title = ""
     let description = ""
     let tags = ""

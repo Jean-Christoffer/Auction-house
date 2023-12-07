@@ -26,14 +26,13 @@ gap-2">
         <option value="old">Oldest</option>
         <option value="soon">Ending soon</option>
         <option value="later">Ending due time</option>
-        <!-- Add more user options here -->
     </select>
 </div>
 
 </div>
-<script>
-  export let selectedValue = '';
-  export let setSelectedValue
+<script lang="ts">
+  export let selectedValue:string = '';
+  export let setSelectedValue: (event: Event) => void;
 </script>
 <style lang="postcss">
     .custom-bg{

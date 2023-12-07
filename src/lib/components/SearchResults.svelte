@@ -9,14 +9,12 @@
     
 </div>
 {/if}
-<script>
+<script lang="ts">
 
     import SearchItem from "./searchComponents/SearchItem.svelte";
-    /**
-	 * @type {Array<{}>}
-	 */
-    export let searchData
-    $: console.log(searchData)
+
+    export let searchData:AuctionItemTypes[]
+   
 </script>
 <style lang="postcss">
 

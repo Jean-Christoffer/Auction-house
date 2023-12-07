@@ -6,13 +6,13 @@
     use:enhance
      class="  px-8 pt-6 pb-8 mb-4 customBg">
 
-        <Button buttonText="Remove listing"/>
+        <Button buttonText="Remove listing" warning={true}/>
      
     </form>
 
 
 </div>
-<script>
+<script lang="ts">
     
     import Button from "../uiComponents/Button.svelte";
     import {enhance} from "$app/forms"
@@ -26,9 +26,5 @@
 <style lang="postcss">
     .customBg{
         background-color: #F2F2F2;
-    }
-    .customWidth{
-        max-width: 250px;
-        width: 100%;
     }
 </style>

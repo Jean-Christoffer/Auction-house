@@ -1,20 +1,39 @@
 
 import { redirect } from '@sveltejs/kit';
-export function load({ fetch, params,locals }) {
+import type { Actions,PageServerLoad } from  './$types';
+
+interface EditDetails {
+    title: FormDataEntryValue | null;
+    description: FormDataEntryValue | null;
+    tags: FormDataEntryValue | null;
+    media: FormDataEntryValue | null;
+    token: string | undefined;
+    auctionID:string  | null;
+
+    
+}
+interface BidDetails {
+    token: string | null;
+    auctionID:string  | null
+    bidAmount:FormDataEntryValue | null
+}
+
+  
+export const load:PageServerLoad = async ({ fetch, params,locals }) => {
     if (!locals.user) {
         throw redirect(307, '/warning');
     }
 
-    const fetchAuctionItem = async (id) => {
+    const fetchAuctionItem = async (id: string) => {
         const apiUrl = `https://api.noroff.dev/api/v1/auction/listings/${id}?_seller=true&_bids=true`;
         const response = await fetch(apiUrl,{
             method:"GET",
             credentials: "same-origin",
             headers: {
-                Authorization: `Bearer ${locals.user.token}`
+                Authorization: `Bearer ${locals?.user?.token}`
         }});
         const data = await response.json();
-     
+
         return data
     }
     return {
@@ -24,42 +43,38 @@ export function load({ fetch, params,locals }) {
 
 }
 
-export const actions = {
+export const actions:Actions = {
     async bid({ request, locals, params }) {
         const formData = await request.formData();
-        //bid
+
         const bidAmount = formData.get('amount');
   
-    
+        const token = locals?.user?.token as string;
         const auctionID = params.auctionID;
-        const result = await placeBid(auctionID, bidAmount, locals.user.token);
-        console.log(result)
+
+        const result = await placeBid({auctionID, bidAmount,token} );
+       
       
         return {
-            status: 303, // 'See Other' status code for redirection
+            status: 303, 
             headers: {
-                location: `/auctionItem/${params.auctionID}` // Redirect to the same auction item page
+                location: `/auctionItem/${params.auctionID}` 
             }
         };
     },
 
     async edit({ request, locals, params }) {
         const formData = await request.formData();
-        const mediaurl = formData.get('url');
+        const media = formData.get('url');
         const title = formData.get('title');
         const description = formData.get('description');
         const tags = formData.get('tags');
-    
+        const token = locals?.user?.token
+
         const auctionID = params.auctionID;
-        const resultsEdit = await editAuction(
-            auctionID,
-            mediaurl,
-            title,
-            description,
-            tags,
-             locals.user.token)
+        const resultsEdit = await editAuction({ auctionID,media,title,description,tags,token} )
     
-        console.log(resultsEdit)
+
         return {
             status: 303, 
             headers: {
@@ -71,15 +86,17 @@ export const actions = {
     async deleteAuction({ request, locals, params }) {
         const formData = await request.formData();
         const auctionID = params.auctionID;
-        const resultsDelete = await deleteItem(auctionID,locals.user.token)
+        const token = locals?.user?.token as string;
+        
+        const resultsDelete = await deleteItem(auctionID,token)
         console.log(resultsDelete,formData)
         throw redirect(303, '/profile');
   
     }
 };
 
-async function placeBid(auctionID, bidAmount, token) {
-    console.log(typeof bidAmount, bidAmount)
+async function placeBid({auctionID, bidAmount, token}:BidDetails ) {
+
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}/bids`, {
             method: "POST",
@@ -93,22 +110,22 @@ async function placeBid(auctionID, bidAmount, token) {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
-            return data;
+            return data
+   
         } else {
-            // If the response is not 'ok', attempt to read and log the error message
+
             const errorData = await response.json();
             console.error('Error Response:', errorData);
 
             if (response.status === 400) {
-                // Handle Bad Request
+  
                 console.error('Bad Request:', errorData.message);
                 return null;
             } else if (response.status === 403) {
                 console.error('Forbidden:', errorData.message);
                 return null;
             } else {
-                // Handle other HTTP errors
+
                 console.error(`HTTP Error: ${response.status}`);
                 return null;
             }
@@ -122,7 +139,7 @@ async function placeBid(auctionID, bidAmount, token) {
 
 
 
-async function editAuction(auctionID,mediaurl,title,description,tags,token) {
+async function editAuction({auctionID,media,title,description,tags,token}:EditDetails) {
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}`,{
@@ -136,39 +153,42 @@ async function editAuction(auctionID,mediaurl,title,description,tags,token) {
                 title:title,
                 description:description,
                 tags:Array(tags),
-                media:Array(mediaurl)
+                media:Array(media)
             })
         })
-
+        const data = await response.json();
+        console.log(data)
         if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            return data;
+            return { success: true };
+            
+         
+       
         } else {
-            // If the response is not 'ok', attempt to read and log the error message
+    
             const errorData = await response.json();
             console.error('Error Response:', errorData);
 
             if (response.status === 400) {
-                // Handle Bad Request
+  
                 console.error('Bad Request:', errorData.message,errorData);
                 return null;
             } else if (response.status === 403) {
                 console.error('Forbidden:', errorData.message);
                 return null;
             } else {
-                // Handle other HTTP errors
+      
                 console.error(`HTTP Error: ${response.status}`);
                 return null;
             }
         }
+      
     } catch (err) {
         console.error("Network or other error:", err);
         return null;
     }
 }
 
-async function deleteItem(auctionID,token) {
+async function deleteItem(auctionID:string,token:string) {
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}`,{
@@ -186,19 +206,19 @@ async function deleteItem(auctionID,token) {
             console.log(data);
             return data;
         } else {
-            // If the response is not 'ok', attempt to read and log the error message
+      
             const errorData = await response.json();
             console.error('Error Response:', errorData);
 
             if (response.status === 400) {
-                // Handle Bad Request
+
                 console.error('Bad Request:', errorData.message,errorData);
                 return null;
             } else if (response.status === 403) {
                 console.error('Forbidden:', errorData.message);
                 return null;
             } else {
-                // Handle other HTTP errors
+ 
                 console.error(`HTTP Error: ${response.status}`);
                 return null;
             }

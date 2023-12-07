@@ -44,21 +44,22 @@
                 {/if}
             </div>
         </div>
-        <dialog id="mediaModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md ">
+        <dialog id="mediaModal" class="modal rounded px-8 pt-6 pb-8 customBg shadow-md " bind:this={mediaModal}>
             <button class="btn ml-auto text-black"  on:click={() => mediaModal.close()}>Close</button>
           <div class="modal-box">
             <div class="modal-action ">
-                <UpdateMedia />
+                <UpdateMedia form={form} />
             </div>
           </div>
         </dialog>
     </div>
 </section>
-<script>
-export let profileData = {}
-export let memberStatus
+<script lang="ts">
+export let profileData:ProfileData
+export let memberStatus = "bronze"
+export let form:FormData
 import UpdateMedia from "../forms/updateMedia.svelte";
-
+let mediaModal: HTMLDialogElement  
 </script>
 <style lang="postcss">
     .shadow{
@@ -80,7 +81,7 @@ import UpdateMedia from "../forms/updateMedia.svelte";
     .hover{
         display: none;
         filter: grayscale(100%);
-        background-image: url("/src/public/27002.jpg");
+        background-image: url("$lib/images/27002.jpg");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center;

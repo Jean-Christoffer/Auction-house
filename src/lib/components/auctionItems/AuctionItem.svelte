@@ -17,10 +17,10 @@
         </div>
         <div class="mt-auto pb-2 pt-2">
           <p class="text-sm font-semibold text-gray-700 mr-2">Ends at {formatDate(listingData.endsAt)}</p>
-          {#if listingData?.bids?.length > 0 && listingData.bids}
+          {#if sortedBids.length > 0 && sortedBids}
             <p>
               <strong><small>Current bid</small></strong>
-              ${listingData.bids[listingData.bids.length - 1].amount}
+              ${sortedBids[sortedBids.length - 1].amount}
             </p>
           {/if}
         </div>
@@ -28,10 +28,13 @@
     </div>
 
   </div>
-<script>
-export let listingData
+<script lang="ts">
+export let listingData:AuctionItemTypes
+$:console.log(listingData)
 let description
-function formatDate(dateString) {
+let sortedBids:Bids[] = []
+
+function formatDate(dateString: string | number | Date) {
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const date = new Date(dateString);
 
@@ -41,7 +44,7 @@ function formatDate(dateString) {
 
     return `${months[monthIndex]} ${day}, ${year}`;
 }
-function truncateDescription(text) {
+function truncateDescription(text:string) {
         const sentence = text
         const sentences = sentence?.split('. ');
         if (sentences?.length > 1) {
@@ -51,7 +54,18 @@ function truncateDescription(text) {
         }
         return sentence
     }
+$:{
+        if(listingData.bids){
+          let bidHistory = listingData.bids
+                sortedBids = [...bidHistory].sort((a, b) => {
+                const date1 = new Date(a.created);
+                const date2 = new Date(b.created);
+                    return date1.getTime() - date2.getTime()
+                
+            });
+        }
 
+}
 </script>
 <style lang="postcss">
 

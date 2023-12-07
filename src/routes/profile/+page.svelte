@@ -1,3 +1,7 @@
+<svelte:head>
+  <title>Profile</title>
+
+</svelte:head>
 {#if userData !== null}
 <div  class="w-full overflow-hidden relative customHeight flex flex-col justify-center " >
           <div class="absolute
@@ -11,34 +15,34 @@
           {memberStatus}"
           ></div>
           <div class="bg-overlay"></div>
-          <ProfileCard profileData = {userData} memberStatus = {memberStatus} />
+          <ProfileCard profileData = {userData} memberStatus = {memberStatus} form={form} />
           
 </div> 
-        <ProfileNav profileData ={userData} />  
+        <ProfileNav profileData ={userData} form={form} />  
 
           <div  class="container mx-auto h-full">
           <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
-              {#each userData.listings as myListing}
-              <a href="/auctionItem/{myListing.id}">
-                <AuctionItem  listingData =  {myListing}/> 
-              </a>
+              {#each userData?.listings as myListing} 
+                <a href="/auctionItem/{myListing.id}">
+                  <AuctionItem  listingData =  {myListing}/> 
+                </a>
               {/each }
         </div>
   </div>
-
-
     {:else}
     <h1>Please log in to see your profile</h1>
 {/if}
-<script>
+<script lang="ts">
 import ProfileCard from '$lib/components/profileComponents/ProfileCard.svelte';
 import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
-export let data
 
-   let userData = {}
-   let wins = 2
-   let memberStatus = "silver"
+export let data
+export let form:ExtendedFormData
+$:console.log(data)
+let userData:ProfileData
+let wins
+let memberStatus = ""
 
 
 
@@ -48,21 +52,22 @@ $: {
     const {profileData} = data
     userData = profileData
     wins = userData?.wins?.length
-  }
-  switch (wins) {
-    
-    case wins > 1:
-     memberStatus = "silver";
-     break;
-    case wins > 2:
-     memberStatus = "gold"
-     break;
-    default:
-        memberStatus = "silver";
+    if(wins){
+      if(wins < 3){
+        memberStatus = "bronze"
+      }else if(wins >= 3){
+        memberStatus = "silver"
+      }else if(wins >= 5){
+        memberStatus = "gold"
+      }
     }
+  }
+
 }
 
 
+const today = new Date();
+today.setHours(0, 0, 0, 0);
 
 
 </script>
@@ -77,13 +82,13 @@ $: {
 
     }
     .animate.bronze{
-      background-image: url("./bronze.jpg");
+      background-image: url("$lib/images/bronze.jpg");
     }
     .animate.silver{
-      background-image: url("./silver.jpg");
+      background-image: url("$lib/images/silver.jpg");
     }
     .animate.gold{
-      background-image: url("./gold.jpg");
+      background-image: url("$lib/images/gold.jpg");
     }
     .bg-overlay{
   position: absolute;

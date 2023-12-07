@@ -1,12 +1,14 @@
+{#if !isMediaGallery}
 <div  class="carousell hideScroll">
     <div  class="inner-carousell hideScroll">
         {#each itemsData as item (item.id)}
+   
                 <a href="/auctionItem/{item.id}"  class="customWidth flex items-stretch" id= {item.id} animate:flip={{duration:500}}>
                     <AuctionItem listingData={item}/>
                 </a>
         {/each}
     </div>
-    <button class="left" on:click={rotateLeft}>
+    <button class="left btn" on:click={rotateLeft} disabled = {isDisabled}>
  
             <svg width="32" height="63" viewBox="0 0 32 63" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-inside-1" fill="white">
@@ -16,7 +18,7 @@
             </svg>
     
     </button>
-    <button class="right"  on:click={rotateRight}>
+    <button class="right btn"  on:click={rotateRight} disabled = {isDisabled}>
 
             <svg width="32" height="63" viewBox="0 0 32 63" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <mask id="path-1-inside-1" fill="white">
@@ -27,35 +29,41 @@
 
     </button>
 </div>
-<script>
-    /**@type {Array<{}>}*/
-    export let itemsData
-   
+
+{/if}
+<script lang="ts">
     import AuctionItem from "./auctionItems/AuctionItem.svelte";
     import {flip} from "svelte/animate"
-
-
-
+    export let itemsData:AuctionItemTypes[]
+    export let isMediaGallery = false
+    let isDisabled:boolean = false
 
     function rotateLeft(){
         const transition = itemsData[itemsData.length - 1]
-        // @ts-ignore
-        document.getElementById(transition.id).style.opacity = 0
-        itemsData = 
-        [itemsData[itemsData.length - 1],...itemsData.slice(0, itemsData.length -1)]
-        setTimeout(()=>{
-            // @ts-ignore
-            document.getElementById(transition.id).style.opacity = 1
-        },500)
+        const lastItemInArray:HTMLElement | null = document.getElementById(transition.id)
+        if(lastItemInArray){
+            lastItemInArray.style.opacity = "0"
+            isDisabled = true
+            itemsData = [itemsData[itemsData.length - 1],...itemsData.slice(0, itemsData.length -1)]
+            setTimeout(()=>{
+                isDisabled=false
+                lastItemInArray.style.opacity = "1"
+            },500)
+        }
     }
     function rotateRight(){
         const transition = itemsData[0]
-        document.getElementById(transition.id).style.opacity = 0
-        itemsData = [...itemsData.slice(1,itemsData.length), itemsData[0]]
-        setTimeout(()=>{
-            // @ts-ignore
-            document.getElementById(transition.id).style.opacity = 1
-        },500)
+        const firstItemInArray:HTMLElement | null =  document.getElementById(transition.id)
+        if(firstItemInArray){
+            firstItemInArray.style.opacity = "0"
+            isDisabled = true
+            itemsData = [...itemsData.slice(1,itemsData.length), itemsData[0]]
+            setTimeout(()=>{
+                firstItemInArray.style.opacity = "1"
+                isDisabled=false
+            },500)
+        }
+     
     }
     
 </script>
@@ -91,15 +99,15 @@
     }
 
 
-    /* Hide scrollbar for Chrome, Safari, and Opera */
+   
 .hideScroll::-webkit-scrollbar {
     display: none;
 }
 
-/* Hide scrollbar for IE, Edge, and Firefox */
+
 .hideScroll {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;  
+    scrollbar-width: none;  
 }
 .right, .left{
     position: absolute;
@@ -117,5 +125,8 @@
 .left{
     left: 10px;
     
+}
+.btn:disabled{
+    opacity: .5;
 }
 </style>

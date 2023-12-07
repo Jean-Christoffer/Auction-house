@@ -1,7 +1,7 @@
 <button
 class="
 w-full
-bg-black
+{warning ? "bg-red-600" : "bg-black"}
 hover:bg-gray-700
 text-white 
 text-center
@@ -18,16 +18,9 @@ disabled = {isDisabled}
 >
     {buttonText}
 </button>
-<script>
-    /**
-     * @type {string}
-    */
-   export let buttonText
- /**
-     * @type {boleean}
-    */
-   export let isDisabled = false
-
-
+<script lang="ts">
+   export let buttonText:string
+   export let isDisabled:boolean = false
+   export let warning:boolean = false
    
 </script>

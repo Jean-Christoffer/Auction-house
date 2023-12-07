@@ -17,15 +17,11 @@ cursor-pointer
 type={inputType}
 value={buttonText}
   />
-<script>
-  /**
-   * @type {string}
-   */
-   export let inputType;
-   /**
-    * @type {string}
-    */
-   export let buttonText
+<script lang="ts">
+
+   export let inputType:'submit' | 'text' | 'number' | 'email' | 'password' | 'date' | 'time' | 'datetime-local' | 'month' | 'week' | 'url' | 'search' | 'tel' | 'color' | 'file';
+
+   export let buttonText:string
 </script>
 <style lang="postcss">
 .custom-style {
