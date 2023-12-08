@@ -41,25 +41,40 @@
                  type="text" 
                  id="tags" 
                  name="tags"
+                 maxlength="8"
                  bind:value={tags} />
             </label>
         </div>
-        <div class="mb-6">
-            <label for="media"
-            class="block text-gray-700 text-sm font-bold mb-2"
-            >
-                Media*
-                <input
-                 class="shadow appearance-none border rounded w-full py-2 px-3 mb-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                 type="text" 
-                 id="media" 
-                 name="media"
-                 bind:value={media} />
-                 {#if !urlPattern.test(media)}
-                    <p class="text-grey-500 text-xs italic">Must be a valid url</p>
-                {/if}
+        <div class="mb-4">
+            <label for="media-count" class="block text-gray-700 text-sm font-bold mb-2">
+                Number of images
+                <select  id="media-count" bind:value={numberOfMediaUrls} on:change={() => (mediaUrls = Array.from({ length: numberOfMediaUrls }, () => ""))}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <!-- Add more options as needed -->
+                </select>
             </label>
         </div>
+        {#each mediaUrls as mediaUrl, index}
+        <div class="mb-4">
+            <label for={`media-url-${index}`} class="block text-gray-700 text-sm font-bold mb-2">
+               Image {index + 1}
+                <input
+                    type="text"
+                    id={`media-url-${index}`}
+                    name={`media-url-${index}`}
+                    bind:value={mediaUrl}
+                    on:input={(event) => updateMediaUrls(index, event)}
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
+                    />
+            </label>
+        </div>
+        {/each}
+
+
+
+
         <div class="mb-6">
             <label for="endsAt"
             class="block text-gray-700 text-sm font-bold mb-2"
@@ -77,11 +92,13 @@
         </div>
         <div  class="flex items-center justify-between">
             <div class="customWidth">
-                <Button buttonText="List item" isDisabled={urlPattern.test(media)
-                 && title.length > 1
-                 && description.length > 1
-                 && tags.length > 1
-               ? false : true } />
+                <Button buttonText="List item"
+                isDisabled={
+                    title.length > 3 &&
+                    description.length > 3 &&
+                    tags.length >= 3 && 
+                    mediaUrls.every(u => urlPattern.test(u)) ? false : true
+                    }  />
             </div>       
         </div>
      
@@ -99,17 +116,19 @@
     let title = ""
     let description = ""
     let tags = ""
-    let media = ""
     let endsAt = new Date()
-
-
-
- 
-
+    let numberOfMediaUrls = 1; 
+    let mediaUrls = [""];
 
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
+    
+    function updateMediaUrls(index: number, event: Event): void {
+        const target = event.target;
+        if (target instanceof HTMLInputElement) {
+            mediaUrls[index] = target.value;
+        }
+    }
 
-   
 </script>
 <style lang="postcss">
     .customBg{

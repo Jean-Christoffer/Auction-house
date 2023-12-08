@@ -38,24 +38,20 @@ import ProfileNav from '$lib/components/profileComponents/ProfileNav.svelte';
 import AuctionItem from '$lib/components/auctionItems/AuctionItem.svelte';
 
 export let data
-export let form:ExtendedFormData
-$:console.log(data)
+export let form:ExtendedFormData  
 let userData:ProfileData
 let wins
 let memberStatus = ""
-
-
-
-
 $: {
   if(data){
     const {profileData} = data
     userData = profileData
     wins = userData?.wins?.length
+ 
     if(wins){
       if(wins < 3){
         memberStatus = "bronze"
-      }else if(wins >= 3){
+      }else if(wins === 3){
         memberStatus = "silver"
       }else if(wins >= 5){
         memberStatus = "gold"
@@ -64,8 +60,6 @@ $: {
   }
 
 }
-
-
 const today = new Date();
 today.setHours(0, 0, 0, 0);
 
@@ -77,10 +71,7 @@ today.setHours(0, 0, 0, 0);
         animation: scalingBack 45s ease-in infinite;
         -webkit-animation-play-state: running;
         animation-play-state: running;
-        
-   
-
-    }
+        }
     .animate.bronze{
       background-image: url("$lib/images/bronze.jpg");
     }

@@ -9,7 +9,7 @@ p-5
 "
 >
 	<div class="custom-width">
-	
+	<p class="text-center text-white"><small>Find us at awesomestreet 200</small></p>
         
             <div class="line"></div>
             <div class="flex gap-3 w-full items-center justify-center p-2">
