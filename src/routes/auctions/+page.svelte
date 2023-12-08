@@ -14,7 +14,8 @@
     </div>
         <AuctionNav listings = {sortedListings}   selectedValue= {sortVal} setSelectedValue={handleChange} />
     <div  class="md:container md:mx-auto">
-    <div class="flex flex-wrap items-stretch gap-9 h-full justify-center md:justify-center mt-5 mb-5">
+    <div class="flex flex-wrap gap-9 items-stretch h-full justify-center mt-5 mb-5">
+       
         {#if sortedListings}
             {#each sortedListings as listing}
                 <a href="/auctionItem/{listing.id}" >
@@ -22,6 +23,7 @@
                 </a>
             {/each}
         {/if}
+
     </div>
 </div>
 </div>
@@ -122,7 +124,7 @@ function getLatestBidAmount(listing: { bids: any; }) {
 }
 
 .customHeight{
-    height: 50vh;
+    height: 40vh;
 }
 .bg-overlay{
   position: absolute;
