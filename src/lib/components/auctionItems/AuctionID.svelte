@@ -21,7 +21,7 @@
                     <p><small>Seconds</small></p>
                 </div>
             </figure>
-            <div class="custom-width">
+            <div class="custom-width media-gallery">
                 <MediaGallery data={data.media} />
                 {#if auctionEnded}
                 <p>Auction has ended</p>
@@ -155,7 +155,9 @@
         display: grid;
         grid-template-columns: 70px 1fr;
     }
-
+    .media-gallery{
+        grid-column: 2/3;
+    }
     .grid-item2{
         grid-column: 2;
     }
