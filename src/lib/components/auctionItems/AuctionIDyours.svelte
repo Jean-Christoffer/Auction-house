@@ -1,4 +1,4 @@
-<section  class="md:container md:mx-auto my-10 h-screen p-2 m-auto flex justify-center">
+<section  class="md:container md:mx-auto my-10 h-full p-2 m-auto flex justify-center">
     {#if data }
     {@const mediaGallery = data.media}
     <figure class="custom-grid ">

@@ -1,4 +1,4 @@
-<div class="sticky md:top-[68px] top-[75px]  w-full block">
+<div class="sticky md:top-[68px] top-[74px]  w-full block">
 <nav class="block w-full customBg text-white relative z-2 px-2 py-2">
     <div class="w-full custom-width flex items-center justify-between container mx-auto flex-wrap gap-2">
         <div class="flex items-center gap-2">
