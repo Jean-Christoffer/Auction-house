@@ -21,15 +21,13 @@
                     <p><small>Seconds</small></p>
                 </div>
             </figure>
-
+            {/if}
             <div class="custom-width media-gallery">
                 <MediaGallery data={data.media} />
                 {#if auctionEnded}
                 <p>Auction has ended</p>
                 {/if}
-            </div>
-            {/if}
-            
+            </div>          
         </div>
         <article class="max-w-sm grid-item2">
             <h2 class="text-4xl">{data.title}</h2>

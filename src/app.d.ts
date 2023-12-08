@@ -27,7 +27,7 @@ declare global {
         success?:boolean
     }
     interface AuctionItemTypes {
-        bids?:Bids[]
+        bids:Bids[]
         created:string;
         description:string
         endsAt:string
