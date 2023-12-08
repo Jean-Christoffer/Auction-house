@@ -33,38 +33,52 @@
         </div>
         <div class="mb-4">
             <label for="tags" class="block text-gray-700 text-sm font-bold mb-2">
-                Tags
+                Tag
                 <input
                 type="text"
                 id="tags"
                 name="tags"
-  
+                maxlength="8"
                 bind:value={tags}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
             </label>
         </div>
         <div class="mb-4">
-            <label for="url" class="block text-gray-700 text-sm font-bold mb-2">
-                Media url
-                <input
-                type="text"
-                id="url"
-                name="url"
-  
-                bind:value={mediaurl}
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
-                 />
+            <label for="media-count" class="block text-gray-700 text-sm font-bold mb-2">
+                Number of Media URLs
+                <select id="media-count" bind:value={numberOfMediaUrls} on:change={() => (mediaUrls = Array.from({ length: numberOfMediaUrls }, () => ""))}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <!-- Add more options as needed -->
+                </select>
             </label>
-
-        </div>
-        
-        <input type="file" name="images" multiple>
+        </div>  
+        {#each mediaUrls as mediaUrl, index}
+        <div class="mb-4">
+            <label for={`media-url-${index}`} class="block text-gray-700 text-sm font-bold mb-2">
+                Media URL {index + 1}
+                <input
+                    type="text"
+                    id={`media-url-${index}`}
+                    name={`media-url-${index}`}
+                    bind:value={mediaUrl}
+                    on:input={(event) => updateMediaUrls(index, event)}
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
+                    />
+            </label>
+            </div>
+        {/each}
         <div  class="flex items-center justify-between">
             <div class="customWidth">
-                <Button buttonText="Update listing" isDisabled={title.length > 0 || description.length > 0 || tags.length > 0 || urlPattern.test(mediaurl)
-       
-               ? false : true } />
+                <Button buttonText="Update listing"
+                 isDisabled={
+                 title.length > 3 &&
+                 description.length > 3 &&
+                 tags.length >= 3 && 
+                 mediaUrls.every(u => urlPattern.test(u)) ? false : true
+                 } />
             </div>       
         </div>
         {#if form?.status === 303}
@@ -81,14 +95,20 @@
      import Button from "../uiComponents/Button.svelte";
      import Snackbar from "../uiComponents/Snackbar.svelte";
      export let form:ExtendedFormData
-
-    let mediaurl = ""
     let title = ""
     let description = ""
     let tags = ""
+    let numberOfMediaUrls = 1; 
+    let mediaUrls = [""];
+
     const urlPattern = /^(http|https):\/\/[^ "]+$/;
     
-    
+    function updateMediaUrls(index: number, event: Event): void {
+        const target = event.target;
+        if (target instanceof HTMLInputElement) {
+            mediaUrls[index] = target.value;
+        }
+    }
 
 </script>
 <style lang="postcss">

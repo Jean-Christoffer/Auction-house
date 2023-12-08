@@ -3,7 +3,7 @@
     <div class="flex flex-col overflow-hidden h-full ">
       <div class="p-12">
         <div class="customWidth">
-          <img class="w-full h-auto object-cover object-center block" src="{listingData.media[0]}" alt="">
+          <img class="w-full h-auto object-cover object-center block" src="{listingData.media[0]}" alt="" loading="lazy">
           
         </div>
       </div>
@@ -30,7 +30,6 @@
   </div>
 <script lang="ts">
 export let listingData:AuctionItemTypes
-$:console.log(listingData)
 let description
 let sortedBids:Bids[] = []
 

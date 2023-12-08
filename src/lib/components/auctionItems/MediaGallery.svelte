@@ -56,7 +56,6 @@
     function checkScrollPosition() {
     const isAtStart = scrollContainer.scrollLeft === 0;
     const isAtEnd = Math.abs((scrollContainer.scrollLeft + scrollContainer.clientWidth) - scrollContainer.scrollWidth) <= tolerance;
-   console.log(scrollContainer.scrollWidth , Math.round(scrollContainer.scrollLeft + scrollContainer.clientWidth) )
     disableLeftButton = isAtStart;
     disableRightButton = isAtEnd;
   }

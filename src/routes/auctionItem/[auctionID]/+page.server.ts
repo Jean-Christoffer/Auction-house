@@ -6,7 +6,7 @@ interface EditDetails {
     title: FormDataEntryValue | null;
     description: FormDataEntryValue | null;
     tags: FormDataEntryValue | null;
-    media: FormDataEntryValue | null;
+    mediaUrls:string[];
     token: string | undefined;
     auctionID:string  | null;
 
@@ -65,15 +65,28 @@ export const actions:Actions = {
 
     async edit({ request, locals, params }) {
         const formData = await request.formData();
-        const media = formData.get('url');
+       // const media = formData.get('url');
         const title = formData.get('title');
         const description = formData.get('description');
         const tags = formData.get('tags');
         const token = locals?.user?.token
-
         const auctionID = params.auctionID;
-        const resultsEdit = await editAuction({ auctionID,media,title,description,tags,token} )
-    
+
+        const mediaUrls = [];
+        for (const [key, value] of formData.entries()) {
+            if (key.startsWith('media-url')) {
+                mediaUrls.push(String(value));
+            }
+        }
+        const filteredMediaUrls = mediaUrls.filter(url => url.trim() !== '');
+        const resultsEdit = await editAuction({ 
+            auctionID,
+            mediaUrls: filteredMediaUrls, 
+            title,
+            description,
+            tags,
+            token
+        });
 
         return {
             status: 303, 
@@ -139,7 +152,8 @@ async function placeBid({auctionID, bidAmount, token}:BidDetails ) {
 
 
 
-async function editAuction({auctionID,media,title,description,tags,token}:EditDetails) {
+async function editAuction({auctionID,mediaUrls,title,description,tags,token}:EditDetails) {
+   // const taggArray = tags.split(",")
 
     try {
         const response = await fetch(`https://api.noroff.dev/api/v1/auction/listings/${auctionID}`,{
@@ -152,8 +166,8 @@ async function editAuction({auctionID,media,title,description,tags,token}:EditDe
             body:JSON.stringify({
                 title:title,
                 description:description,
-                tags:Array(tags),
-                media:Array(media)
+                tags:[tags],
+                media:mediaUrls
             })
         })
         const data = await response.json();

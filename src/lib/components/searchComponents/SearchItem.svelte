@@ -2,7 +2,7 @@
     <p class="text-xs leading-5 mb-5">Listed {formatDate(searchData.created)}</p>
     <article class="text-gray-800 flex items-center mb-10">
         <div class="w-20 h-20 mr-6">
-            <img class="max-w-[80px] max-h-[80px] mx-auto block relative top-1/2 -translate-y-1/2" alt="" src="{searchData.media.length ? searchData.media[0] : "$lib/images/6.jpg"}"/>
+            <img loading="lazy" class="max-w-[80px] max-h-[80px] mx-auto block relative top-1/2 -translate-y-1/2" alt="" src="{searchData.media.length ? searchData.media[0] : "$lib/images/6.jpg"}"/>
         </div>
         <div class="max-w-[210px]">
             <h4 class="text-sm leading-5  font-semibold text-black">{searchData.title ?? ""}</h4>
