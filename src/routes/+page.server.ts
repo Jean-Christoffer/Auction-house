@@ -1,6 +1,5 @@
 
 import type { Load } from '@sveltejs/kit';
-export const prerender = true;
 export const load: Load = async ({ fetch }) => {
     const fetchAuctionItem = async () => {
         const apiUrl = `https://api.noroff.dev/api/v1/auction/listings?_active=true&_bids=true&_seller=true`;
