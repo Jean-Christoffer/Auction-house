@@ -122,7 +122,7 @@ function getLatestBidAmount(listing: { bids: any; }) {
 }
 
 .customHeight{
-    height: 60vh;
+    height: 50vh;
 }
 .bg-overlay{
   position: absolute;

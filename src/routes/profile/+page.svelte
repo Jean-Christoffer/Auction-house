@@ -88,7 +88,7 @@ today.setHours(0, 0, 0, 0);
 
 }
     .customHeight{
-    height: 60vh;
+    height: 50vh;
     display: flex;
     flex-direction: column;
 }
