@@ -1,12 +1,14 @@
 <svelte:head>
-  <title>Auctib item</title>
+  <title>Auction item</title>
   <meta name="description" content="Bid or edit your listing!">
 </svelte:head>
+
 {#if auctionData?.seller?.name !== $page?.data?.user?.name}
 <AuctionId  data = {auctionData} form={form}/>
 {:else}
     <AuctionIDyours data = {auctionData} form={form}/>
 {/if}
+
 <script lang="ts">
     export let data
     export let form : ExtendedFormData

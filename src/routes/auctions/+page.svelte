@@ -14,7 +14,7 @@
     </div>
         <AuctionNav listings = {sortedListings}   selectedValue= {sortVal} setSelectedValue={handleChange} />
     <div  class="md:container md:mx-auto">
-    <div class="flex flex-wrap items-stretch gap-1 h-full justify-center md:justify-start">
+    <div class="flex flex-wrap items-stretch gap-9 h-full justify-center md:justify-center mt-5 mb-5">
         {#if sortedListings}
             {#each sortedListings as listing}
                 <a href="/auctionItem/{listing.id}" >

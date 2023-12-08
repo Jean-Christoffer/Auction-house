@@ -1,9 +1,9 @@
 
   <div class=" w-[250px] custom  bg-white flex flex-col h-full " id="{listingData.id}">
     <div class="flex flex-col overflow-hidden h-full ">
-      <div class="p-12">
+      <div class="p-8 img-wrapper">
         <div class="customWidth">
-          <img class="w-full h-auto object-cover object-center block" src="{listingData.media[0]}" alt="">
+          <img class="w-full h-auto object-cover object-center block" src="{listingData.media[0]}" alt="" loading="lazy">
           
         </div>
       </div>
@@ -30,7 +30,6 @@
   </div>
 <script lang="ts">
 export let listingData:AuctionItemTypes
-$:console.log(listingData)
 let description
 let sortedBids:Bids[] = []
 
@@ -79,5 +78,8 @@ $:{
   justify-content: center;
   aspect-ratio: 16/10;
   overflow: hidden;
+}
+.img-wrapper{
+  background-color: #d6d4d4;
 }
 </style>

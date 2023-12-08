@@ -5,7 +5,7 @@ interface AuctionDetails {
     title: FormDataEntryValue | null;
     description: FormDataEntryValue | null;
     tags: FormDataEntryValue | null;
-    media: FormDataEntryValue | null;
+    mediaUrls:string[];
     endsAt: FormDataEntryValue | null;
     token: string | null;
 }
@@ -44,13 +44,21 @@ export const actions:Actions = {
         const title = formData.get("title");
         const description = formData.get("description");
         const tags = formData.get("tags");
-        const media = formData.get("media");
+       // const media = formData.get("media");
 
     
         const endsAt = formData.get("endsAt");
         const token = locals?.user?.token as string;
 
-        const result = await createAuction({ title, description, tags, media, endsAt, token })
+        const mediaUrls = [];
+        for (const [key, value] of formData.entries()) {
+            if (key.startsWith('media-url')) {
+                mediaUrls.push(String(value));
+            }
+        }
+        const filteredMediaUrls = mediaUrls.filter(url => url.trim() !== '');
+
+        const result = await createAuction({ title, description, tags, mediaUrls: filteredMediaUrls, endsAt, token })
 
       
         return {
@@ -82,7 +90,7 @@ export const actions:Actions = {
 
 };
 
-async function createAuction({ title, description, tags, media, endsAt, token }: AuctionDetails) {
+async function createAuction({ title, description, tags, mediaUrls, endsAt, token }: AuctionDetails) {
   
     try {
         const response = await fetch("https://api.noroff.dev/api/v1/auction/listings",{
@@ -96,7 +104,7 @@ async function createAuction({ title, description, tags, media, endsAt, token }:
                 title:title,
                 description: description,
                 tags:Array(tags),
-                media: Array(media),
+                media: mediaUrls,
                 endsAt:endsAt
             })
         })

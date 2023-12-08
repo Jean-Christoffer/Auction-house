@@ -12,7 +12,7 @@
 				<div class="sticky top-0 zindex bg-white  py-8 px-10 ">
 					<button  on:click={handleVisible} class="customLink inline-block tracking-tight uppercase cursor-pointer transition-all">Close</button>
 					<h3 class="mb-3 pt-6">Search our auction house</h3>
-					<p class="customText">search by keyword</p>
+					<p class="customText">Search by tag</p>
 
 					<form class="flex" on:submit={handleSearch}>
 						<Input inputType="text" handleInput={handleInput} inputValue={inputValue}/>

@@ -2,13 +2,34 @@
     {#if data}
     <figure class="custom-grid ">
         <div class="grid-item1">
-            <div class="custom-width">
-            
+            {#if !auctionEnded}
+            <figure class="custom-timer">
+                <div class="days">
+                    <h2 class="text-4xl">{days}</h2>
+                    <p><small>Days</small></p>
+                </div>    
+                <div class="hours">
+                    <h2 class="text-4xl">{hours}</h2>
+                    <p><small>Hours</small></p>
+                </div>
+                <div class="minutes">
+                    <h2 class="text-4xl">{minutes}</h2>
+                    <p><small>Minutes</small></p>
+                </div>
+                <div class="seconds">
+                    <h2 class="text-4xl">{seconds}</h2>
+                    <p><small>Seconds</small></p>
+                </div>
+            </figure>
+
+            <div class="custom-width media-gallery">
                 <MediaGallery data={data.media} />
-       
-                <p><strong>Auction ends in {timeRemaining} </strong></p>
+                {#if auctionEnded}
+                <p>Auction has ended</p>
+                {/if}
             </div>
-       
+            {/if}
+            
         </div>
         <article class="max-w-sm grid-item2">
             <h2 class="text-4xl">{data.title}</h2>
@@ -54,6 +75,12 @@
 
     export let data:AuctionItemTypes
     export let form:ExtendedFormData
+    
+    let days = 0
+    let hours = 0
+    let minutes = 0
+    let seconds = 0
+    let auctionEnded = false
     let sortedBids:Bids[]
 
     dayjs.extend(relativeTime);
@@ -83,16 +110,16 @@
             const timeDiff = endDate.getTime() - now.getTime();
 
             if (timeDiff <= 0) {
-            timeRemaining = 'Auction ended';
+            auctionEnded = true
             return;
             }
 
-            const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+             days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+             hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+             minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+             seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
-            timeRemaining = `${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
+            timeRemaining = `Auction ends in    ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
 
         }
         onMount(() => {
@@ -111,16 +138,29 @@
         max-width: 550px;
        
     }
+    .custom-timer{
+        display: flex;
+        flex-direction: column;
+    }
     .custom-grid{
         display: grid;
-        grid-template-columns: minmax(150px,600px) 1fr;
+        grid-template-columns: minmax(150px,700px) 1fr;
         justify-content: center;
         align-items: center;
         gap: 50px;
     }
     .grid-item1{
         grid-column: 1;
+        align-self: start;
+
+        display: grid;
+        grid-template-columns: 70px 1fr;
+
     }
+    .media-gallery{
+        grid-column: 2/3;
+    }
+
     .grid-item2{
         grid-column: 2;
     }
@@ -133,6 +173,24 @@
         .grid-item1{
         grid-column: 1;
         padding: 16px;
+
+        grid-template-columns: 1fr 1fr;
+        justify-items: center;
+        grid-template-rows: 3fr;
+    }
+    .media-gallery{
+        grid-column: 1/3;
+    }
+
+    .custom-timer{
+        grid-row: 2;
+        grid-column: 1/3;
+     
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 30px;
     }
     .grid-item2{
         grid-column: 1;
