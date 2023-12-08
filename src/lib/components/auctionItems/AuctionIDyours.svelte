@@ -162,6 +162,11 @@
         display: grid;
         grid-template-columns: 70px 1fr;
     }
+
+    .media-gallery{
+        grid-column: 2/3;
+    }
+
     .remove-item{
         grid-column: 2;
         grid-row: 2;
