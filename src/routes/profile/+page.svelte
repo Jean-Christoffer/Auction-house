@@ -21,7 +21,7 @@
         <ProfileNav profileData ={userData} form={form} />  
 
           <div  class="container mx-auto h-full">
-          <div  class="flex flex-wrap items-stretch gap-1 h-full justify-center py-5 md:justify-start"> 
+          <div  class="flex flex-wrap items-stretch gap-9 h-full justify-center py-5 md:justify-center mt-5 mb-5"> 
               {#each userData?.listings as myListing} 
                 <a href="/auctionItem/{myListing.id}">
                   <AuctionItem  listingData =  {myListing}/> 
