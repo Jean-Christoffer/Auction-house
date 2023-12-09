@@ -1,23 +1,25 @@
 
 
 <div class="min-h-screen flex-col flex">
-  <header>
-      <Navigation
-       searchData={searchData}
-       handleSearch={handleSearch}
-       handleInput={handleInput} 
-       inputValue={inputValue}/>
-  </header>
+    <header>
+        <Navigation
+        searchData={searchData}
+        handleSearch={handleSearch}
+        handleInput={handleInput} 
+        inputValue={inputValue}/>
+    </header>
 
-  <main>
-    <slot />
-  </main>
-  <footer class="mt-auto">
-    <Footer/>
-  </footer>
+    <main>
+      <slot />
+    </main>
+    <footer class="mt-auto">
+      <Footer/>
+    </footer>
 </div>
 
 <script lang="ts">
+
+
 
 
   import "../app.css";
@@ -69,4 +71,29 @@ header{
   z-index: 2000;
   background-color: #F2F2F2;
 }
+
+.custom-container-scroll{
+      
+
+      max-height: 200px;
+      width: 100%;
+      overflow: auto;
+      padding: 10px 10px;
+      scroll-behavior: smooth;
+}
+.custom-container-scroll::-webkit-scrollbar {
+      width: 12px;
+  }
+  
+  .custom-container-scroll::-webkit-scrollbar-track {
+      border-radius: 8px;
+      background-color: #e7e7e7;
+      border: 1px solid #cacaca;
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+  }
+  
+  .custom-container-scroll::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: #363636;
+  }
 </style>

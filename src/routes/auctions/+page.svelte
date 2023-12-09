@@ -14,7 +14,8 @@
     </div>
         <AuctionNav listings = {sortedListings}   selectedValue= {sortVal} setSelectedValue={handleChange} />
     <div  class="md:container md:mx-auto">
-    <div class="flex flex-wrap items-stretch gap-9 h-full justify-center md:justify-center mt-5 mb-5">
+    <div class="flex flex-wrap gap-9 items-stretch h-full justify-center mt-5 mb-5">
+       
         {#if sortedListings}
             {#each sortedListings as listing}
                 <a href="/auctionItem/{listing.id}" >
@@ -22,6 +23,7 @@
                 </a>
             {/each}
         {/if}
+
     </div>
 </div>
 </div>
@@ -48,13 +50,14 @@
                 const date1 = new Date(a.endsAt);
                 const date2 = new Date(b.endsAt);
 
-                const date1Creat = new Date(a.endsAt);
-                const date2Create = new Date(b.endsAt);
+                const date1Creat = new Date(a.created);
+                const date2Create = new Date(b.created);
+                
                 switch (sortVal) {
                 case 'new':
-                return date1Creat.getTime() - date2Create.getTime();
+                return date2Create.getTime() - date1Creat.getTime();
                 case 'old':
-                    return date2Create.getTime() - date1Creat.getTime();
+                    return date1Creat.getTime() - date2Create.getTime();
                 case "soon":
                     return date1.getTime() - date2.getTime() 
                 case "later":
@@ -122,7 +125,7 @@ function getLatestBidAmount(listing: { bids: any; }) {
 }
 
 .customHeight{
-    height: 50vh;
+    height: 40vh;
 }
 .bg-overlay{
   position: absolute;

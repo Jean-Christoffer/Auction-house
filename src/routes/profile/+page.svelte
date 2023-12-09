@@ -22,10 +22,12 @@
 
           <div  class="container mx-auto h-full">
           <div  class="flex flex-wrap items-stretch gap-9 h-full justify-center py-5 md:justify-center mt-5 mb-5"> 
-              {#each userData?.listings as myListing} 
+              {#each userData?.listings as myListing}
+         
                 <a href="/auctionItem/{myListing.id}">
                   <AuctionItem  listingData =  {myListing}/> 
                 </a>
+  
               {/each }
         </div>
   </div>
@@ -88,7 +90,7 @@ today.setHours(0, 0, 0, 0);
 
 }
     .customHeight{
-    height: 50vh;
+    height: 40vh;
     display: flex;
     flex-direction: column;
 }
@@ -110,4 +112,5 @@ today.setHours(0, 0, 0, 0);
         max-width: 1010px;
         margin: 0 auto;
     }
+    
 </style>

@@ -4,7 +4,9 @@
 	
 	<div class="w-screen h-screen overflow-hidden fixed top-0 left-0 flex items-center justify-center">
 		
-		<div class="absolute top-0 h-full left-0 w-full customColor"  />
+		<!-- svelte-ignore a11y-click-events-have-key-events -->
+		<!-- svelte-ignore a11y-no-static-element-interactions -->
+		<div class="absolute top-0 h-full left-0 w-full customColor" on:click={handleVisible} />
 		<div  
 		   out:slide={{ delay: 60, duration: 2000,  axis: 'x', }}
 		   class:expanded={isVisible}
@@ -26,7 +28,9 @@
 				<div class="pt-6" >
 		
 					{#if searchData && searchData.length > 0}
-					<SearchResults searchData={searchData} />
+					<button on:click={handleVisible} class="text-left">
+					<SearchResults searchData={searchData}  />
+					</button>
 					{:else if searchData && searchData.length < 1}
 						<div class="mt-2" >
 							<p >

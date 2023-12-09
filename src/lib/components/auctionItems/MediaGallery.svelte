@@ -71,7 +71,7 @@ onMount(()=>{checkScrollPosition()})
 }
 .image-gallery-ul{
     aspect-ratio: 4 / 3;
-    overflow-x: auto;
+    overflow-x: hidden;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
