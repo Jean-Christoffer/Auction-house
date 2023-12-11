@@ -64,6 +64,8 @@ onMount(()=>{checkScrollPosition()})
 <style lang="postcss">
 .image-gallery-wrapper{
     max-height: 1000px;
+  min-width: 280px;
+    
     border: 1px solid rgba(0,0,0,.15);
     border-radius: 8px;
     overflow: hidden;
@@ -146,6 +148,7 @@ onMount(()=>{checkScrollPosition()})
     visibility: hidden
 }
 .hideScroll {
+    background-color: #202020b4;
     -ms-overflow-style: none;  
     scrollbar-width: none;  
 }

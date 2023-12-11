@@ -3,7 +3,8 @@
     <title>About us</title>
     <meta name="description" content="Who are we?">
   </svelte:head>
-    <section  class="max-w-7xl mx-auto my-0 px-1" >
+  <div class="lenisWrapper">
+    <section  class="max-w-7xl mx-auto my-0 px-1 child" >
         <article class="overflow-hidden">
             {#each stories as story,idx}
                 <div
@@ -73,7 +74,7 @@
         </article>
     </div>
 
-
+</div>
 <script lang="ts">
     import { onMount } from "svelte";
 
@@ -96,9 +97,6 @@
 onMount(async () => {
   const module = await import ("gsap")
   gsap = module.default
-
-
-
 
 
 
@@ -271,5 +269,6 @@ onMount(async () => {
 -webkit-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 -moz-box-shadow: -6px -45px 54px -33px rgba(0,0,0,0.31);
 }
+
 
 </style>

@@ -41,7 +41,7 @@
             <h2 class="text-4xl">{data.title}</h2>
             <p>{data.description}</p>
             {#if sortedBids.length > 0  && sortedBids}
-            <ul class="text-black mt-1 custom-ul">
+            <ul class="text-black mt-1 custom-ul" data-lenis-prevent>
                 <div class="custom-container-scroll border border-gray-400 flex flex-col gap-1" >
                     <h2 class=" mb-1">Bid history</h2>
                     {#each sortedBids as bid}
