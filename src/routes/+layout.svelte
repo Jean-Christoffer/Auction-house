@@ -1,7 +1,9 @@
 
-
+<svelte:head>
+  <link rel="icon" type="image/svg" href="./lib/images/logo.svg">
+</svelte:head>
 <div class="min-h-screen flex-col flex">
-    <header>
+    <header data-lenis-prevent>
         <Navigation
         searchData={searchData}
         handleSearch={handleSearch}
@@ -18,14 +20,20 @@
 </div>
 
 <script lang="ts">
-
-
-
-
   import "../app.css";
   import Navigation from "$lib/components/Navigation.svelte";
   import Footer from "$lib/components/Footer.svelte";
+  import {onMount} from "svelte"
+  import Lenis from '@studio-freight/lenis'
+  onMount(()=>{
+    const lenis = new Lenis()
+    function raf(time: any) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
 
+  requestAnimationFrame(raf)
+  })
   let inputValue = ""
 
   let searchData:AuctionItemTypes[]

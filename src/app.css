@@ -13,9 +13,6 @@ h3,
 h4{
   font-family: 'Playfair Display',"Times New Roman", serif;
 }
-html{
-  scroll-behavior: smooth;
-}
 
 ::-webkit-scrollbar{
   width: 11px;
