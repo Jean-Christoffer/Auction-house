@@ -78,6 +78,10 @@ $:{
   justify-content: center;
   aspect-ratio: 16/10;
   overflow: hidden;
+  background: url("$lib/images/logo.svg");
+  background-repeat: no-repeat;
+  background-size: 20%;
+  background-position: center;
 }
 .img-wrapper{
   background-color: #d6d4d4;
