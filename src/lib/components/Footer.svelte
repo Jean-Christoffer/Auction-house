@@ -24,6 +24,7 @@ p-5
                   
                         <div class="custom-img">
                             <a href="https://www.linkedin.com/">
+                                <span class="aria">Link to linkedin</span>
                                 <svg
                                     x="0"
                                     y="0"
@@ -37,6 +38,7 @@ p-5
                         </div>
                         <div class="custom-img">
                             <a href="https://www.instagram.com/">
+                                <span class="aria">Link to instagram</span>
                                 <svg
                                     x="0"
                                     y="0"
@@ -51,6 +53,7 @@ p-5
                         </div>
                         <div class="custom-img">
                             <a href="https://twitter.com/">
+                                <span class="aria">Link to twitter</span>
                                 <svg
                                     x="0"
                                     y="0"
@@ -65,6 +68,7 @@ p-5
                         </div>
                         <div class="custom-img">
                             <a href="https://www.facebook.com/">
+                                <span class="aria">Link to facebook</span>
                                 <svg
                                     x="0"
                                     y="0"
@@ -108,5 +112,9 @@ p-5
         width: 100%;
         background-color: white;
     }
-
+    .aria{
+    position:absolute;
+    left:-100;
+    visibility: hidden
+}
 </style>
