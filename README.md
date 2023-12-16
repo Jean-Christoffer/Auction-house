@@ -5,17 +5,19 @@
 
 ##  Project
 
-Access the deployed project on Netlify by this link: https://effortless-jalebi-e61abe.netlify.app/  
-  Create an account and enjoy the platform!
+Access the deployed project on Vercel by this link: https://auction-house-rosy.vercel.app/
+Create an account and enjoy the platform!
 
+### Getting started
+#### clone the project
 git clone https://github.com/Jean-Christoffer/Auction-house.git
 
-Install depencencies: 
+#### Install depencencies: 
 npm install 
 
-Start the application: 
+#### Start the application: 
 npm run dev
 
-Buld
+####Buld
 npm run build 
 
