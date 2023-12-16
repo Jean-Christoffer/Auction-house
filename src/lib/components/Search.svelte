@@ -11,17 +11,15 @@
 		   out:slide={{ delay: 60, duration: 2000,  axis: 'x', }}
 		   class:expanded={isVisible}
 		   class=" absolute top-0 h-full right-0 opacity-100 bg-white overflow-hidden customWidth">
-				<div class="sticky top-0 zindex bg-white  py-8 px-10 ">
+				<div class="sticky top-0 zindex bg-white  py-1 px-8">
 					<button  on:click={handleVisible} class="customLink inline-block tracking-tight uppercase cursor-pointer transition-all">Close</button>
-					<h3 class="mb-3 pt-6">Search our auction house</h3>
-					<p class="customText">Search by tag</p>
-
+					<h3 class="pt-3">Search our auction house</h3>
 					<form class="flex" on:submit={handleSearch}>
 						<Input inputType="text" handleInput={handleInput} inputValue={inputValue}/>
 						<InputButton inputType={"submit"} buttonText={"Search"}  />  
 					</form>
-					</div>
-			<div class="box-border py-8 px-10 overflow-auto h-full relative" >
+				</div>
+			<div class="box-border py-1 px-8 overflow-auto h-full relative" >
 				
 
 
