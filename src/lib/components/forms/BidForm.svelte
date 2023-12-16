@@ -12,8 +12,9 @@
                 type="number"
                 id="amount"
                 name="amount"
-  
+                min="{amountToBid + 1}"
                 bind:value={amount}
+                on:input={handleAmount}
                 class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"    
                  />
                  {#if amount < amountToBid + 1}
@@ -41,7 +42,11 @@
     export let form:ExtendedFormData
     import Snackbar from "../uiComponents/Snackbar.svelte";
     let amount = 0
-  
+    function handleAmount() {
+    if (amount < 0) {
+      amount = 0;
+    }
+  }
 
 </script>
 <style lang="postcss">
