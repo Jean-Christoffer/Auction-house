@@ -4,18 +4,29 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind-CSS-teal)
 
 ##  Project
+Fine Auctions was developed as part of my second year semester project at Noroff, reflecting a the skills and knowledge I've acquired the past three semesters.
+Focusing on responsive design, easy to use and navigate.
 
-Access the deployed project on Netlify by this link: https://effortless-jalebi-e61abe.netlify.app/  
-  Create an account and enjoy the platform!
+Live Site: https://auction-house-rosy.vercel.app/
 
-git clone https://github.com/Jean-Christoffer/Auction-house.git
+## Features
+Login/register: A user with a stud.noroff.no email may register/login
 
-Install depencencies: 
-npm install 
+Bidding: A registered user may add a bid to another user’s Listing
 
-Start the application: 
+Profile: User can update their profile, view total credits, create new listing and view and edit their own listings.
+
+Detailed Listing: User can see time remaining of a listing, media gallery, bid history.
+
+
+## Getting started
+```bash
+git clone https://github.com/your-repository.git
+
+cd Auction-house
+
+npm install
+
 npm run dev
-
-Buld
-npm run build 
+```
 
