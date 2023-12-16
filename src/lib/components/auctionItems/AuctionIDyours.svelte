@@ -38,7 +38,7 @@
         
  
         <article class="max-w-sm grid-item2">
-            <h2 class="text-4xl">{data.title}</h2>
+            <h2 class="text-2xl md:text-4xl breaks">{truncateDescription(data.title)}</h2>
             <p>{data.description}</p>
             {#if sortedBids.length > 0  && sortedBids}
             <ul class="text-black mt-1 custom-ul" data-lenis-prevent>
@@ -127,6 +127,16 @@
             //timeRemaining = `Auction ends in ${days} days, ${hours} hours, ${minutes} minutes, and ${seconds} seconds`;
 
         }
+        function truncateDescription(text:string) {
+        const sentence = text
+        const sentences = sentence?.split('');
+        if (sentences?.length > 65) {
+          let splittedText = sentences.slice(0, 65).join('') + '.';
+          
+          return splittedText
+        }
+        return sentence
+    }
 
         onMount(() => {
       
@@ -139,6 +149,9 @@
 
 </script>
 <style lang="postcss">
+    .breaks{
+        word-wrap: break-word;
+    }
     .custom-timer{
         display: flex;
         flex-direction: column;

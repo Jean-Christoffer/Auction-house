@@ -152,6 +152,13 @@
     let isVisible = false
     let innerWidth:number
 
+    $: if (typeof window !== 'undefined') {
+      if (isVisible) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
+    }
 
 
     let showMenu = false;

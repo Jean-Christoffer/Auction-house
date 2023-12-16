@@ -1,7 +1,4 @@
 
-<svelte:head>
-  <link rel="icon" type="image/svg" href="./lib/images/logo.svg">
-</svelte:head>
 <div class="min-h-screen flex-col flex">
     <header data-lenis-prevent>
         <Navigation
@@ -40,11 +37,18 @@
   
  
   async function getSearchResults(value:string){
-    const apiUrl = `https://api.noroff.dev/api/v1/auction/listings?_tag=${value}&_active=tru`;
+   // const apiUrl = `https://api.noroff.dev/api/v1/auction/listings?_tag=${value}`;
+   const apiUrl = 'https://api.noroff.dev/api/v1/auction/listings?_seller=true';
+   let filteredData = [];
     try{
       const response = await  fetch(apiUrl)
       const data = await response.json()
-      searchData = data
+      filteredData = data.filter((listing: { title: string; seller: { name: string; }; tags: any[]; }) => 
+      (listing.title && listing.title.toLowerCase().includes(value.toLowerCase())) ||
+      (listing.seller.name && listing.seller.name.toLowerCase().includes(value.toLowerCase())) ||
+      (listing.tags?.some(tag => tag.toLowerCase().includes(value.toLowerCase())))
+    );
+      searchData = filteredData
  
     }
 
