@@ -21,7 +21,7 @@ Detailed Listing: User can see time remaining of a listing, media gallery, bid h
 
 ## Getting started
 ```bash
-git clone https://github.com/your-repository.git
+git clone https://github.com/Jean-Christoffer/Auction-house.git
 
 cd Auction-house
 
